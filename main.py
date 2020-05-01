@@ -14,7 +14,7 @@ class Instrument(object):
         BOND  = 2
         ETF   = 3
 
-    def __init__(self, type=Instrument.Type.STOCK):
+    def __init__(self, type: Instrument.Type):
         """TODO"""
         pass
 
@@ -30,7 +30,7 @@ class Order(object):
         BUY  = 1
         SELL = 2
     
-    def __init__(self, instrument=None, action=Order.Action.BUY):
+    def __init__(self, instrument: Instrument, action:Order.Action) -> None:
         """TODO"""
         pass
 
@@ -50,7 +50,7 @@ class Portfolio(object):
 
 class User(object):
     """TODO"""
-    def __init__(self, username, password):
+    def __init__(self, email: str, password: str):
         """TODO"""
         self.portfolio = Portfolio()
 
