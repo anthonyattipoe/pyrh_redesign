@@ -292,3 +292,85 @@ This what the endpoint currently returns (shortened results)
 ```
 
 Possible fix: It's just an endpoint wrapper so it might change, but can still be placed somewhere else.
+
+## get_open_orders
+
+## get_option_market_data
+
+## get_options
+
+## get_popularity
+
+## get_quote
+
+## get_quote_list
+
+## get_tickers_by_tag
+
+## get_url
+
+## instrument
+
+## instruments
+
+## investment_profile
+
+## last_core_equity
+
+## last_core_market_value
+
+## last_trade_price
+
+## last_updated_at
+
+## last_updated_at_datetime
+
+## market_value
+
+## order_history
+
+## place_buy_order
+
+## place_limit_buy_order
+
+## place_limit_sell_order
+
+## place_market_buy_order
+
+## place_market_sell_order
+
+## place_order
+
+## place_sell_order
+
+## place_stop_limit_buy_order
+
+## place_stop_limit_sell_order
+
+## place_stop_loss_buy_order
+
+## place_stop_loss_sell_order
+
+## portfolios
+
+## positions
+
+## previous_close
+
+## previous_close_date
+
+## print_quote
+
+## print_quotes
+
+## quote_data
+
+## quotes_data
+
+## securities_owned
+
+## submit_buy_order
+
+## submit_sell_order
+
+## symbol
