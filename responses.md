@@ -46,8 +46,33 @@ Fixed Version
             return myStr.split(",")
 ```
 
+Says it returns: int
+
+Actually returns: list[list[str,str]]
+
+Possible fix: wrapper to access int(rh.ask_size("CRM")[0][0])
+
+## bid_price
+rh.bid_price("CRM")
+
+[['155.000000', '']]
+
 Says it returns: float
 
 Actually returns: list[list[str,str]]
 
-Possible fix: wrapper to access float(rh.ask_size("CRM")[0][0])
+Possible fix: wrapper to access float(rh.bid_price("CRM")[0][0])
+
+## bid_size
+rh.bid_size("CRM")
+
+[['30', '']]
+
+Says it returns: int
+
+Actually returns: list[list[str,str]]
+
+Possible fix: wrapper to access int(rh.bid_size("CRM")[0][0])
+
+
+
