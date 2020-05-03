@@ -204,3 +204,91 @@ rh.fundamentals('CRM')
 ```
 
 Possible fix: Don't think we need to change, just place in right spot. Define what will be returned in docs.
+
+## get_account
+rh.get_account
+
+Returns the account information from the account endpoint
+This what the endpoint currently returns (redacted)
+```
+{
+'url': 'https://api.robinhood.com/accounts/ACCOUNT_NUMBER/', 
+'portfolio_cash': '14321013.1900', 
+'can_downgrade_to_cash': 'https://api.robinhood.com/accounts/ACCOUNT_NUMBER/can_downgrade_to_cash/', 
+'user': 'api.robinhood.com/user/', 
+'account_number': 'ACCOUNT_NUMBER', 
+'type': 'margin', 
+'created_at': '2019-07-31T23:53:57.197892Z', 
+'updated_at': '2020-04-21T12:21:54.168775Z', 
+'deactivated': False, 
+'deposit_halted': False, 
+'withdrawal_halted': False, 
+'only_position_closing_trades': False, 
+'buying_power': '14321013.1900', 
+'cash_available_for_withdrawal': '14321013.1900', 
+'cash': '14321013.1900', 
+'cash_held_for_orders': '0.0000', 
+'uncleared_deposits': '0.0000', 
+'sma': '0', 
+'sma_held_for_orders': '0', 
+'unsettled_funds': '0.0000', 
+'unsettled_debit': '0.0000', 
+'crypto_buying_power': '14321013.1900', 
+'max_ach_early_access_amount': '10000.00', 
+'cash_balances': None, 
+'margin_balances': {
+	SOME_DICT_VALS
+}, 
+'sweep_enabled': False, 
+'instant_eligibility': {
+	SOME_DICT_VALS
+	}, 
+'option_level': None, 
+'is_pinnacle_account': True, 
+'rhs_account_number': ACCOUNT_NUMBER, 
+'state': 'active', 
+'active_subscription_id': None, 
+'locked': False, 
+'permanently_deactivated': False, 
+'received_ach_debit_locked': False, 
+'drip_enabled': False, 
+'eligible_for_fractionals': False, 
+'eligible_for_drip': False, 
+'cash_management_enabled': False, 
+'cash_held_for_options_collateral': '0.0000', 
+'fractional_position_closing_only': False, 
+'user_id': USER_ID
+}
+```
+
+Possible fix: It's just an endpoint wrapper so it might change, but can still be placed within user.
+## get_news
+rh.get_news("GOOG")
+
+Returns the news information from the news endpoint
+This what the endpoint currently returns (shortened results)
+```
+{'count': 1, 
+ 'next': None, 
+ 'previous': None, 
+ 'results': [
+ 	{'api_source': 'reuters', 
+ 	 'author': '', 
+ 	 'num_clicks': 1199, 
+ 	 'preview_image_url': 'https://images.robinhood.com/dYW7Rpkz75W5olNy3uwSk64ViME/aHR0cHM6Ly9pbWFnZXMucm9iaW5ob29kLmNvb...', 
+ 	 'published_at': '2020-05-01T22:20:15Z', 
+ 	 'relay_url': 'https://news.robinhood.com/8a681d3e-ff0e-3cbd-bd2f-9e6c94b9777f/', 
+ 	 'source': 'Reuters', 
+ 	 'summary': '', 
+ 	 'title': 'Google travel data show lockdown fatigue in U.S., Australia; other countries stay home', 
+ 	 'updated_at': '2020-05-02T00:32:41.790799Z', 
+ 	 'url': 'https://www.reuters.com/article/us-health-coronavirus-google/google-travel-data-show-lockdown-fatigue-in-u-s-australia-other-countries-stay-home-idUSKBN22D6AX', 
+ 	 'uuid': '8a681d3e-ff0e-3cbd-bd2f-9e6c94b9777f', 
+ 	 'related_instruments': ['943c5009-a0bb-4665-8cf4-a95dab5874e4'], 
+ 	 'preview_text': 'OAKLAND, Calif. (Reuters) - More people stayed home in Brazil, Japan and Singapore in April as those countries’ novel coronavirus cases surged, while people in', 
+ 	 'currency_id': 'None'}, 
+ ]
+}
+```
+
+Possible fix: It's just an endpoint wrapper so it might change, but can still be placed somewhere else.
