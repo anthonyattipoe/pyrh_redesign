@@ -170,3 +170,37 @@ rh.extended_hours_market_value()
 Accurately returns float value of market value of extended hours from user's account
 
 Possible fix: Nothing, but could be placed under our user model.
+
+## fundamentals & get_fundamentals
+fundamentals and get_fundamentals are the same exact function, can remove one for sure
+
+rh.fundamentals('CRM')
+
+```
+{
+ 'open': '158.310000', 
+ 'high': '160.170000', 
+ 'low': '155.260000', 
+ 'volume': '4275536.000000', 
+ 'average_volume_2_weeks': '6414987.900000', 
+ 'average_volume': '6414987.900000', 
+ 'high_52_weeks': '195.720000', 
+ 'dividend_yield': None, 
+ 'float': '859278760.000000', 
+ 'low_52_weeks': '115.290000', 
+ 'market_cap': '139951150000.000000', 
+ 'pb_ratio': '4.120950', 
+ 'pe_ratio': '1055.130000', 
+ 'shares_outstanding': '895000000.000000', 
+ 'description': 'salesforce.com, inc. engages in the ... blah blah blah', 
+ 'instrument': 'https://api.robinhood.com/instruments/cf1d849d-06f7-4374-9e84-13129713d0c7/', 
+ 'ceo': 'Marc Russell Benioff', 
+ 'headquarters_city': 'San Francisco', 
+ 'headquarters_state': 'California', 
+ 'sector': 'Technology Services', 
+ 'industry': 'Packaged Software', 
+ 'num_employees': 49000, 'year_founded': 1999
+ }
+```
+
+Possible fix: Don't think we need to change, just place in right spot. Define what will be returned in docs.
