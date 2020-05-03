@@ -75,4 +75,23 @@ Actually returns: list[list[str,str]]
 Possible fix: wrapper to access int(rh.bid_size("CRM")[0][0])
 
 
+## adjusted_equity_previous_close
+rh.adjusted_equity_previous_close()
+
+1000000.49
+
+Accurately returns float value of equity value from user's account
+
+Possible fix: Name is definitely confusing, it's basically the account balance
+
+## adjusted_previous_close
+rh.adjusted_previous_close("CRM")
+
+[['161.950000', '']]
+
+Says it returns: float
+
+Actuall returns: list[list[str,str]]
+
+Possible fix: wrapper to access int(rh.adjusted_previous_close("CRM")[0][0])
 
