@@ -394,17 +394,76 @@ Acutally returns list of dict (shortened)
 
 ## investment_profile
 
+rh.investment_profile()
+returns dict object (redacted)
+```
+{
+ 'user': 'api.robinhood.com/user/', 
+ 'total_net_worth': RANGE_RANGE_STR, 
+ 'annual_income': RANGE_RANGE_STR, 
+ 'source_of_funds': STR, 
+ 'investment_objective': 'income_invest_obj', 
+ 'investment_experience': STR, 
+ 'liquid_net_worth': RANGE_RANGE_STR, 
+ 'risk_tolerance': STR, 
+ 'tax_bracket': '', 
+ 'time_horizon': STR, 
+ 'liquidity_needs': STR, 
+ 'investment_experience_collected': BOOL, 
+ 'suitability_verified': BOOL, 
+ 'option_trading_experience': '', 
+ 'professional_trader': None, 
+ 'understand_option_spreads': BOOL, 
+ 'interested_in_options': None, 
+ 'updated_at': '2019-08-01T16:18:26.996458Z'
+ }
+```
+
 ## last_core_equity
+
+rh.last_core_equity()
+
+100001.98
+
+correctly returns float value
 
 ## last_core_market_value
 
+
+rh.last_core_market_value()
+
+90001.98
+
+correctly returns float value
+
 ## last_trade_price
+
+rh.last_trade_price("FB")
+
+[['202.270000', '']]
 
 ## last_updated_at
 
+rh.last_updated_at("FB")
+
+Currently broken:
+KeyError: 'last_updated_at'
+
 ## last_updated_at_datetime
 
+rh.last_updated_at_datetime("FB")
+
+Currently broken:
+KeyError: 'last_updated_at'
+
 ## market_value
+
+rh.market_value()
+23828347.11
+
+correctly returns float:
+
+Can probably be merged with other market_value calls
 
 ## order_history
 
@@ -431,6 +490,34 @@ Acutally returns list of dict (shortened)
 ## place_stop_loss_sell_order
 
 ## portfolios
+
+rh.portfoliios()
+
+```
+{'url': 'https://api.robinhood.com/portfolios/ACCOUNT_ID/', 
+ 'account': 'https://api.robinhood.com/accounts/ACCOUNT_ID/', 
+ 'start_date': '2019-07-31', 
+ 'market_value': FLOAT_AS_STR, 
+ 'equity': FLOAT_AS_STR, 
+ 'extended_hours_market_value': FLOAT_AS_STR, 
+ 'extended_hours_equity': FLOAT_AS_STR, 
+ 'extended_hours_portfolio_equity': FLOAT_AS_STR, 
+ 'last_core_market_value': FLOAT_AS_STR, 
+ 'last_core_equity': FLOAT_AS_STR, 
+ 'last_core_portfolio_equity': FLOAT_AS_STR, 
+ 'excess_margin': FLOAT_AS_STR, 
+ 'excess_maintenance': FLOAT_AS_STR, 
+ 'excess_margin_with_uncleared_deposits': FLOAT_AS_STR, 
+ 'excess_maintenance_with_uncleared_deposits': FLOAT_AS_STR, 
+ 'equity_previous_close': FLOAT_AS_STR, 
+ 'portfolio_equity_previous_close': FLOAT_AS_STR, 
+ 'adjusted_equity_previous_close': FLOAT_AS_STR, 
+ 'adjusted_portfolio_equity_previous_close': FLOAT_AS_STR, 
+ 'withdrawable_amount': FLOAT_AS_STR, 
+ 'unwithdrawable_deposits': FLOAT_AS_STR, 
+ 'unwithdrawable_grants': FLOAT_AS_STR
+ }
+```
 
 ## positions
 
