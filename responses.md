@@ -82,7 +82,7 @@ rh.adjusted_equity_previous_close()
 
 Accurately returns float value of equity value from user's account
 
-Possible fix: Name is definitely confusing, it's basically the account balance
+Possible fix: Name is definitely confusing, it's the equity with market adjustments. Could be merged with equity_previous_close?
 
 ## adjusted_previous_close
 rh.adjusted_previous_close("CRM")
@@ -91,7 +91,82 @@ rh.adjusted_previous_close("CRM")
 
 Says it returns: float
 
-Actuall returns: list[list[str,str]]
+Actually returns: list[list[str,str]]
 
 Possible fix: wrapper to access int(rh.adjusted_previous_close("CRM")[0][0])
 
+## dividends
+rh.dividends()
+
+Says it returns JSON dict from getting dividends
+Actual structure of return JSON (heavily redacted)
+```
+{'next': None, 
+ 'previous': None, 
+ 'results': [
+	{'id': ID_NUMBER_AS_STR, 
+	 'url': URL_AS_STR, 
+	 'account': ACCOUNT_URL_AS_STR, 
+	 'instrument': INSTRUMENT_URL_AS_STR, 
+	 'amount': '0.36', 
+	 'rate': '0.1200000000', 
+	 'position': '3.00000000', 
+	 'withholding': '0.00', 
+	 'record_date': '2020-03-05', 
+	 'payable_date': '2020-03-16', 
+	 'paid_at': '2020-03-17T02:14:50Z', 
+	 'state': 'paid', 
+	 'nra_withholding': None, 
+	 'drip_enabled': False
+	}
+        ]
+}
+```
+Possible fix: Should be clearly laid out what everything is in return type. Not sure what next and previous are. keys within each dividend have some industry terminology I don't understand (e.g. drip_enabled?).
+
+
+## equity
+rh.equity()
+
+1000000.49
+
+Accurately returns float value of equity value from user's account
+
+Possible fix: Nothing, but could be placed under our user model. Merge with other equity functions.
+
+## equity_previous_close
+rh.equity_previous_close()
+
+1000000.49
+
+Accurately returns float value of equity value of the previous close from user's account
+
+Possible fix: Nothing, but could be placed under our user model. Merge with other equity functions.
+
+## excess_margin
+rh.excess_margin()
+
+900000.49
+
+Accurately returns float value of excess margin value from user's account
+
+Possible fix: Nothing, but could be placed under our user model.
+
+
+## extended_hours_equity
+rh.extended_hours_equity()
+
+1000000.49
+
+Accurately returns float value of equity value of extended hours from user's account
+
+Possible fix: Nothing, but could be placed under our user model. Merge with other equity functions.
+
+## extended_hours_market_value
+rh.extended_hours_market_value()
+
+800000.49
+
+Accurately returns float value of market value of extended hours from user's account
+
+Possible fix: Nothing, but could be placed under our user model.
