@@ -299,19 +299,98 @@ Possible fix: It's just an endpoint wrapper so it might change, but can still be
 
 ## get_options
 
+Function does not return anything - wrong inputs?
+
+rh.get_options("AAPL","2021-05-30",'put')
+
 ## get_popularity
+
+rh.get_popularity("GOOG")
+
+Returns int
+27216
 
 ## get_quote
 
+rh.get_quote("GOOG")
+
+Returns dict
+```
+{'ask_price': '1369.000000', 
+ 'ask_size': 150, 
+ 'bid_price': '1310.000000', 
+ 'bid_size': 50, 
+ 'last_trade_price': '1320.610000', 
+ 'last_extended_hours_trade_price': '1320.610000', 
+ 'previous_close': '1348.660000', 
+ 'adjusted_previous_close': '1348.660000', 
+ 'previous_close_date': '2020-04-30', 
+ 'symbol': 'GOOG', 
+ 'trading_halted': False, 
+ 'has_traded': True, 
+ 'last_trade_price_source': 'consolidated', 
+ 'updated_at': '2020-05-02T00:00:00Z', 
+ 'instrument': 'https://api.robinhood.com/instruments/943c5009-a0bb-4665-8cf4-a95dab5874e4/'}
+```
+
 ## get_quote_list
+rh.get_quote_list("GOOG,AAPL")
+
+Currently broken - can't parse?
 
 ## get_tickers_by_tag
+ rh.get_tickers_by_tag("top-movers")
+ 
+ ```
+['CODX', 'SM', 'CEQP', 'GPOR', 'CAR', 'ARCT', 'PBF', 'WY', 'OII', 'IMXI', 'DISCB', 'CURO', 'CAPL', 'LBTYB', 'OPCH', 'LBTYK', 'ASGN', 'LBTYA', 'SHEN', 'VRTS']
+```
 
 ## get_url
 
+rh.get_url('')
+
+This is to be used for making requests while being logged in. idk if we should keep it
+
 ## instrument
 
+rh.instrument("943c5009-a0bb-4665-8cf4-a95dab5874e4")
+
+Might be broken? I'm not 100% sure what I'm supposed to use for the id
+
 ## instruments
+
+rh.instruments("GOOG")
+
+Acutally returns list of dict (shortened)
+```
+[
+	{
+	 'id': '943c5009-a0bb-4665-8cf4-a95dab5874e4', 
+	 'url': 'https://api.robinhood.com/instruments/943c5009-a0bb-4665-8cf4-a95dab5874e4/', 
+	 'quote': 'https://api.robinhood.com/quotes/GOOG/', 
+	 'fundamentals': 'https://api.robinhood.com/fundamentals/GOOG/', 
+	 'splits': 'https://api.robinhood.com/instruments/943c5009-a0bb-4665-8cf4-a95dab5874e4/splits/', 
+	 'state': 'active', 
+	 'market': 'https://api.robinhood.com/markets/XNAS/', 
+	 'simple_name': 'Alphabet Class C', 
+	 'name': 'Alphabet Inc. Class C Capital Stock', 
+	 'tradeable': True, 
+	 'tradability': 'tradable', 
+	 'symbol': 'GOOG', 
+	 'bloomberg_unique': 'EQ0000000044670269', 
+	 'margin_initial_ratio': '0.5000', 
+	 'maintenance_ratio': '0.2500', 
+	 'country': 'US', 
+	 'day_trade_ratio': '0.2500', 
+	 'list_date': '2004-08-19', 
+	 'min_tick_size': None, 
+	 'type': 'stock', 
+	 'tradable_chain_id': '9330028e-455f-4acf-9954-77f60b19151d', 
+	 'rhs_tradability': 'tradable', 
+	 'fractional_tradability': 'tradable', 
+	 'default_collar_fraction': '0.05'}
+]
+```
 
 ## investment_profile
 
