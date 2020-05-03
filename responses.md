@@ -521,22 +521,153 @@ rh.portfoliios()
 
 ## positions
 
+rh.positions()
+
+returns a dict (shortened results)
+```
+{'next': None, 
+ 'previous': None, 
+ 'results': [
+	 {'url': 'https://api.robinhood.com/positions/ACCOUNT_NUMBER/ID_NUMBER/', 
+	 'instrument': 'https://api.robinhood.com/instruments/ID_NUMBER/', 
+	 'account': 'https://api.robinhood.com/accounts/ACCOUNT_NUMBER/', 
+	 'account_number': 'ACCOUNT_NUMBER', 
+	 'average_buy_price': PRICE_STR_FLT, 
+	 'pending_average_buy_price': PRICE_STR_FLT, 
+	 'quantity': QUANTITY_STR_FLT, 
+	 'intraday_average_buy_price': '0.0000', 
+	 'intraday_quantity': '0.00000000', 
+	 'shares_held_for_buys': '0.00000000', 
+	 'shares_held_for_sells': '2.00000000', 
+	 'shares_held_for_stock_grants': '0.00000000', 
+	 'shares_held_for_options_collateral': '0.00000000', 
+	 'shares_held_for_options_events': '0.00000000', 
+	 'shares_pending_from_options_events': '0.00000000', 
+	 'updated_at': '2020-05-02T20:11:41.491656Z', 
+	 'created_at': '2019-07-31T23:57:07.494746Z'
+	 }
+ ]}
+```
+
 ## previous_close
+
+rh.previous_close("FB")
+[['204.710000', '']]
 
 ## previous_close_date
 
+rh.previous_close_date("FB")
+[['2020-04-30', '']]
+
 ## print_quote
+
+rh.print_quote("FB")
+>> FB: $202.270000
 
 ## print_quotes
 
+rh.print_quotes(["FB","GOOG"])
+>> FB: $202.270000
+>> GOOG: $1320.610000
+
 ## quote_data
 
+rh.quote_data('FB')
+
+```
+{'ask_price': '240.000000', 
+ 'ask_size': 1750, 
+ 'bid_price': '185.000000', 
+ 'bid_size': 1500, 
+ 'last_trade_price': '202.270000', 
+ 'last_extended_hours_trade_price': '202.790000', 
+ 'previous_close': '204.710000', 
+ 'adjusted_previous_close': '204.710000', 
+ 'previous_close_date': '2020-04-30', 
+ 'symbol': 'FB', 
+ 'trading_halted': False, 
+ 'has_traded': True, 
+ 'last_trade_price_source': 'consolidated', 
+ 'updated_at': '2020-05-02T00:00:00Z', 
+ 'instrument': 'https://api.robinhood.com/instruments/ebab2398-028d-4939-9f1d-13bf38f81c50/'}
+```
 ## quotes_data
+rh.quotes_data(['FB','GOOG'])
+```
+[{
+ 'ask_price': '240.000000', 
+ 'ask_size': 1750, 
+ 'bid_price': '185.000000', 
+ 'bid_size': 1500, 
+ 'last_trade_price': '202.270000', 
+ 'last_extended_hours_trade_price': '202.790000', 
+ 'previous_close': '204.710000', 
+ 'adjusted_previous_close': '204.710000', 
+ 'previous_close_date': '2020-04-30', 
+ 'symbol': 'FB', 
+ 'trading_halted': False, 
+ 'has_traded': True, 
+ 'last_trade_price_source': 'consolidated', 
+ 'updated_at': '2020-05-02T00:00:00Z', 
+ 'instrument': 'https://api.robinhood.com/instruments/ebab2398-028d-4939-9f1d-13bf38f81c50/'
+ }, 
+ {
+ 'ask_price': '1369.000000', 
+ 'ask_size': 150, 
+ 'bid_price': '1310.000000', 
+ 'bid_size': 50, 
+ 'last_trade_price': '1320.610000', 
+ 'last_extended_hours_trade_price': '1320.610000', 
+ 'previous_close': '1348.660000', 
+ 'adjusted_previous_close': '1348.660000', 
+ 'previous_close_date': '2020-04-30', 
+ 'symbol': 'GOOG', 
+ 'trading_halted': False, 
+ 'has_traded': True, 
+ 'last_trade_price_source': 'consolidated', 
+ 'updated_at': '2020-05-02T00:00:00Z', 
+ 'instrument': 'https://api.robinhood.com/instruments/943c5009-a0bb-4665-8cf4-a95dab5874e4/'
+ }
+]
+```
 
 ## securities_owned
+
+rh.securities_owned()
+returns this dict, results shortened
+```
+{'next': None, 
+ 'previous': None, 
+ 'results': [{
+ 'url': 'https://api.robinhood.com/positions/ACCOUNT_ID/INSTRUMENT_ID/', 
+ 'instrument': 'https://api.robinhood.com/instruments/INSTRUMENT_ID/', 
+ 'account': 'https://api.robinhood.com/accounts/ACCOUNT_ID/', 
+ 'account_number': 'ACCOUNT_ID', 
+ 'average_buy_price': FLT_STR, 
+ 'pending_average_buy_price': FLT_STR, 
+ 'quantity': FLT_STR, 
+ 'intraday_average_buy_price': '0.0000', 
+ 'intraday_quantity': '0.00000000', 
+ 'shares_held_for_buys': '0.00000000', 
+ 'shares_held_for_sells': '2.00000000', 
+ 'shares_held_for_stock_grants': '0.00000000', 
+ 'shares_held_for_options_collateral': '0.00000000', 
+ 'shares_held_for_options_events': '0.00000000', 
+ 'shares_pending_from_options_events': '0.00000000', 
+ 'updated_at': '2020-05-02T20:11:41.491656Z', 
+ 'created_at': '2019-07-31T23:57:07.494746Z'}
+ ]
+} 
+```
 
 ## submit_buy_order
 
 ## submit_sell_order
 
 ## symbol
+
+rh.symbol("FB")
+[['FB', '']]
+
+rh.symbol("fb")
+pyrh.exceptions.InvalidTickerSymbol
