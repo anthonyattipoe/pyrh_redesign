@@ -1,6 +1,5 @@
 from enum import Enum
 
-
 ###########################
 #      Instruments
 ###########################
@@ -27,7 +26,7 @@ class Instrument(object):
             An instrument object.
 
         Raises:
-            **CustomError**: If an invalid combination of symbol and instrument type is provided.
+            MalformedInstrumentError: If an invalid combination of symbol and instrument type is provided.
         """
         pass
 
@@ -85,7 +84,7 @@ class Order(object):
         """Validates the properties set on an order before it is placed.
         
         Raises:
-            **CustomError**: If the combinations of properties set on the order are not compatible.
+            MalformedOrderError: If the combinations of properties set on the order are not compatible.
         """
         pass
 
@@ -95,7 +94,7 @@ class Order(object):
         placed will have no effect.
         
         Raises:
-            **CustomError**: If the combinations of properties set on the order are not compatible.
+            MalformedOrderError: If the combinations of properties set on the order are not compatible.
         """
         pass
 
@@ -103,7 +102,7 @@ class Order(object):
         """Cancels the current order after it has been placed but not yet executed.
         
         Raises:
-            **CustomError**: If order has already been executed or terminated.
+            OrderCancellationError: If order has already been executed or terminated.
         """
         pass
 
@@ -134,7 +133,7 @@ class User(object):
             A new Robinhood user object.
         
         Raises:
-            **CustomError**: If user credentials are invalid.
+            InvalidLoginCredentialsError: If user credentials are invalid.
         """
         pass
 
