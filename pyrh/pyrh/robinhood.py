@@ -1,4 +1,4 @@
-"""robinhood.py: a collection of utilities for working with Robinhood's Private API."""
+"""RobinHood.py: a collection of utilities for working with Robinhood's Private API."""
 
 from enum import Enum
 from urllib.parse import unquote

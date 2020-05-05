@@ -5,7 +5,7 @@ from typing import Optional
 from yarl import URL
 
 
-# TODO: All url construction should happen here, not in robinhood.py
+# TODO: All url construction should happen here, not in RobinHood.py
 
 # Base
 API_BASE = URL("https://api.robinhood.com")
