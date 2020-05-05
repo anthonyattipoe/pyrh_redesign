@@ -4,8 +4,8 @@ from enum import Enum
 #  Robinhood 
 ###########################
 
-class Robinhood():
-    """A Robinhood superclass class """
+class Robinhood(object):
+    """ Robinhood superclass  """
 
 
     def __init__(self, email: str, password: str) -> Robinhood:
