@@ -1,14 +1,16 @@
+from __future__ import annotations
 from enum import Enum
 
 ###########################
 #  Robinhood 
 ###########################
 
+
 class Robinhood(object):
     """ Robinhood superclass  """
 
 
-    def __init__(self, email: str, password: str) -> Robinhood:
+    def __init__(self, email: str, password: str):
     """Logs in an existing Robinhood user with the provided credentials.
 
     Args:
@@ -52,7 +54,7 @@ class Instrument(Robinhood):
         ETF    = 3
         CRYPTO = 4
 
-    def __init__(self, type: Instrument.Type, symbol: str) -> Instrument:
+    def __init__(self, type: Instrument.Type, symbol: str):
         """Creates a new object which can be used to track
         updates about an instrument or be included in an order.
 
@@ -100,7 +102,7 @@ class Instrument(Robinhood):
     def historical_quotes(self):
         pass
 
-    def newsself():
+    def newsself(self):
         pass
 
     def chain_id(self):
@@ -176,7 +178,7 @@ class Order(Robinhood):
         GTC = 2
 
     def __init__(self, instrument: Instrument, type: Order.Type, time_in_force: Order.TimeInForce,
-                quantity: int = None, price: float = None) -> Order:
+                quantity: int = None, price: float = None) :
         """Creates a new order.
         
         Args:
