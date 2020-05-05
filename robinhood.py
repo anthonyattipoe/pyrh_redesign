@@ -1,10 +1,48 @@
 from enum import Enum
 
 ###########################
+#  Robinhood 
+###########################
+
+class Robinhood():
+    """A Robinhood superclass class """
+
+
+    def __init__(self, email: str, password: str) -> Robinhood:
+    """Logs in an existing Robinhood user with the provided credentials.
+
+    Args:
+        email: the email used to register the Robinhood account.
+        password: the password used to authenticate the user's account.
+
+    Returns:
+        A new Robinhood object.
+    
+    Raises:
+        InvalidLoginCredentialsError: If user credentials are invalid.
+    """
+        # authenticated = [true/false]
+        pass
+
+
+    def reauthorize():
+        """ reauthorize Robinhood session using the Robinhood User credentials
+            method called in case of session expiriy
+        """
+        pass
+
+    def end_session():
+        """ logout of Robinhood session"""
+        pass
+
+
+
+
+###########################
 #      Instruments
 ###########################
 
-class Instrument(object):
+class Instrument(Robinhood):
     """A tradeable instrument on the Robinhood platform."""
 
     class Type(Enum):
@@ -30,18 +68,91 @@ class Instrument(object):
         """
         pass
 
+    def _str_(self):
+        """Custom pretty print function for an Instrument"""
+        """prints instrument data"""
+        pass
+
+    def symbol(self):
+        pass
+
+    def quote(self):
+        pass
+
+    def adjusted_previous_close(self):
+        pass
+
+    def ask_price(self):
+        pass
+
+    def ask_size(self):
+        pass
+
+    def bid_price(self):
+        pass
+
+    def bid_size(self):
+        pass
+
+    def fundamental(self):
+        pass
+
+    def historical_quotes(self):
+        pass
+
+    def newsself():
+        pass
+
+    def chain_id(self):
+        pass
+
+    def market_data(self):
+        pass
+
+    def quote(self):
+        pass
+
+    def popularity(self):
+        pass
+
+    def tickers(self):
+        pass
+
+    def last_trade_price(self):
+        pass
+
+    def last_updated_at(self):
+        pass
+
+    def previous_close(self):
+        pass
+
+    def previous_close_date(self):
+        pass
+
+    @staticmethod
+    def search(name) -> List(Instrument):
+        pass
+
+
+
 ##########################
 #         Order
 ##########################
 
-class OrderStatus(object):
+class OrderStatus():
     # TODO: Should this inherently be some type of promise
     # Perhaps return info immediately if trade occurs immediately or 
     # return an ID which can be used to fetch info if trade is async.
     """The status of an order."""
-    pass
+    def __init__(self):
+        pass
 
-class Order(object):
+    def _str_(self):
+        """Custom pretty print function for an Order status"""
+        pass
+
+class Order(Robinhood):
     """An order which a user can place."""
 
     class Type(Enum):
@@ -80,6 +191,11 @@ class Order(object):
         """
         pass
 
+    def _str_(self):
+        """Custom pretty print function for an Order"""
+        pass
+
+
     def validate(self) -> None:
         """Validates the properties set on an order before it is placed.
         
@@ -110,33 +226,75 @@ class Order(object):
         """Returns the status of the current order."""
         pass
 
+
 ##########################
-#   User & Portfolio
+#   User , Portfolio, Positions
 ##########################
 
-class Portfolio(object):
-    """A user's current portfolio of instruments they own."""
-    pass
-
-
-class User(object):
+class User(Robinhood):
     """An existing Robinhood User."""
-    
-    def __init__(self, email: str, password: str) -> User:
-        """Logs in an existing Robinhood user with the provided credentials.
-
-        Args:
-            email: the email used to register the Robinhood account.
-            password: the password used to authenticate the user's account.
-
-        Returns:
-            A new Robinhood user object.
-        
-        Raises:
-            InvalidLoginCredentialsError: If user credentials are invalid.
-        """
+    def __init__(self):
         pass
+
+    def _str_(self):
+        """Custom pretty print function for a User"""
+        pass
+
+    # def get_account(self):
+    #     pass
 
     def portfolio(self) -> Portfolio:
         """Returns the portfolio of the current user."""
+        """Consolidated portfolio() and options_owned() and investment_profile """
+
+    def order_history(self) -> List(Order): #return type? 
         pass
+
+    def get_open_orders(self) -> List(OrderStatus):
+        """return all currently open(cancellabe) orders"""
+        pass 
+
+
+
+class Portfolio():
+    """A user's current portfolio of instruments they own.
+       Includes info on securities and positions
+    """
+
+    def __init__(self):
+        pass
+
+    def _str_(self):
+        """Custom pretty print function for a Portfolio"""
+        pass
+
+    def market_value(self): 
+        pass
+
+    def dividends(self):
+        pass
+
+    def excess_margin(self):
+        pass
+
+    def extended_hours_market_value(self):
+        pass
+
+    def equity(self):
+        pass
+
+    def extended_hours_equity(self):
+        pass
+
+    def equity_previous_close(self):
+        pass
+
+    def adjusted_equity_previous_close(self):
+        pass
+
+    def last_core_equity(self):
+        pass
+
+    def last_core_market_value(self):
+        pass
+
