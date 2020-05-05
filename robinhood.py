@@ -81,19 +81,12 @@ class Instrument(Robinhood):
     def quote(self):
         pass
 
-    def adjusted_previous_close(self):
+    def ask_info(self):
+        # returns (price, size)
         pass
 
-    def ask_price(self):
-        pass
-
-    def ask_size(self):
-        pass
-
-    def bid_price(self):
-        pass
-
-    def bid_size(self):
+    def bid_info(self):
+        # returns (price, size)
         pass
 
     def fundamental(self):
@@ -111,9 +104,6 @@ class Instrument(Robinhood):
     def market_data(self):
         pass
 
-    def quote(self):
-        pass
-
     def popularity(self):
         pass
 
@@ -126,10 +116,8 @@ class Instrument(Robinhood):
     def last_updated_at(self):
         pass
 
-    def previous_close(self):
-        pass
-
-    def previous_close_date(self):
+    def previous_close(self, adjusted=False):
+        # return (price, date)
         pass
 
     @staticmethod
@@ -161,14 +149,6 @@ class Order(Robinhood):
         """The type of an order."""
         BUY                   = 1
         SELL                  = 2
-        LIMIT_BUY_ORDER       = 3
-        LIMIT_SELL_ORDER      = 4
-        MARKET_BUY_ORDER      = 5
-        MARKET_SELL_ORDER     = 6
-        STOP_LIMIT_BUY_ORDER  = 7
-        STOP_LIMIT_SELL_ORDER = 8
-        STOP_LOSS_BUY_ORDER   = 9
-        STOP_LOSS_SELL_ORDER  = 10
     
     class TimeInForce(Enum):
         """The time in force of an order. 
@@ -206,7 +186,7 @@ class Order(Robinhood):
         """
         pass
 
-    def place(self) -> OrderStatus:
+    def place(self, limit=None, stop=None) -> OrderStatus:
         """Place the current order. Calls validate() before the order is placed.
         This method is idempotent so calling place() after the order has already
         placed will have no effect.
@@ -242,9 +222,6 @@ class User(Robinhood):
         """Custom pretty print function for a User"""
         pass
 
-    # def get_account(self):
-    #     pass
-
     def portfolio(self) -> Portfolio:
         """Returns the portfolio of the current user."""
         """Consolidated portfolio() and options_owned() and investment_profile """
@@ -254,14 +231,17 @@ class User(Robinhood):
 
     def get_open_orders(self) -> List(OrderStatus):
         """return all currently open(cancellabe) orders"""
-        pass 
-
-
+        pass
 
 class Portfolio():
     """A user's current portfolio of instruments they own.
        Includes info on securities and positions
     """
+
+    class ValueType(Enum):
+        """ The way to calculate the value of a user's holdings """
+        EQUITY = 1
+        MARKET_VALUE = 2
 
     def __init__(self):
         pass
@@ -270,7 +250,8 @@ class Portfolio():
         """Custom pretty print function for a Portfolio"""
         pass
 
-    def market_value(self): 
+    def value(self, value_type):
+        # value_type is of Portfolio.ValueType
         pass
 
     def dividends(self):
@@ -279,24 +260,14 @@ class Portfolio():
     def excess_margin(self):
         pass
 
-    def extended_hours_market_value(self):
+    def extended_hours_value(self, value_type):
+        # value_type is of Portfolio.ValueType
         pass
 
-    def equity(self):
+    def equity_previous_close(self, adjusted=False):
         pass
 
-    def extended_hours_equity(self):
-        pass
-
-    def equity_previous_close(self):
-        pass
-
-    def adjusted_equity_previous_close(self):
-        pass
-
-    def last_core_equity(self):
-        pass
-
-    def last_core_market_value(self):
+    def last_core_value(self, value_type):
+        # value_type is of Portfolio.ValueType
         pass
 
