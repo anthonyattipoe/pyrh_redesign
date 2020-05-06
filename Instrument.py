@@ -1,5 +1,7 @@
 from enum import Enum
-from .Session import Session
+#from Session import Session
+
+import __init__
 
 
 class Instrument:
@@ -32,7 +34,7 @@ class Instrument:
         """
         self.instrument_type = instrument_type
         self.ticker_symbol = symbol
-        self.rh = Session
+        self.rh = __init__.SessionToken.rh
 
     def _str_(self):
         """Custom pretty print function for an Instrument"""
