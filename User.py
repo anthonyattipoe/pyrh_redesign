@@ -1,5 +1,6 @@
 from pyrh.pyrh import urls
 from pyrh.pyrh.models import PortfolioSchema
+from Session import begin_robinhood_session, end_robinhood_session
 
 class User:
     """An existing Robinhood User."""
@@ -47,16 +48,19 @@ class User:
         return open_orders
 
 ###### CLIENT CODE ######
-user = User()
-print("Testing: __str__()")
-print(str(user))
+if __name__ == "__main__":
+    begin_robinhood_session("", "")
+    user = User()
+    print("Testing: __str__()")
+    print(str(user))
 
-print("Testing: portfolio()")
-portfolio = user.portfolio()
-print(str(portfolio))
+    print("Testing: portfolio()")
+    portfolio = user.portfolio()
+    print(str(portfolio))
 
-print("Testing: order_history()")
-print(user.order_history())
+    print("Testing: order_history()")
+    print(user.order_history())
 
-print("Testing: get_open_orders()")
-print(user.get_open_orders())
+    print("Testing: get_open_orders()")
+    print(user.get_open_orders())
+    end_robinhood_session()
