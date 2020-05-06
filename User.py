@@ -15,8 +15,7 @@ class User:
         return 'User(name='+self.name+', portfolio='+str(self.portfolio)+ ')'
 
     def portfolio(self):
-        """Returns the portfolio of the current user."""
-        """Consolidated portfolio() and options_owned() and investment_profile """
+        """Returns the user's portfolio."""
         return self.portfolio
 
     def order_history(self) -> List(Order): #return type?
