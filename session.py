@@ -1,7 +1,7 @@
 from __future__ import annotations
 from pyrh.pyrh.robinhood import Robinhood
+import __init__
 
-session_token = None
 
 
 class RobinHood_Object(object):
@@ -33,18 +33,18 @@ class RobinHood_Object(object):
 
 
 def begin_robinhood_session(email, password):
-    global session_token
-    session_token = RobinHood_Object(email, password)
+    
+    __init__.session_token = RobinHood_Object(email, password)
 
 
 def end_robinhood_session():
-    global session_token
-    session_token.end_session()
-    session_token = None
+    
+    __init__.session_token.end_session()
+    __init__.session_token = None
 
 
 __all__ = [
-    session_token,
+    __init__.session_token,
     begin_robinhood_session,
     end_robinhood_session
 ]
