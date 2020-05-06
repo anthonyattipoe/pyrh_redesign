@@ -9,8 +9,16 @@ class Order:
 
     class Type(Enum):
         """The type of an order."""
-        BUY = 1
-        SELL = 2
+        BUY                   = 1
+        SELL                  = 2
+        LIMIT_BUY_ORDER       = 3
+        LIMIT_SELL_ORDER      = 4
+        MARKET_BUY_ORDER      = 5
+        MARKET_SELL_ORDER     = 6
+        STOP_LIMIT_BUY_ORDER  = 7
+        STOP_LIMIT_SELL_ORDER = 8
+        STOP_LOSS_BUY_ORDER   = 9
+        STOP_LOSS_SELL_ORDER  = 10
 
     class TimeInForce(Enum):
         """The time in force of an order.
@@ -47,7 +55,7 @@ class Order:
         """
         pass
 
-    def place(self, limit=None, stop=None) -> OrderStatus:
+    def place(self) -> OrderStatus:
         """Place the current order. Calls validate() before the order is placed.
         This method is idempotent so calling place() after the order has already
         placed will have no effect.
