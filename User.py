@@ -1,15 +1,15 @@
-from pyrh.pyrh import urls
-from pyrh.pyrh.models import PortfolioSchema
 from Session import begin_robinhood_session, end_robinhood_session
+import __init__
+
 
 class User:
     """An existing Robinhood User."""
-    
+
     def __init__(self):
         """ Returns an existing Robinhood User."""
-        self.portfolio = self.get(urls.PORTFOLIOS, schema=PortfolioSchema())
-        self.name = self.get(urls.USER)
-       
+        self.rh = __init__.session_token.rh
+        self.portfolio = self.rh.Portfolio()
+        self.name = self.rh.User()
 
     def _str_(self):
         """Prints User Data In the Form:
@@ -29,7 +29,7 @@ class User:
             (:obj:`dict`): JSON dict from getting orders
         """
 
-        return self.get(urls.build_orders(orderId))
+        return self.rh.order_history(orderId)
         
 
     def get_open_orders(self):
@@ -39,13 +39,7 @@ class User:
             order history?
         """
 
-        open_orders = []
-        orders = self.order_history()
-        for order in orders["results"]:
-            if order["cancel"] is not None:
-                open_orders.append(order)
-
-        return open_orders
+        return self.rh.get_open_orders()
 
 ###### CLIENT CODE ######
 if __name__ == "__main__":
