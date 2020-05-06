@@ -16,8 +16,36 @@ class Portfolio:
     def __init__(self):
         self.rh = __init__.session_token.rh
 
+        #call the rh endpoint
+        #save all the key:value pairs as object attributes 
+        portfolio = self.rh.portfolios()
+        for key in portfolio:
+            setattr(self, key, portfolio[key])
+
+
     def _str_(self) -> str:
         """Custom pretty print function for a Portfolio"""
+        string = "Portfolio:\n"
+        string = string + "url: {}\n".format(self.url)
+        string = string + "instrument: {}\n".format(self.instrument)
+        string = string + "account: {}\n".format(self.account)
+        string = string + "account_number: {}\n".format(self.account_number)
+        string = string + "average_buy_price: {}\n".format(self.average_buy_price)
+        string = string + "pending_average_buy_price: {}\n".format(self.pending_average_buy_price)
+        string = string + "quantity: {}\n".format(self.quantity)
+        string = string + "intraday_average_buy_price: {}\n".format(self.intraday_average_buy_price)
+        string = string + "intraday_quantity: {}\n".format(self.intraday_quantity)
+        string = string + "shares_held_for_buys: {}\n".format(self.shares_held_for_buys)
+        string = string + "shares_held_for_sells: {}\n".format(self.shares_held_for_sells)
+        string = string + "shares_held_for_stock_grants: {}\n".format(self.shares_held_for_stock_grants)
+        string = string + "shares_held_for_options_collateral: {}\n".format(self.shares_held_for_options_collateral)
+        string = string + "shares_held_for_options_events: {}\n".format(self.shares_held_for_options_events)
+        string = string + "shares_pending_from_options_events: {}\n".format(self.shares_pending_from_options_events)
+        string = string + "updated_at: {}\n".format(self.updated_at)
+        string = string + "created_at: {}\n".format(self.created_at)
+        
+        return string
+
 
 
     def value(self, value_type : ValueType) -> float:
@@ -44,7 +72,7 @@ class Portfolio:
         Returns:
             Float representing value
         """
-        return rh.excess_margin()
+        return self.rh.excess_margin()
 
     def extended_hours_value(self, value_type : ValueType) -> float:
         """Returns portfolio extended_hours equity or market value.
@@ -70,9 +98,9 @@ class Portfolio:
             Float representing the value.
         """
         if adjusted:
-            return rh.adjusted_equity_previous_close()
+            return self.rh.adjusted_equity_previous_close()
         else:
-            return rh.equity_previous_close()
+            return self.rh.equity_previous_close()
 
     def last_core_value(self, value_type) -> float:
         """Returns portfolio last core value
@@ -114,41 +142,9 @@ class Portfolio:
                                }
         """
 
-        json = rh.dividends()
+        json = self.rh.dividends()
         # TODO: convert json to map
         pass
-
-
-    def investment_profile(self) -> dict:
-        """Returns the investment profile for a users portfolio
-        
-        Args:
-            None 
-
-        Returns:
-            dict represnation of investment profile 
-
-            example  'user': 'api.robinhood.com/user/', 
-                     'total_net_worth': RANGE_RANGE_STR, 
-                     'annual_income': RANGE_RANGE_STR, 
-                     'source_of_funds': STR, 
-                     'investment_objective': 'income_invest_obj', 
-                     'investment_experience': STR, 
-                     'liquid_net_worth': RANGE_RANGE_STR, 
-                     'risk_tolerance': STR, 
-                     'tax_bracket': '', 
-                     'time_horizon': STR, 
-                     'liquidity_needs': STR, 
-                     'investment_experience_collected': BOOL, 
-                     'suitability_verified': BOOL, 
-                     'option_trading_experience': '', 
-                     'professional_trader': None, 
-                     'understand_option_spreads': BOOL, 
-                     'interested_in_options': None, 
-                     'updated_at': '2019-08-01T16:18:26.996458Z'
-        """
-
-        return self.rh.investment_profile()
 
 
     def positions(self) -> dict:
@@ -183,5 +179,3 @@ class Portfolio:
         # TODO: convert json to map
 
         pass
-
-        
