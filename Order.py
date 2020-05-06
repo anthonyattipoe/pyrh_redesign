@@ -43,7 +43,7 @@ class Order:
         """
         pass
 
-    def _str_(self):
+    def __str__(self) -> str:
         """Custom pretty print function for an Order"""
         pass
 
@@ -59,6 +59,9 @@ class Order:
         """Place the current order. Calls validate() before the order is placed.
         This method is idempotent so calling place() after the order has already
         placed will have no effect.
+
+        Returns:
+            An OrderStatus object outlining the status of the current order.
 
         Raises:
             MalformedOrderError: If the combinations of properties set on the order are not compatible.
