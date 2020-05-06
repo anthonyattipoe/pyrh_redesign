@@ -1,16 +1,11 @@
 from __future__ import annotations
 from pyrh.pyrh.robinhood import Robinhood
-from pyrh.pyrh.models.sessionmanager import *
-import __init__
 
-__all__ = [
-    "pyrh.pyrh"
-]
+session_token = None
+
 
 class RobinHood_Object(object):
     """ Robinhood superclass  """
-
-    
 
     def __init__(self, email, password):
         """Logs in an existing Robinhood user with the provided credentials.
@@ -36,10 +31,20 @@ class RobinHood_Object(object):
         #self.rh.logout()
         pass
 
+
 def begin_robinhood_session(email, password):
-    __init__.session_token = RobinHood_Object(email, password)
+    global session_token
+    session_token = RobinHood_Object(email, password)
 
 
 def end_robinhood_session():
-    __init__.session_token.end_session()
-    __init__.session_token = None
+    global session_token
+    session_token.end_session()
+    session_token = None
+
+
+__all__ = [
+    session_token,
+    begin_robinhood_session,
+    end_robinhood_session
+]

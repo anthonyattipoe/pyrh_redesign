@@ -1,5 +1,5 @@
 import __init__
-from Session import begin_robinhood_session, end_robinhood_session
+from session import begin_robinhood_session, end_robinhood_session
 from Instrument import *
 import sys
 
