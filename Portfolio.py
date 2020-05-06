@@ -1,23 +1,19 @@
 from enum import Enum
-from .Session import Session
-
+from Session import begin_robinhood_session, end_robinhood_session
+import __init__
 
 class Portfolio:
     """A user's current portfolio of instruments they own.
        Includes info on securities and positions
     """
-    rh = Session
-    all_instruments = None  # each instrument is mapped to number of shares in this portfolio
-
+    
     class ValueType(Enum):
         """ The way to calculate the value of a user's holdings """
         EQUITY = 1
         MARKET_VALUE = 2
 
     def __init__(self):
-        self.all_instruments = {}
-        self.rh = Session
-
+        self.rh = __init__.session_token.rh
 
     def _str_(self) -> str:
         """Custom pretty print function for a Portfolio"""
