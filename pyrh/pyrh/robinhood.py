@@ -122,10 +122,14 @@ class Robinhood(InstrumentManager, SessionManager):
 
         # Creates a tuple containing the information we want to retrieve
         def append_stock(stock):
+
             keys = key.split(",")
             myStr = ""
             for item in keys:
-                myStr += f"{stock[item]},"
+                if isinstance(stock[item], str):
+                    myStr += stock[item] + ","
+                elif isinstance(stock[item], int):
+                    myStr += str(stock[item]) + ","
 
             return myStr.split(",")
 
