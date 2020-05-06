@@ -1,5 +1,5 @@
 from enum import Enum
-from pyrh import Robinhood
+from .Session import Session
 
 
 class Instrument:
@@ -7,7 +7,7 @@ class Instrument:
 
     instrument_type = None
     ticker_symbol = None
-    rh = Robinhood()
+    rh = None
 
     class Type(Enum):
         """The type of instrument in question."""
@@ -32,11 +32,12 @@ class Instrument:
         """
         self.instrument_type = instrument_type
         self.ticker_symbol = symbol
+        self.rh = Session
 
     def _str_(self):
         """Custom pretty print function for an Instrument"""
         """prints instrument data"""
-        return "{self.name}: {self.instrument_type}"
+        return self.ticker_symbol
 
     def symbol(self):
         return self.ticker_symbol
@@ -45,13 +46,16 @@ class Instrument:
         return self.rh.quote_data(self.ticker_symbol)
 
     def ask_info(self):
-        price = self.rh.ask_price(self.ticker_symbol)
+        price_string = self.rh.ask_price(self.ticker_symbol)
+        price = float(price_string[0][0])
         size = self.rh.ask_size(self.ticker_symbol)
         return price, size
 
     def bid_info(self):
-        price = self.rh.bid_price(self.ticker_symbol)
-        size = self.rh.bid_size(self.ticker_symbol)
+        price_string = self.rh.bid_price(self.ticker_symbol)
+        price = float(price_string[0][0])
+        size_string = self.rh.bid_size(self.ticker_symbol)
+        size = float(size_string[0][0])
         return price, size
 
     def fundamental(self):
@@ -89,7 +93,3 @@ class Instrument:
         else:
             price = self.rh.adjusted_previous_close(self.ticker_symbol)
             return price, date
-
-    @staticmethod
-    def search(name) -> List(Instrument):
-        pass

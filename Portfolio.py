@@ -1,5 +1,5 @@
 from enum import Enum
-from pyrh import Robinhood
+from .Session import Session
 
 
 class Portfolio:
@@ -7,17 +7,21 @@ class Portfolio:
        Includes info on securities and positions
     """
 
+    all_instruments = None  # each instrument is mapped to number of shares in this portfolio
+    rh = None
+
     class ValueType(Enum):
         """ The way to calculate the value of a user's holdings """
         EQUITY = 1
         MARKET_VALUE = 2
 
     def __init__(self):
-        pass
+        self.all_instruments = {}
+        self.rh = Session
 
     def _str_(self):
         """Custom pretty print function for a Portfolio"""
-        pass
+
 
     def value(self, value_type):
         # value_type is of Portfolio.ValueType

@@ -32,3 +32,7 @@ class RobinHood(object):
         """ logout of Robinhood session"""
         self.rh.logout()
 
+    def get_rh(self):
+        """ Returns the Robinhood session """
+        return self.rh
+

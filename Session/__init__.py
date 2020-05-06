@@ -32,9 +32,13 @@ class RobinHood(object):
 
 Session = None
 
-def beginRobinhoodSession(email, password):
-	Session =  RobinHood(email, password)
 
-def endRobinhoodSession():
-	Session.end_session()
-	Session = None
+def begin_robinhood_session(email, password):
+    global Session
+    Session = RobinHood(email, password)
+
+
+def end_robinhood_session():
+    global Session
+    Session.end_session()
+    Session = None
