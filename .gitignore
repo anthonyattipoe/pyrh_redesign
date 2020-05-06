@@ -1,0 +1,5 @@
+# Ignore the following files
+venv/*
+__pycache__/*
+.vscode/*
+credentials
