@@ -1,5 +1,6 @@
 from enum import Enum
-from session import begin_robinhood_session, end_robinhood_session, session_token
+from session import begin_robinhood_session, end_robinhood_session
+import __init__
 
 
 class Instrument:
@@ -28,7 +29,7 @@ class Instrument:
         """
         self.instrument_type = instrument_type
         self.ticker_symbol = symbol
-        self.rh = session_token.rh
+        self.rh = __init__.session_token.rh
 
     def __str__(self):
         """Custom pretty print function for an Instrument"""
