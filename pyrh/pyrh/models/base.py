@@ -6,7 +6,7 @@ from typing import Any, Callable, Dict, Iterable, Mapping, Optional
 from marshmallow import INCLUDE, Schema, fields, post_load
 from yarl import URL
 
-from pyrh.exceptions import InvalidOperation
+from ...pyrh.exceptions import InvalidOperation
 
 
 JSON = Dict[str, Any]

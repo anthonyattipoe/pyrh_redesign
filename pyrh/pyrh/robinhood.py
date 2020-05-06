@@ -6,9 +6,9 @@ from urllib.parse import unquote
 import dateutil
 import requests
 
-from pyrh import urls
-from pyrh.exceptions import InvalidTickerSymbol
-from pyrh.models import (
+from ..pyrh import urls
+from ..pyrh.exceptions import InvalidTickerSymbol
+from ..pyrh.models import (
     InstrumentManager,
     PortfolioSchema,
     SessionManager,

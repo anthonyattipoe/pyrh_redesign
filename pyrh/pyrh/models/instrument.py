@@ -4,8 +4,8 @@ from typing import Iterable, Optional, cast
 
 from marshmallow import fields
 
-from pyrh import urls
-from pyrh.exceptions import PyrhValueError
+from ...pyrh import urls
+from ...pyrh.exceptions import PyrhValueError
 
 from .base import (
     BaseModel,

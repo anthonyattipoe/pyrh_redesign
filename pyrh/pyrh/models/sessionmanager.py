@@ -13,8 +13,8 @@ from requests.exceptions import HTTPError
 from requests.structures import CaseInsensitiveDict
 from yarl import URL
 
-from pyrh import urls
-from pyrh.exceptions import AuthenticationError, PyrhValueError
+from ...pyrh import urls
+from ...pyrh.exceptions import AuthenticationError, PyrhValueError
 
 from .base import JSON, BaseModel, BaseSchema
 from .oauth import CHALLENGE_TYPE_VAL, OAuth, OAuthSchema
