@@ -2,6 +2,7 @@ from enum import Enum
 from Session import begin_robinhood_session, end_robinhood_session
 import __init__
 
+
 class Instrument:
     """A tradeable instrument on the Robinhood platform."""
 
@@ -48,7 +49,8 @@ class Instrument:
     def ask_info(self):
         price_string = self.rh.ask_price(self.ticker_symbol)
         price = float(price_string[0][0])
-        size = self.rh.ask_size(self.ticker_symbol)
+        size_string = self.rh.ask_size(self.ticker_symbol)
+        size = float(size_string[0][0])
         return price, size
 
     def bid_info(self):
@@ -80,39 +82,44 @@ class Instrument:
         return self.rh.get_popularity(self.ticker_symbol)
 
     def last_trade_price(self):
-        return self.rh.last_trade_price(self.ticker_symbol)
+        trade_price_string = self.rh.last_trade_price(self.ticker_symbol)
+        return trade_price_string[0][0]
 
     def last_updated_at(self):
-        return self.rh.last_updated_at(self.ticker_symbol)
+        updated_at_string = self.rh.last_updated_at(self.ticker_symbol)
+        return updated_at_string[0][0]
 
     def previous_close(self, adjusted=False):
-        date = self.rh.previous_close_date(self.ticker_symbol)
+        date_string = self.rh.previous_close_date(self.ticker_symbol)
+        date = date_string[0][0]
         if adjusted:
-            price = self.rh.previous_close(self.ticker_symbol)
+            price_string = self.rh.previous_close(self.ticker_symbol)
+            price = price_string[0][0]
             return price, date
         else:
-            price = self.rh.adjusted_previous_close(self.ticker_symbol)
+            price_string = self.rh.adjusted_previous_close(self.ticker_symbol)
+            price = price_string[0][0]
             return price, date
 
 
 # unit testing
 if __name__ == "__main__":
-    begin_robinhood_session("johnwpaulharriman@gmail.com", "KanyeWest4$")
+    begin_robinhood_session("evangelinehliu@hotmail.com", "APIsAreGreat!!1")
     amazon_stock = Instrument(Instrument.Type.STOCK, "AMZN")
     print("Amazon stock " + str(amazon_stock))
     print("Amazon stock symbol: " + str(amazon_stock.symbol()))
     print("Quote for Amazon stock: " + str(amazon_stock.quote()))
     print("Ask price x size: " + str(amazon_stock.ask_info()))
     print(("Bid price x size: " + str(amazon_stock.bid_info())))
-    print("Fundamental: " + str(amazon_stock.fundamental()))
-    print("Historical data for Amazon: " + str(amazon_stock.historical_quotes()))
-    print("News: " + str(amazon_stock.news()))
-    print("Option chain ID: " + str(amazon_stock.option_chain()))
-    print("Market data for Amazon: " + str(amazon_stock.market_data()))
-    print("Popularity of Amazon stock as measured by number of Robinhood users who own it: "
-          + str(amazon_stock.popularity()))
+    #print("Fundamental: " + str(amazon_stock.fundamental()))
+    #print("Historical data for Amazon: " + str(amazon_stock.historical_quotes()))
+    #print("News: " + str(amazon_stock.news()))
+    #print("Option chain ID: " + str(amazon_stock.option_chain()))
+    #print("Market data for Amazon: " + str(amazon_stock.market_data()))
+    # print("Popularity of Amazon stock as measured by number of Robinhood users who own it: "
+    #       + str(amazon_stock.popularity()))
     print("Last trade price of Amazon stock: " + str(amazon_stock.last_trade_price()))
     print("Price for Amazon stock last updated at: " + str(amazon_stock.last_updated_at()))
     print("Previous closing price for Amazon stock, not adjusted: " + str(amazon_stock.previous_close()))
     print("Previous closing price for Amazon stock, adjusted: " + str(amazon_stock.previous_close(adjusted=True)))
-    end_robinhood_session()
+    #end_robinhood_session()
