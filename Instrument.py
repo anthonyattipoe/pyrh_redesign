@@ -1,6 +1,6 @@
 from enum import Enum
-from pyrh_redesign import session_token, begin_robinhood_session, end_robinhood_session
-
+from Session import begin_robinhood_session, end_robinhood_session
+import __init__
 
 class Instrument:
     """A tradeable instrument on the Robinhood platform."""
@@ -32,7 +32,7 @@ class Instrument:
         """
         self.instrument_type = instrument_type
         self.ticker_symbol = symbol
-        self.rh = session_token
+        self.rh = __init__.session_token.rh
 
     def __str__(self):
         """Custom pretty print function for an Instrument"""
@@ -97,7 +97,7 @@ class Instrument:
 
 # unit testing
 if __name__ == "__main__":
-    begin_robinhood_session("evangelinehliu@hotmail.com", "APIsAreGreat!!1")
+    begin_robinhood_session("johnwpaulharriman@gmail.com", "KanyeWest4$")
     amazon_stock = Instrument(Instrument.Type.STOCK, "AMZN")
     print("Amazon stock " + str(amazon_stock))
     print("Amazon stock symbol: " + str(amazon_stock.symbol()))

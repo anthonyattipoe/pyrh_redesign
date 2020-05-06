@@ -37,9 +37,9 @@ class RobinHood_Object(object):
         pass
 
 def begin_robinhood_session(email, password):
-    __init__.SessionToken = RobinHood_Object(email, password)
+    __init__.session_token = RobinHood_Object(email, password)
 
 
 def end_robinhood_session():
-    __init__.SessionToken.end_session()
-    __init__.SessionToken = None
+    __init__.session_token.end_session()
+    __init__.session_token = None
