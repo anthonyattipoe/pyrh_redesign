@@ -1,9 +1,6 @@
 from __future__ import annotations
 from pyrh.pyrh.robinhood import Robinhood
 
-__all__ = [
-    "pyrh.pyrh"
-]
 
 class RobinHood_Object(object):
     """ Robinhood superclass  """
@@ -34,15 +31,25 @@ class RobinHood_Object(object):
         self.rh.logout()
 
 
-SessionToken = None
+session_token = None
 
 
 def begin_robinhood_session(email, password):
-    global SessionToken
-    SessionToken = RobinHood_Object(email, password)
+    global session_token
+    session_token = RobinHood_Object(email, password)
 
 
 def end_robinhood_session():
-    global SessionToken
-    SessionToken.end_session()
-    SessionToken = None
+    global session_token
+    session_token.end_session()
+    session_token = None
+
+
+__all__ = [
+    session_token
+]
+
+# unit testing
+if __name__ == "__main__":
+    begin_robinhood_session("evangelinehliu@hotmail.com", "APIsAreGreat!!1")
+    end_robinhood_session()
