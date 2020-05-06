@@ -1,5 +1,5 @@
 from enum import Enum
-from .Session import Session
+from .session import Session
 
 
 class Portfolio:
