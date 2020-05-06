@@ -1,5 +1,5 @@
 from enum import Enum
-from .Session import Session
+from pyrh_redesign import session_token, begin_robinhood_session, end_robinhood_session
 
 
 class Instrument:
@@ -32,9 +32,9 @@ class Instrument:
         """
         self.instrument_type = instrument_type
         self.ticker_symbol = symbol
-        self.rh = Session
+        self.rh = session_token
 
-    def _str_(self):
+    def __str__(self):
         """Custom pretty print function for an Instrument"""
         """prints instrument data"""
         return self.ticker_symbol
@@ -93,3 +93,26 @@ class Instrument:
         else:
             price = self.rh.adjusted_previous_close(self.ticker_symbol)
             return price, date
+
+
+# unit testing
+if __name__ == "__main__":
+    begin_robinhood_session("evangelinehliu@hotmail.com", "APIsAreGreat!!1")
+    amazon_stock = Instrument(Instrument.Type.STOCK, "AMZN")
+    print("Amazon stock " + str(amazon_stock))
+    print("Amazon stock symbol: " + str(amazon_stock.symbol()))
+    print("Quote for Amazon stock: " + str(amazon_stock.quote()))
+    print("Ask price x size: " + str(amazon_stock.ask_info()))
+    print(("Bid price x size: " + str(amazon_stock.bid_info())))
+    print("Fundamental: " + str(amazon_stock.fundamental()))
+    print("Historical data for Amazon: " + str(amazon_stock.historical_quotes()))
+    print("News: " + str(amazon_stock.news()))
+    print("Option chain ID: " + str(amazon_stock.option_chain()))
+    print("Market data for Amazon: " + str(amazon_stock.market_data()))
+    print("Popularity of Amazon stock as measured by number of Robinhood users who own it: "
+          + str(amazon_stock.popularity()))
+    print("Last trade price of Amazon stock: " + str(amazon_stock.last_trade_price()))
+    print("Price for Amazon stock last updated at: " + str(amazon_stock.last_updated_at()))
+    print("Previous closing price for Amazon stock, not adjusted: " + str(amazon_stock.previous_close()))
+    print("Previous closing price for Amazon stock, adjusted: " + str(amazon_stock.previous_close(adjusted=True)))
+    end_robinhood_session()
