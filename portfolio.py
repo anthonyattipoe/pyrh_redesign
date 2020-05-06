@@ -2,6 +2,7 @@ from enum import Enum
 from Session import begin_robinhood_session, end_robinhood_session
 import __init__
 
+
 class Portfolio:
     """A user's current portfolio of instruments they own.
        Includes info on securities and positions

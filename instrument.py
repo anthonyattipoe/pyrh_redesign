@@ -1,13 +1,9 @@
 from enum import Enum
-from Session import begin_robinhood_session, end_robinhood_session
+from session import begin_robinhood_session, end_robinhood_session
 import __init__
 
 class Instrument:
     """A tradeable instrument on the Robinhood platform."""
-
-    instrument_type = None
-    ticker_symbol = None
-    rh = None
 
     class Type(Enum):
         """The type of instrument in question."""

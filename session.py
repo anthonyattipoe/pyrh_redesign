@@ -10,8 +10,6 @@ __all__ = [
 class RobinHood_Object(object):
     """ Robinhood superclass  """
 
-    
-
     def __init__(self, email, password):
         """Logs in an existing Robinhood user with the provided credentials.
         Args:

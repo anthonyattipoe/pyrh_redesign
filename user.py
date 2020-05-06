@@ -1,6 +1,6 @@
-from Session import begin_robinhood_session, end_robinhood_session
-import __init__
-
+from pyrh.pyrh import urls
+from pyrh.pyrh.models import PortfolioSchema
+from session import begin_robinhood_session, end_robinhood_session
 
 class User:
     """An existing Robinhood User."""
