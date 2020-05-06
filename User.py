@@ -7,7 +7,7 @@ class User:
     def __init__(self):
         """ Returns an existing Robinhood User."""
         self.portfolio = self.get(urls.PORTFOLIOS, schema=PortfolioSchema())
-        self.name = """Username """
+        self.name = self.get(urls.USER)
        
 
     def _str_(self):
