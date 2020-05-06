@@ -45,3 +45,18 @@ class User:
                 open_orders.append(order)
 
         return open_orders
+
+###### CLIENT CODE ######
+user = User()
+print("Testing: __str__()")
+print(str(user))
+
+print("Testing: portfolio()")
+portfolio = user.portfolio()
+print(str(portfolio))
+
+print("Testing: order_history()")
+print(user.order_history())
+
+print("Testing: get_open_orders()")
+print(user.get_open_orders())
