@@ -5,10 +5,6 @@ import __init__
 class Instrument:
     """A tradeable instrument on the Robinhood platform."""
 
-    instrument_type = None
-    ticker_symbol = None
-    rh = None
-
     class Type(Enum):
         """The type of instrument in question."""
         STOCK = 1
