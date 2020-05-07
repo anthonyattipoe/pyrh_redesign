@@ -1,5 +1,6 @@
-from session import begin_robinhood_session, end_robinhood_session
+from portfolio import Portfolio
 import __init__
+
 
 class User:
     """An existing Robinhood User."""
@@ -12,27 +13,16 @@ class User:
         """
 
         self.rh = __init__.session_token.rh
-        self.portfolio = self.rh.portfolio()
-        self.name = self.rh.user()
+        self.portfolio = Portfolio()
 
-    def _str_(self):
-        """Prints User Data In the Form:
-            User: Name
-            Portfolio: Portfolio            
-        """
-        return 'User(name='+self.name+', portfolio='+str(self.portfolio) + ')'
 
-    def portfolio(self):
-        """Returns the user's portfolio."""
-        return self.portfolio
-
-    def order_history(self, orderId):
+    def order_history(self, orderId=None):
         """Wrapper for portfolios
         Optional Args: add an order ID to retrieve information about a single order.
         Returns:
             (:obj:`dict`): JSON dict from getting orders
         """
-
+        
         return self.rh.order_history(orderId)
         
 
@@ -45,20 +35,33 @@ class User:
 
         return self.rh.get_open_orders()
 
-###### CLIENT CODE ######
-if __name__ == "__main__":
-    begin_robinhood_session("", "")
-    user = User()
-    print("Testing: __str__()")
-    print(str(user))
+    def investment_profile(self) -> dict:
+        """Returns the investment profile for a users portfolio
+        
+        Args:
+            None 
 
-    print("Testing: portfolio()")
-    portfolio = user.portfolio()
-    print(str(portfolio))
+        Returns:
+            dict represnation of investment profile 
 
-    print("Testing: order_history()")
-    print(user.order_history())
+            example  'user': 'api.robinhood.com/user/', 
+                     'total_net_worth': RANGE_RANGE_STR, 
+                     'annual_income': RANGE_RANGE_STR, 
+                     'source_of_funds': STR, 
+                     'investment_objective': 'income_invest_obj', 
+                     'investment_experience': STR, 
+                     'liquid_net_worth': RANGE_RANGE_STR, 
+                     'risk_tolerance': STR, 
+                     'tax_bracket': '', 
+                     'time_horizon': STR, 
+                     'liquidity_needs': STR, 
+                     'investment_experience_collected': BOOL, 
+                     'suitability_verified': BOOL, 
+                     'option_trading_experience': '', 
+                     'professional_trader': None, 
+                     'understand_option_spreads': BOOL, 
+                     'interested_in_options': None, 
+                     'updated_at': '2019-08-01T16:18:26.996458Z'
+        """
 
-    print("Testing: get_open_orders()")
-    print(user.get_open_orders())
-    end_robinhood_session()
+        return self.rh.investment_profile()

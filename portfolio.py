@@ -1,27 +1,31 @@
 from enum import Enum
-from .session import Session
+from session import begin_robinhood_session, end_robinhood_session
+import __init__
 
 
 class Portfolio:
     """A user's current portfolio of instruments they own.
        Includes info on securities and positions
     """
-    rh = Session
-    all_instruments = None  # each instrument is mapped to number of shares in this portfolio
-
+    
     class ValueType(Enum):
         """ The way to calculate the value of a user's holdings """
         EQUITY = 1
         MARKET_VALUE = 2
 
     def __init__(self):
-        self.all_instruments = {}
-        self.rh = Session
+        self.rh = __init__.session_token.rh 
 
 
-    def _str_(self) -> str:
+
+    def __str__(self) -> str:
         """Custom pretty print function for a Portfolio"""
-
+        portfolio = self.rh.portfolio()
+        attr = vars(portfolio)
+        string = "Portfolio \n"
+        for item in attr:
+            string = string + "{}: {}\n".format(item, str(attr[item])) 
+        return string
 
     def value(self, value_type : ValueType) -> float:
         """Returns portfolio equity or market value.
@@ -47,7 +51,7 @@ class Portfolio:
         Returns:
             Float representing value
         """
-        return rh.excess_margin()
+        return self.rh.excess_margin()
 
     def extended_hours_value(self, value_type : ValueType) -> float:
         """Returns portfolio extended_hours equity or market value.
@@ -73,9 +77,9 @@ class Portfolio:
             Float representing the value.
         """
         if adjusted:
-            return rh.adjusted_equity_previous_close()
+            return self.rh.adjusted_equity_previous_close()
         else:
-            return rh.equity_previous_close()
+            return self.rh.equity_previous_close()
 
     def last_core_value(self, value_type) -> float:
         """Returns portfolio last core value
@@ -91,7 +95,7 @@ class Portfolio:
         else:
             return self.rh.last_core_market_value()
 
-    def dividends(self) -> list(dict):
+    def dividends(self) -> list:
         """Returns the dividends for a portfolio
         
         Args:
@@ -117,44 +121,10 @@ class Portfolio:
                                }
         """
 
-        json = rh.dividends()
-        # TODO: convert json to map
-        pass
+        return self.rh.dividends()["results"]
 
 
-    def investment_profile(self) -> dict:
-        """Returns the investment profile for a users portfolio
-        
-        Args:
-            None 
-
-        Returns:
-            dict represnation of investment profile 
-
-            example  'user': 'api.robinhood.com/user/', 
-                     'total_net_worth': RANGE_RANGE_STR, 
-                     'annual_income': RANGE_RANGE_STR, 
-                     'source_of_funds': STR, 
-                     'investment_objective': 'income_invest_obj', 
-                     'investment_experience': STR, 
-                     'liquid_net_worth': RANGE_RANGE_STR, 
-                     'risk_tolerance': STR, 
-                     'tax_bracket': '', 
-                     'time_horizon': STR, 
-                     'liquidity_needs': STR, 
-                     'investment_experience_collected': BOOL, 
-                     'suitability_verified': BOOL, 
-                     'option_trading_experience': '', 
-                     'professional_trader': None, 
-                     'understand_option_spreads': BOOL, 
-                     'interested_in_options': None, 
-                     'updated_at': '2019-08-01T16:18:26.996458Z'
-        """
-
-        return self.rh.investment_profile()
-
-
-    def positions(self) -> dict:
+    def positions(self) -> list:
         """Returns the positions for a user's portfolio
         
         Args:
@@ -182,9 +152,5 @@ class Portfolio:
                                  'created_at': '2019-07-31T23:57:07.494746Z'
                              }
         """
-        json = self.rh.positions() 
-        # TODO: convert json to map
 
-        pass
-
-        
+        return self.rh.positions()["results"]
