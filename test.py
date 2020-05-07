@@ -14,6 +14,7 @@ def test_quote():
 	ins = Instrument(Instrument.Type.STOCK, "GOOG")
 	print(ins.quote())
 
+
 def test_user():
 
 	print("testing Portfolio..............................")
@@ -28,7 +29,8 @@ def test_user():
 
 	print("Testing: get_open_orders()")
 	print(user.get_open_orders())
-	
+
+
 def test_instrument():
 	print("testing Instrument..............................")
 	amazon_stock = Instrument(Instrument.Type.STOCK, "AMZN")
@@ -48,6 +50,7 @@ def test_instrument():
 	print("Price for Amazon stock last updated at: " + str(amazon_stock.last_updated_at()))
 	print("Previous closing price for Amazon stock, not adjusted: " + str(amazon_stock.previous_close()))
 	print("Previous closing price for Amazon stock, adjusted: " + str(amazon_stock.previous_close(adjusted=True)))
+
 
 if __name__ == "__main__":
 	begin_robinhood_session(email, password)
