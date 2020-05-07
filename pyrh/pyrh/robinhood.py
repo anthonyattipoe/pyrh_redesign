@@ -7,6 +7,7 @@ import dateutil
 import requests
 
 from ..pyrh import urls
+from ..pyrh import endpoints
 from ..pyrh.exceptions import InvalidTickerSymbol
 from ..pyrh.models import (
     InstrumentManager,
@@ -546,7 +547,7 @@ class Robinhood(InstrumentManager, SessionManager):
 
     def get_option_marketdata(self, instrument):
         info = self.get_url(
-            urls.build_market_data() + "options/?instruments=" + instrument
+            endpoints.market_data() + "options/?instruments=" + instrument
         )
         return info["results"][0]
 
@@ -555,7 +556,7 @@ class Robinhood(InstrumentManager, SessionManager):
         stock_id = stock_info["results"][0]["id"]
         params = {}
         params["equity_instrument_ids"] = stock_id
-        chains = self.get_url(urls.options_base() + "chains/", params=params)
+        chains = self.get_url(endpoints.options_base() + "chains/", params=params)
         chains = chains["results"]
         chain_id = None
 

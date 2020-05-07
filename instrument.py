@@ -66,7 +66,7 @@ class Instrument:
     def news(self):
         return self.rh.get_news(self.ticker_symbol)
 
-    def option_chain(self):
+    def option_chain_id(self):
         return self.rh.get_option_chainid(self.ticker_symbol)
 
     def market_data(self, option_id=None):
