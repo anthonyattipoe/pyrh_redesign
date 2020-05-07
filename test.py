@@ -41,8 +41,8 @@ def test_instrument():
     # print("News: " + str(amazon_stock.news()))
     # print("Option chain ID: " + str(amazon_stock.option_chain()))
     # print("Market data for Amazon: " + str(amazon_stock.market_data()))
-    # print("Popularity of Amazon stock as measured by number of Robinhood users who own it: "
-    #       + str(amazon_stock.popularity()))
+    print("Popularity of Amazon stock as measured by number of Robinhood users who own it: "
+          + str(amazon_stock.popularity()))
     print("Last trade price of Amazon stock: " + str(amazon_stock.last_trade_price()))
     print("Price for Amazon stock last updated at: " + str(amazon_stock.last_updated_at()))
     print("Previous closing price for Amazon stock, not adjusted: " + str(amazon_stock.previous_close()))
