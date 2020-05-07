@@ -61,7 +61,9 @@ class Instrument:
         return self.rh.get_fundamentals(self.ticker_symbol)
 
     def historical_quotes(self, interval, span):
-        return self.rh.get_historical_quotes(self.ticker_symbol, interval, span)
+        historical_data_raw = self.rh.get_historical_quotes(self.ticker_symbol, interval, span)
+        historical_data = historical_data_raw['results'][0]['historicals']
+        return historical_data
 
     def news(self):
         return self.rh.get_news(self.ticker_symbol)
