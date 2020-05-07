@@ -455,7 +455,7 @@ class Robinhood(InstrumentManager, SessionManager):
 
         """
         stock_instrument = self.get_url(self.quote_data(stock)["instrument"])["id"]
-        return self.get_url(urls.build_instruments(stock_instrument, "popularity"))[
+        return self.get_url(urls.instruments(stock_instrument, "popularity"))[
             "num_open_positions"
         ]
 
