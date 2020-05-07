@@ -8,7 +8,7 @@ import requests
 
 from ..pyrh import urls
 from ..pyrh import endpoints
-from ..pyrh.exceptions import InvalidTickerSymbol
+from ..pyrh.exceptions import InvalidTickerSymbol, InvalidOptionId
 from ..pyrh.models import (
     InstrumentManager,
     PortfolioSchema,
@@ -545,16 +545,15 @@ class Robinhood(InstrumentManager, SessionManager):
         options = options["results"]
         return options
 
-    def get_option_marketdata(self, instrument):
-        info = self.get_url(
-            endpoints.market_data() + "options/?instruments=" + instrument
-        )
-        return info["results"][0]
+    def get_option_marketdata(self):
+        try:
+            market_data = self.get_url(endpoints.markets()) or {}
+        except requests.exceptions.HTTPError:
+            raise InvalidOptionId()
+        return market_data
 
     def get_option_chainid(self, symbol):
-        #stock_info = self.get_url(self.endpoints["instruments"] + "?symbol=" + symbol)
         stock_info = self.get_url(endpoints.instruments()+"?symbol=" + symbol)
-        print("STOCK INFO: {}".format(str(stock_info)))
         stock_id = stock_info["results"][0]["id"]
         params = {}
         params["equity_instrument_ids"] = stock_id
@@ -613,7 +612,7 @@ class Robinhood(InstrumentManager, SessionManager):
             req.raise_for_status()
             data = req.json()
         except requests.exceptions.HTTPError:
-            raise RH_exception.InvalidTickerSymbol()
+            raise InvalidTickerSymbol()
 
         return data
 

@@ -39,8 +39,8 @@ def test_instrument():
     print("Fundamental: " + str(amazon_stock.fundamental()))
     print("Historical data for Amazon: " + str(amazon_stock.historical_quotes("5minute", "week")))
     print("News: " + str(amazon_stock.news()))
-    # print("Option chain ID: " + str(amazon_stock.option_chain_id()))
-    # print("Market data for Amazon: " + str(amazon_stock.market_data()))
+    print("Option chain ID: " + str(amazon_stock.option_chain_id()))
+    print("Market data for Amazon: " + str(amazon_stock.market_data()))
     print("Popularity of Amazon stock as measured by number of Robinhood users who own it: "
           + str(amazon_stock.popularity()))
     print("Last trade price of Amazon stock: " + str(amazon_stock.last_trade_price()))

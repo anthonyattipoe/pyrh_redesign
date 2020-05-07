@@ -69,11 +69,8 @@ class Instrument:
     def option_chain_id(self):
         return self.rh.get_option_chainid(self.ticker_symbol)
 
-    def market_data(self, option_id=None):
-        if option_id is None:
-            return self.rh.get_option_marketdata(self.ticker_symbol)
-        else:
-            return self.rh.get_option_market_data(option_id)
+    def market_data(self):
+        return self.rh.get_option_marketdata()
 
     def popularity(self):
         return self.rh.get_popularity(self.ticker_symbol)
