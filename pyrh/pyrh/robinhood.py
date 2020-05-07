@@ -45,6 +45,9 @@ def instruments(instrumentId=None, option=None):
         + ("{_option}/".format(_option=option) if option else "")
     )
 
+def fundamentals(stock):
+    return api_url + "/fundamentals/{_stock}/".format(_stock=stock)
+
 
 class Robinhood(InstrumentManager, SessionManager):
     """Wrapper class for fetching/parsing Robinhood endpoints.
@@ -588,25 +591,26 @@ class Robinhood(InstrumentManager, SessionManager):
     def get_fundamentals(self, stock=""):
         """Find stock fundamentals data
 
-        Args:
-            (str): stock ticker
+            Args:
+                (str): stock ticker
 
-        Returns:
-            (:obj:`dict`): contents of `fundamentals` endpoint
-
+            Returns:
+                (:obj:`dict`): contents of `fundamentals` endpoint
         """
 
         # Prompt for stock if not entered
         if not stock:  # pragma: no cover
             stock = input("Symbol: ")
 
-        url = str(urls.build_fundamentals(str(stock.upper())))
+        url = str(fundamentals(str(stock.upper())))
 
         # Check for validity of symbol
         try:
-            data = self.get(url)
+            req = self.session.get(url, timeout=15)
+            req.raise_for_status()
+            data = req.json()
         except requests.exceptions.HTTPError:
-            raise InvalidTickerSymbol()
+            raise RH_exception.InvalidTickerSymbol()
 
         return data
 
