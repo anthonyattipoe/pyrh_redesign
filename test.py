@@ -1,4 +1,3 @@
-import __init__
 from session import begin_robinhood_session, end_robinhood_session
 from instrument import Instrument
 from user import User
