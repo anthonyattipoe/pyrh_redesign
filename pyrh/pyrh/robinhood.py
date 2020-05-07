@@ -227,7 +227,7 @@ class Robinhood(InstrumentManager, SessionManager):
 
         """
 
-        return self.get(urls.build_news(stock.upper()))
+        return self.session.get(endpoints.news(stock.upper()), timeout=15).json()
 
     def print_quote(self, stock=""):  # pragma: no cover
         """Print quote information.
