@@ -15,6 +15,7 @@ from ..pyrh.models import (
     SessionManagerSchema,
 )
 
+api_url = "https://api.robinhood.com"
 
 # TODO: re-enable InvalidOptionId when broken endpoint function below is fixed
 
@@ -31,6 +32,18 @@ class Transaction(Enum):
 
     BUY = "buy"
     SELL = "sell"
+
+def instruments(instrumentId=None, option=None):
+    """
+    Return information about a specific instrument by providing its instrument id.
+    Add extra options for additional information such as "popularity"
+    """
+    return (
+        api_url
+        + "/instruments/"
+        + ("{id}/".format(id=instrumentId) if instrumentId else "")
+        + ("{_option}/".format(_option=option) if option else "")
+    )
 
 
 class Robinhood(InstrumentManager, SessionManager):
@@ -447,17 +460,17 @@ class Robinhood(InstrumentManager, SessionManager):
     def get_popularity(self, stock=""):
         """Get the number of robinhood users who own the given stock
 
-        Args:
-            stock (str): stock ticker
+            Args:
+                stock (str): stock ticker
 
-        Returns:
-            (int): number of users who own the stock
-
+            Returns:
+                (int): number of users who own the stock
         """
         stock_instrument = self.get_url(self.quote_data(stock)["instrument"])["id"]
-        return self.get_url(urls.build_instruments(stock_instrument, "popularity"))[
+        return self.get_url(instruments(stock_instrument, "popularity"))[
             "num_open_positions"
         ]
+          
 
     def get_tickers_by_tag(self, tag=None):
         """Get a list of instruments belonging to a tag
