@@ -1,5 +1,5 @@
 from enum import Enum
-from Session import begin_robinhood_session, end_robinhood_session
+from session import begin_robinhood_session, end_robinhood_session
 import __init__
 
 
@@ -14,38 +14,47 @@ class Portfolio:
         MARKET_VALUE = 2
 
     def __init__(self):
-        self.rh = __init__.session_token.rh
+        self.rh = __init__.session_token.rh 
+        # portfolio = self.rh.portfolio()
 
-        #call the rh endpoint
-        #save all the key:value pairs as object attributes 
-        portfolio = self.rh.portfolios()
-        for key in portfolio:
-            setattr(self, key, portfolio[key])
+        # self.url = portfolio.URL()
+        # self.account = portfolio.URL()
+        # self.start_date = portfolio.NaiveDateTime()
+        # self.market_value = portfolio.Float()
+        # self.equity = portfolio.Float()
+        # self.extended_hours_market_value = portfolio.Float()
+        # self.extended_hours_equity = portfolio.Float()
+        # self.extended_hours_portfolio_equity = portfolio.Float()
+        # self.last_core_market_value = portfolio.Float()
+        # self.last_core_equity = portfolio.Float()
+        # self.last_core_portfolio_equity = portfolio.Float()
+        # self.excess_margin = portfolio.Float()
+        # self.excess_maintenance = portfolio.Float()
+        # self.excess_margin_with_uncleared_deposits = portfolio.Float()
+        # self.portfolio_equity_previous_close = portfolio.Float()
+        # self.adjusted_equity_previous_close = portfolio.Float()
+        # self.adjusted_portfolio_equity_previous_close = portfolio.Float()
+        # self.withdrawable_amount = portfolio.Float()
+        # self.unwithdrawable_deposits = portfolio.Float()
+        # self.unwithdrawable_grants = portfolio.Float()
 
 
-    def _str_(self) -> str:
+
+    def __str__(self) -> str:
         """Custom pretty print function for a Portfolio"""
-        string = "Portfolio:\n"
-        string = string + "url: {}\n".format(self.url)
-        string = string + "instrument: {}\n".format(self.instrument)
-        string = string + "account: {}\n".format(self.account)
-        string = string + "account_number: {}\n".format(self.account_number)
-        string = string + "average_buy_price: {}\n".format(self.average_buy_price)
-        string = string + "pending_average_buy_price: {}\n".format(self.pending_average_buy_price)
-        string = string + "quantity: {}\n".format(self.quantity)
-        string = string + "intraday_average_buy_price: {}\n".format(self.intraday_average_buy_price)
-        string = string + "intraday_quantity: {}\n".format(self.intraday_quantity)
-        string = string + "shares_held_for_buys: {}\n".format(self.shares_held_for_buys)
-        string = string + "shares_held_for_sells: {}\n".format(self.shares_held_for_sells)
-        string = string + "shares_held_for_stock_grants: {}\n".format(self.shares_held_for_stock_grants)
-        string = string + "shares_held_for_options_collateral: {}\n".format(self.shares_held_for_options_collateral)
-        string = string + "shares_held_for_options_events: {}\n".format(self.shares_held_for_options_events)
-        string = string + "shares_pending_from_options_events: {}\n".format(self.shares_pending_from_options_events)
-        string = string + "updated_at: {}\n".format(self.updated_at)
-        string = string + "created_at: {}\n".format(self.created_at)
-        
+        portfolio = self.rh.portfolio()
+        attr = vars(portfolio)
+        string = "Portfolio \n"
+        for item in attr:
+            string = string + "{}: {}\n".format(item, str(attr[item])) 
         return string
-
+        # portfolio = self.rh.portfolio()
+        # import pdb;
+        # pdb.set_trace()
+        # for key in portfolio:
+        #     string = string + "{}:{}\n".format(key, portfolio[key])
+        
+        # return string
 
 
     def value(self, value_type : ValueType) -> float:
@@ -116,7 +125,7 @@ class Portfolio:
         else:
             return self.rh.last_core_market_value()
 
-    def dividends(self) -> list(dict):
+    def dividends(self) -> list:
         """Returns the dividends for a portfolio
         
         Args:
@@ -142,12 +151,10 @@ class Portfolio:
                                }
         """
 
-        json = self.rh.dividends()
-        # TODO: convert json to map
-        pass
+        return self.rh.dividends()["results"]
 
 
-    def positions(self) -> dict:
+    def positions(self) -> list:
         """Returns the positions for a user's portfolio
         
         Args:
@@ -175,7 +182,5 @@ class Portfolio:
                                  'created_at': '2019-07-31T23:57:07.494746Z'
                              }
         """
-        json = self.rh.positions() 
-        # TODO: convert json to map
 
-        pass
+        return self.rh.positions()["results"]
