@@ -30,6 +30,8 @@ class Instrument:
         self.ticker_symbol = symbol
         self.rh = __init__.session_token.rh
 
+        self.url = self.quote()["instrument"]
+
     def __str__(self):
         """Custom pretty print function for an Instrument"""
         """prints instrument data"""

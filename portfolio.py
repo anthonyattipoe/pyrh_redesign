@@ -15,28 +15,6 @@ class Portfolio:
 
     def __init__(self):
         self.rh = __init__.session_token.rh 
-        # portfolio = self.rh.portfolio()
-
-        # self.url = portfolio.URL()
-        # self.account = portfolio.URL()
-        # self.start_date = portfolio.NaiveDateTime()
-        # self.market_value = portfolio.Float()
-        # self.equity = portfolio.Float()
-        # self.extended_hours_market_value = portfolio.Float()
-        # self.extended_hours_equity = portfolio.Float()
-        # self.extended_hours_portfolio_equity = portfolio.Float()
-        # self.last_core_market_value = portfolio.Float()
-        # self.last_core_equity = portfolio.Float()
-        # self.last_core_portfolio_equity = portfolio.Float()
-        # self.excess_margin = portfolio.Float()
-        # self.excess_maintenance = portfolio.Float()
-        # self.excess_margin_with_uncleared_deposits = portfolio.Float()
-        # self.portfolio_equity_previous_close = portfolio.Float()
-        # self.adjusted_equity_previous_close = portfolio.Float()
-        # self.adjusted_portfolio_equity_previous_close = portfolio.Float()
-        # self.withdrawable_amount = portfolio.Float()
-        # self.unwithdrawable_deposits = portfolio.Float()
-        # self.unwithdrawable_grants = portfolio.Float()
 
 
 
@@ -48,14 +26,6 @@ class Portfolio:
         for item in attr:
             string = string + "{}: {}\n".format(item, str(attr[item])) 
         return string
-        # portfolio = self.rh.portfolio()
-        # import pdb;
-        # pdb.set_trace()
-        # for key in portfolio:
-        #     string = string + "{}:{}\n".format(key, portfolio[key])
-        
-        # return string
-
 
     def value(self, value_type : ValueType) -> float:
         """Returns portfolio equity or market value.

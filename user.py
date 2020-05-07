@@ -1,7 +1,4 @@
-from pyrh.pyrh import urls
-from pyrh.pyrh.models import PortfolioSchema
-from session import begin_robinhood_session, end_robinhood_session
-# from portfolio import Portfolio
+from portfolio import Portfolio
 import __init__
 
 
@@ -9,17 +6,14 @@ class User:
     """An existing Robinhood User."""
 
     def __init__(self):
-        """ Returns an existing Robinhood User."""
-        self.rh = __init__.session_token.rh
-        # self.portfolio = Portfolio()
-        # self.name = self.rh.user()["user"]
+        """Creates a new object which is used to access the current Users portfolio and orders.
 
-    # def __str__(self):
-    #     """Prints User Data In the Form:
-    #         User: Name
-    #         Portfolio: Portfolio            
-    #     """
-    #     return 'User(name=dsddsds, portfolio='+str(self.portfolio) + ')'
+                Returns:
+                    An user object.
+        """
+
+        self.rh = __init__.session_token.rh
+        self.portfolio = Portfolio()
 
 
     def order_history(self, orderId=None):
