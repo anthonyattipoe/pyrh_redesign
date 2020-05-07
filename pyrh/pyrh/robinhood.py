@@ -552,11 +552,13 @@ class Robinhood(InstrumentManager, SessionManager):
         return info["results"][0]
 
     def get_option_chainid(self, symbol):
-        stock_info = self.get_url(self.endpoints["instruments"] + "?symbol=" + symbol)
+        #stock_info = self.get_url(self.endpoints["instruments"] + "?symbol=" + symbol)
+        stock_info = self.get_url(endpoints.instruments()+"?symbol=" + symbol)
+        print("STOCK INFO: {}".format(str(stock_info)))
         stock_id = stock_info["results"][0]["id"]
         params = {}
         params["equity_instrument_ids"] = stock_id
-        chains = self.get_url(endpoints.options_base() + "chains/", params=params)
+        chains = self.get_url(endpoints.chain(stock_id))
         chains = chains["results"]
         chain_id = None
 
