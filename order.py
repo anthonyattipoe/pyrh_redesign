@@ -1,6 +1,6 @@
 from enum import Enum
 
-from exceptions import OrderCancellationError, MalformedOrderError, UnownedInstrumentError
+from exceptions import OrderCancellationError, MalformedOrderError, UnownedInstrumentError, InsufficientFundsError
 from instrument import Instrument
 from portfolio import Portfolio
 import __init__
@@ -89,6 +89,10 @@ class Order(object):
             Order.Type.STOP_LIMIT_SELL_ORDER, Order.Type.STOP_LOSS_SELL_ORDER]):
             if not Portfolio().contains_instrument(self.instrument):
                 raise UnownedInstrumentError(self.instrument.ticker_symbol)
+        
+        if self.order_type in [Order.Type.BUY, Order.Type.LIMIT_BUY_ORDER, Order.Type.MARKET_BUY_ORDER, Order.Type.STOP_LIMIT_BUY_ORDER, Order.Type.STOP_LOSS_BUY_ORDER]:
+            if Portfolio().withdrawable_amount < self.quantity * self.instrument.last_trade_price():
+                raise InsufficientFundsError(self.instrument.ticker_symbol)
 
 
     def place(self) -> OrderStatus:
