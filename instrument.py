@@ -1,3 +1,7 @@
+"""
+    The following class, Instrument, is used to represent a tradable instrument on the Robinhood platform.
+"""
+
 from enum import Enum
 import __init__
 
@@ -7,9 +11,9 @@ class Instrument:
 
     class Type(Enum):
         """The type of instrument in question."""
-        STOCK = 1
-        BOND = 2
-        ETF = 3
+        STOCK  = 1
+        BOND   = 2
+        ETF    = 3
         CRYPTO = 4
 
     def __init__(self, instrument_type, symbol):
@@ -21,7 +25,7 @@ class Instrument:
             symbol: the symbol corresponding with the desired instrument.
 
         Returns:
-            An instrument object.
+            An Instrument object.
 
         Raises:
             MalformedInstrumentError: If an invalid combination of symbol and instrument type is provided.
@@ -33,17 +37,19 @@ class Instrument:
         self.url = self.quote()["instrument"]
 
     def __str__(self):
-        """Custom pretty print function for an Instrument"""
-        """prints instrument data"""
+        """ Prints the Instruments ticket symbol"""
         return self.ticker_symbol
 
     def symbol(self):
+        """ Returns the Instrument's ticket symbol"""
         return self.ticker_symbol
 
     def quote(self):
+        """ Returns the current market quote of the Instrument."""
         return self.rh.quote_data(self.ticker_symbol)
 
     def order_object(self):
+        """ Returns the users URL and the Instrument's  ticket symbol"""
         return {
             'url': self.url,
             'symbol': self.ticker_symbol
