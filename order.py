@@ -85,9 +85,9 @@ class Order(object):
         response = None
 
         if self.order_type == Order.Type.BUY:
-            response = self.rh.place_buy_order(self.instrument.url, self.quantity, self.price)
+            response = self.rh.place_buy_order(self.instrument.order_object(), self.quantity, self.price)
         elif self.order_type == Order.Type.SELL:
-            response = self.rh.place_sell_order(self.instrument.url, self.quantity, self.price)
+            response = self.rh.place_sell_order(self.instrument.order_object(), self.quantity, self.price)
         elif self.order_type == Order.Type.LIMIT_BUY_ORDER:
             response = self.rh.place_limit_buy_order(self.instrument.url, self.instrument.symbol, self.time_in_force, self.price, self.quantity)
         elif self.order_type == Order.Type.LIMIT_SELL_ORDER:
