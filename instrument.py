@@ -43,6 +43,12 @@ class Instrument:
     def quote(self):
         return self.rh.quote_data(self.ticker_symbol)
 
+    def order_object(self):
+        return {
+            'url': self.url,
+            'symbol': self.ticker_symbol
+        } 
+
     def ask_info(self):
         price_string = self.rh.ask_price(self.ticker_symbol)
         price = float(price_string[0][0])
