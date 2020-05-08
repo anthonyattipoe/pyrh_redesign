@@ -1,13 +1,20 @@
+"""
+    test.py is used to test the functionality of th following classes: RobinhoodSession, User, Instrument, Oder,
+    and Portfolio.
+"""
+
 from session import begin_robinhood_session, end_robinhood_session
 from instrument import Instrument
 from order import Order
 from user import User
 from portfolio import Portfolio
 
+# reading email and password from credentials file
 creds = open("credentials").readlines()
 email = creds[0].strip()
 password = creds[1].strip()
 
+# The following functions test each method in every class
 
 def pretty_print(text):
     print('*****************')
