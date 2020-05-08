@@ -480,7 +480,18 @@ Can probably be merged with other market_value calls
 
 ## place_limit_buy_order
 
+#### inputs
+
+ZOM,
+GTC,
+2.5,
+2
+
+{'id': '7fff182f-8be4-4c91-aa6a-d8fd8834971b', 'ref_id': None, 'url': 'https://api.robinhood.com/orders/7fff182f-8be4-4c91-aa6a-d8fd8834971b/', 'account': 'https://api.robinhood.com/accounts/843657974/', 'position': 'https://api.robinhood.com/positions/843657974/6b016aac-a281-40a1-bc1c-390d286444a9/', 'cancel': 'https://api.robinhood.com/orders/7fff182f-8be4-4c91-aa6a-d8fd8834971b/cancel/', 'instrument': 'https://api.robinhood.com/instruments/6b016aac-a281-40a1-bc1c-390d286444a9/', 'cumulative_quantity': '0.00000000', 'average_price': None, 'fees': '0.00', 'state': 'unconfirmed', 'type': 'limit', 'side': 'buy', 'time_in_force': 'gtc', 'trigger': 'immediate', 'price': '2.50000000', 'stop_price': None, 'quantity': '2.00000000', 'reject_reason': None, 'created_at': '2020-05-08T18:09:37.176082Z', 'updated_at': '2020-05-08T18:09:37.228166Z', 'last_transaction_at': '2020-05-08T18:09:37.176082Z', 'executions': [], 'extended_hours': False, 'override_dtbp_checks': False, 'override_day_trade_checks': False, 'response_category': None, 'stop_triggered_at': None, 'last_trail_price': None, 'last_trail_price_updated_at': None, 'total_notional': {'amount': '5.00', 'currency_code': 'USD', 'currency_id': '1072fc76-1862-41ab-82c2-485837590762'}, 'executed_notional': None, 'investment_schedule_id': None}
+
 ## place_limit_sell_order
+
+{'id': '2875db2e-8810-4314-8327-421025122471', 'ref_id': None, 'url': 'https://api.robinhood.com/orders/2875db2e-8810-4314-8327-421025122471/', 'account': 'https://api.robinhood.com/accounts/843657974/', 'position': 'https://api.robinhood.com/positions/843657974/6b016aac-a281-40a1-bc1c-390d286444a9/', 'cancel': 'https://api.robinhood.com/orders/2875db2e-8810-4314-8327-421025122471/cancel/', 'instrument': 'https://api.robinhood.com/instruments/6b016aac-a281-40a1-bc1c-390d286444a9/', 'cumulative_quantity': '0.00000000', 'average_price': None, 'fees': '0.00', 'state': 'unconfirmed', 'type': 'limit', 'side': 'sell', 'time_in_force': 'gtc', 'trigger': 'immediate', 'price': '2.75000000', 'stop_price': None, 'quantity': '1.00000000', 'reject_reason': None, 'created_at': '2020-05-08T18:09:37.693986Z', 'updated_at': '2020-05-08T18:09:37.738850Z', 'last_transaction_at': '2020-05-08T18:09:37.693986Z', 'executions': [], 'extended_hours': False, 'override_dtbp_checks': False, 'override_day_trade_checks': False, 'response_category': None, 'stop_triggered_at': None, 'last_trail_price': None, 'last_trail_price_updated_at': None, 'total_notional': {'amount': '2.75', 'currency_code': 'USD', 'currency_id': '1072fc76-1862-41ab-82c2-485837590762'}, 'executed_notional': None, 'investment_schedule_id': None}
 
 ## place_market_buy_order
 

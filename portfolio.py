@@ -1,5 +1,6 @@
 from enum import Enum
 from session import begin_robinhood_session, end_robinhood_session
+from instrument import Instrument
 import __init__
 
 
@@ -124,11 +125,11 @@ class Portfolio:
         return self.rh.dividends()["results"]
 
 
-    def positions(self) -> list:
+    def positions(self, previously_held=False) -> list:
         """Returns the positions for a user's portfolio
         
         Args:
-            None 
+            previously_held: bool. include positions where the user has 0 quantity
 
         Returns:
             dict representation of a position
@@ -149,8 +150,18 @@ class Portfolio:
                                  'shares_held_for_options_events': '0.00000000', 
                                  'shares_pending_from_options_events': '0.00000000', 
                                  'updated_at': '2020-05-02T20:11:41.491656Z', 
-                                 'created_at': '2019-07-31T23:57:07.494746Z'
+                                 'created_at': '2019-07-31T23:57:07.494746Z',
+                                 'symbol': "GOOG"
                              }
         """
+        positions = self.rh.positions()["results"]
+        mod_positions = []
+        for position in positions:
+            if (float(position["quantity"]) == 0 and not previously_held):
+                continue
+            symbol = self.rh.get(position["instrument"])["symbol"]
+            position["symbol"] = symbol
+            mod_positions += [position]
+        return mod_positions
 
-        return self.rh.positions()["results"]
+
