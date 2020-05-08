@@ -93,7 +93,7 @@ class InsufficientFundsError(Exception):
 
     def __str__(self):
         """Returns a string description of the InsufficientFundsError."""
-        return 'You do not have suffiecient funds to purchase {}'.format(self.symbol)
+        return 'You do not have suffiecient funds to purchase the desired number of shares of {}'.format(self.symbol)
 
 class UnownedInstrumentError(Exception):
     """An exception raised when a user attempts to sell an Instrument they do not own."""

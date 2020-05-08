@@ -28,6 +28,7 @@ class Portfolio:
             string = string + "{}: {}\n".format(item, str(attr[item])) 
         return string
 
+
     def value(self, value_type : ValueType) -> float:
         """Returns portfolio equity or market value.
         
@@ -41,6 +42,12 @@ class Portfolio:
             return self.rh.equity()
         else:
             return self.rh.market_value()
+        
+    def contains_instrument(self, instrument: Instrument, quantity: float = 0.0):
+        for position in self.positions():
+            if position['symbol'] == instrument.ticker_symbol and position['shares_held_for_sells'] >= quantity:
+                return True
+        return False
 
 
     def excess_margin(self) -> float:
