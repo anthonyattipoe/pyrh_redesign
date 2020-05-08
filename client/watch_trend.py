@@ -16,11 +16,12 @@ def make_trend_graph(ticker_symbol):
         close_prices[i] = float(quote['close_price'])
 
     x = np.arange(len(historical_data))
+    plt.clf()
     plt.plot(x, open_prices)
-    plt.savefig("../results/open_prices_trend.jpg")
+    plt.savefig("../results/open_prices_trend_" + ticker_symbol + ".jpg")
     plt.clf()
     plt.plot(x, close_prices)
-    plt.savefig("../results/close_prices_trend.jpg")
+    plt.savefig("../results/close_prices_trend_" + ticker_symbol + ".jpg")
 
 
 if __name__ == "__main__":
@@ -29,5 +30,7 @@ if __name__ == "__main__":
     password = creds[1].strip()
     begin_robinhood_session(email, password)
     make_trend_graph("AMZN")
+    make_trend_graph("AAPL")
+    make_trend_graph("ANTM")
     end_robinhood_session()
 
