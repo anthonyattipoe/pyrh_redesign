@@ -21,8 +21,7 @@ class User:
         self.portfolio = Portfolio()
 
     def order_history(self, orderId=None):
-        """ Wrapper for portfolios
-            Optional Args: add an order ID to retrieve information about a single order.
+        """ Optional Args: add an order ID to retrieve information about a single order.
             Returns:
                 (:obj:`dict`): JSON dict from getting orders
         """
