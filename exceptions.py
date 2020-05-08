@@ -23,7 +23,7 @@ class OrderCancellationError(Exception):
 class MalformedOrderError(Exception):
     """An exception thrown when a malformed order is validated."""
 
-    def __init__(self, order):
+    def __init__(self, error):
         """Creates a new MalformedOrderError.
 
         Args:
@@ -32,11 +32,11 @@ class MalformedOrderError(Exception):
         Returns:
             A new MalformedOrderError.
         """
-        pass
+        self.error = error
 
     def __str__(self) -> str:
         """Returns a string description of the MalformedOrderError."""
-        return 'The combination of properties set on your order are illegal.'
+        return self.error
 
 
 class MalformedInstrumentError(Exception):
