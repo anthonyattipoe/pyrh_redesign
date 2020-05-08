@@ -1,3 +1,8 @@
+"""
+    The following class, User, is used to represent an existing Robinhod User.  The User has a portfolio attribute,
+    which is represented by the Portfolio class.  In addition to accessing the user's porfolio, information regarding
+    their order history and current open orders can be access.
+"""
 from portfolio import Portfolio
 import __init__
 
@@ -15,22 +20,18 @@ class User:
         self.rh = __init__.session_token.rh
         self.portfolio = Portfolio()
 
-
     def order_history(self, orderId=None):
-        """Wrapper for portfolios
-        Optional Args: add an order ID to retrieve information about a single order.
-        Returns:
-            (:obj:`dict`): JSON dict from getting orders
+        """ Wrapper for portfolios
+            Optional Args: add an order ID to retrieve information about a single order.
+            Returns:
+                (:obj:`dict`): JSON dict from getting orders
         """
-        
+
         return self.rh.order_history(orderId)
-        
 
     def get_open_orders(self):
-        """Returns all currently open (cancellable) orders.
-        If not orders are currently open, `None` is returned.
-        TODO: Is there a way to get these from the API endpoint without stepping through
-            order history?
+        """ Returns all currently open (cancellable) orders.
+            If not orders are currently open, `None` is returned.
         """
 
         return self.rh.get_open_orders()
