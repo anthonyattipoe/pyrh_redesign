@@ -1,12 +1,12 @@
-.. _api:
+.. .. _api:
 
-API Reference
-=============
+.. API Reference
+.. =============
 
-.. currentmodule:: pyrh
-.. autosummary::
-    :toctree: stubs
+.. .. currentmodule:: pyrh
+.. .. autosummary::
+..     :toctree: stubs
 
-    Robinhood
-    SessionManager
-    exceptions
+..     Robinhood
+..     SessionManager
+..     exceptions

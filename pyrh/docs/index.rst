@@ -1,32 +1,32 @@
-.. _index:
+.. .. _index:
 
-.. include:: ../README.rst
+.. .. include:: ../README.rst
 
-Developers
-##########
-.. toctree::
-   :maxdepth: 2
+.. Developers
+.. ##########
+.. .. toctree::
+..    :maxdepth: 2
 
-   developers
+..    developers
 
-API
-###
+.. API
+.. ###
 
-.. toctree::
-   :maxdepth: 3
+.. .. toctree::
+..    :maxdepth: 3
 
-   api
+..    api
 
 
-Changelog
-#########
-.. toctree::
-   :maxdepth: 2
+.. Changelog
+.. #########
+.. .. toctree::
+..    :maxdepth: 2
 
-   changelog
+..    changelog
 
-Indices and tables
-##################
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. Indices and tables
+.. ##################
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`

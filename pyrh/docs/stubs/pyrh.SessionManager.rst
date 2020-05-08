@@ -1,33 +1,33 @@
-pyrh.SessionManager
-===================
+.. pyrh.SessionManager
+.. ===================
 
-.. currentmodule:: pyrh
+.. .. currentmodule:: pyrh
 
-.. autoclass:: SessionManager
-
-
-   .. automethod:: __init__
+.. .. autoclass:: SessionManager
 
 
-   .. rubric:: Methods
-
-   .. autosummary::
-
-      ~SessionManager.__init__
-      ~SessionManager.from_json
-      ~SessionManager.get
-      ~SessionManager.login
-      ~SessionManager.logout
-      ~SessionManager.post
-      ~SessionManager.to_json
+..    .. automethod:: __init__
 
 
+..    .. rubric:: Methods
+
+..    .. autosummary::
+
+..       ~SessionManager.__init__
+..       ~SessionManager.from_json
+..       ~SessionManager.get
+..       ~SessionManager.login
+..       ~SessionManager.logout
+..       ~SessionManager.post
+..       ~SessionManager.to_json
 
 
 
-   .. rubric:: Attributes
 
-   .. autosummary::
 
-      ~SessionManager.authenticated
-      ~SessionManager.login_set
+..    .. rubric:: Attributes
+
+..    .. autosummary::
+
+..       ~SessionManager.authenticated
+..       ~SessionManager.login_set
