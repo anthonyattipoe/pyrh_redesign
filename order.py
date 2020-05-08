@@ -1,6 +1,6 @@
 from enum import Enum
 
-from exceptions import OrderCancellationError
+from exceptions import OrderCancellationError, MalformedOrderError
 from instrument import Instrument
 import __init__
 
@@ -34,8 +34,8 @@ class Order(object):
         GFD = 1
         GTC = 2
 
-    def __init__(self, instrument: Instrument, order_type: Type, time_in_force: TimeInForce = TimeInForce.GFD,
-                 quantity: int = None, price: float = None, stop_price: float = None):
+    def __init__(self, instrument: Instrument, order_type: Type, quantity: int,
+                time_in_force: TimeInForce = TimeInForce.GFD, price: float = None, stop_price: float = None):
         """Creates a new order.
 
         Args:
@@ -68,7 +68,22 @@ class Order(object):
         Raises:
             MalformedOrderError: If the combinations of properties set on the order are not compatible.
         """
-        pass
+        if self.quantity <= 0:
+            raise MalformedOrderError('The quantity must be greater than or equal to 1.')
+            
+        if self.price and self.price < 0:
+            raise MalformedOrderError('The price must be greater than or equal to 0.')
+
+        if self.stop_price and self.stop_price < 0:
+            raise MalformedOrderError('The stop price must be greater than or equal to 0.')
+
+        if (self.order_type in [Order.Type.STOP_LIMIT_BUY_ORDER, Order.Type.STOP_LIMIT_SELL_ORDER, 
+            Order.Type.STOP_LOSS_BUY_ORDER,Order.Type.STOP_LOSS_SELL_ORDER] and self.stop_price == None):
+            raise MalformedOrderError('You must include a stop_price with the current order.')
+
+        if self.order_type in [Order.Type.STOP_LIMIT_BUY_ORDER, Order.Type.STOP_LIMIT_SELL_ORDER] and self.price == None:
+            raise MalformedOrderError('You must include a price with the current order.')
+
 
     def place(self) -> OrderStatus:
         """Place the current order. Calls validate() before the order is placed.
