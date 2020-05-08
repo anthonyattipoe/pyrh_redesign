@@ -5,12 +5,6 @@ from instrument import Instrument
 from portfolio import Portfolio
 import __init__
 
-class OrderStatus(object):
-    """The status of an order."""
-    
-    def __init__(self, order_response=None):
-        pass
-
 
 class Order(object):
     """An order which a user can place."""
@@ -34,6 +28,13 @@ class Order(object):
         """
         GFD = 1
         GTC = 2
+    
+    class Status(Enum):
+        UNPLACED    = 1
+        UNCONFIRMED = 2
+        UNFILLED    = 3
+        FILLED      = 4
+        CANCELLED   = 5
 
     def __init__(self, instrument: Instrument, order_type: Type, quantity: int,
                 time_in_force: TimeInForce = TimeInForce.GFD, price: float = None, stop_price: float = None):
@@ -56,8 +57,9 @@ class Order(object):
         self.price = price
         self.stop_price = stop_price
         self.id = None
-        self.status = OrderStatus()
         self.rh = __init__.session_token.rh
+        self._is_placed = False
+        self._position = None
 
     def __str__(self) -> str:
         """Custom pretty print function for an Order"""
@@ -96,7 +98,7 @@ class Order(object):
 
 
     def place(self) -> OrderStatus:
-        """Place the current order. Calls validate() before the order is placed.
+        """Place the current order. Calls _validate() before the order is placed.
         This method is idempotent so calling place() after the order has already
         placed will have no effect.
 
@@ -132,9 +134,9 @@ class Order(object):
         elif self.order_type == Order.Type.STOP_LOSS_SELL_ORDER:
             response = self.rh.place_stop_loss_sell_order(self.instrument.url, self.instrument.ticker_symbol, time_in_force, self.stop_price, self.quantity)
         
+        self._is_placed = True
+        self._position = response['position']
         return response
-        # self.status = OrderStatus(response)
-        # return self.status
 
 
     def cancel(self) -> None:
@@ -143,14 +145,24 @@ class Order(object):
         Raises:
             OrderCancellationError: If order has already been executed or terminated.
         """
-        # if self.status.is_executed() or self.status.is_terminated():
-            # raise OrderCancellationError(self)
-        # if self.status.is_placed() and self.status.is_pending():
-            # self.rh.canel_order(order_id)
-            # self.status = CANCELED
-        pass
+        status, cancel_url = self._status()
+
+        if status == Order.Status.UNPLACED:
+            raise OrderCancellationError('This order cannot be cancelled because it has not been placed yet.')
+        elif status == Order.Status.FILLED:
+            raise OrderCancellationError('This order has already been filled.')
+        elif status == Order.Status.CANCELLED:
+            raise OrderCancellationError('This order has already been cancelled.')
+        elif status == Order.Status.UNFILLED or status == Order.Status.UNCONFIRMED:
+            self.rh.get(cancel_url)
+
+    def _status(self):
+        if not self._is_placed:
+            return Order.Status.UNPLACED
+        position = self.rh.get(self._position)
 
 
-    def status(self) -> OrderStatus:
+    def status(self):
         """Returns the status of the current order."""
-        return self.status
+        status, cancel_url = self._status()
+        return status

@@ -4,20 +4,20 @@ class OrderCancellationError(Exception):
     * Already cancelled
     """
 
-    def __init__(self, order):
+    def __init__(self, error):
         """Creates a new OrderCancellationError.
         
         Args:
-            order: the malformed order.
+            error: an error string provided by the caller.
 
         Returns:
             A new OrderCancellationError.
         """
-        pass
+        self.error = error
 
     def __str__(self) -> str:
         """Returns a string description of the OrderCancellationError."""
-        return 'An error occurred logging you in with the provided credentials.'
+        return self.error
 
 
 class MalformedOrderError(Exception):
