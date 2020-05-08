@@ -74,13 +74,13 @@ def test_sell_order():
 def test_limit_buy_order():
     pretty_print('TESTING LIMIT BUY ORDER')
     zom = Instrument(Instrument.Type.STOCK, 'ZOM')
-    zom_order = Order(zom, Order.Type.LIMIT_BUY_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, price=2.50)
+    zom_order = Order(zom, Order.Type.LIMIT_BUY_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, price=0.25)
     print(zom_order.place())
 
 def test_limit_sell_order():
     pretty_print('TESTING LIMIT SELL ORDER')
     zom = Instrument(Instrument.Type.STOCK, 'ZOM')
-    zom_order = Order(zom, Order.Type.LIMIT_SELL_ORDER, quantity=1, time_in_force=Order.TimeInForce.GTC, price=2.75)
+    zom_order = Order(zom, Order.Type.LIMIT_SELL_ORDER, quantity=1, time_in_force=Order.TimeInForce.GTC, price=0.275)
     print(zom_order.place())
 
 def test_market_buy_order():
@@ -98,25 +98,25 @@ def test_market_sell_order():
 def test_stop_limit_buy_order():
     pretty_print('TESTING STOP LIMIT BUY ORDER')
     zom = Instrument(Instrument.Type.STOCK, 'ZOM')
-    zom_order = Order(zom, Order.Type.STOP_LIMIT_BUY_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, price=2.50, stop_price=2.75)
+    zom_order = Order(zom, Order.Type.STOP_LIMIT_BUY_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, price=0.250, stop_price=0.275)
     print(zom_order.place())
 
 def test_stop_limit_sell_order():
     pretty_print('TESTING STOP LIMIT SELL ORDER')
     zom = Instrument(Instrument.Type.STOCK, 'ZOM')
-    zom_order = Order(zom, Order.Type.STOP_LIMIT_SELL_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, price=2.50, stop_price=2.00)
+    zom_order = Order(zom, Order.Type.STOP_LIMIT_SELL_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, price=0.250, stop_price=0.20)
     print(zom_order.place())
 
 def test_stop_loss_buy_order():
     pretty_print('TESTING STOP LOSS BUY ORDER')
     zom = Instrument(Instrument.Type.STOCK, 'ZOM')
-    zom_order = Order(zom, Order.Type.STOP_LOSS_BUY_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, stop_price=2.55)
+    zom_order = Order(zom, Order.Type.STOP_LOSS_BUY_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, stop_price=0.255)
     print(zom_order.place())
 
 def test_stop_loss_sell_order():
     pretty_print('TESTING STOP LOSS SELL ORDER')
     zom = Instrument(Instrument.Type.STOCK, 'ZOM')
-    zom_order = Order(zom, Order.Type.STOP_LOSS_SELL_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, stop_price=2.00)
+    zom_order = Order(zom, Order.Type.STOP_LOSS_SELL_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, stop_price=0.200)
     print(zom_order.place())
 
 if __name__ == "__main__":
