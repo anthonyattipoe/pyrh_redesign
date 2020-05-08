@@ -98,7 +98,7 @@ class Order(object):
                 raise InsufficientFundsError(self.instrument.ticker_symbol)
 
 
-    def place(self) -> OrderStatus:
+    def place(self):
         """Place the current order. Calls _validate() before the order is placed.
         This method is idempotent so calling place() after the order has already
         placed will have no effect.
@@ -157,9 +157,7 @@ class Order(object):
         elif status == Order.Status.UNFILLED or status == Order.Status.UNCONFIRMED:
             self.rh.get(cancel_url)
 
-
-    def status(self):
-        """Returns the status of the current order."""
+    def _status(self):
         status_map = {
             'unconfirmed': Order.Status.UNCONFIRMED,
             'unfilled': Order.Status.UNFILLED,
@@ -171,4 +169,11 @@ class Order(object):
         past_orders = User().order_history()['results'] 
         order = [x for x in past_orders if x['id'] == self.id][0]
         status = order['state']
-        return status_map.get(status, Order.Status.UNKNOWN)
+        cancel_url = order['cancel']
+        return (status_map.get(status, Order.Status.UNKNOWN), cancel_url)
+
+    def status(self):
+        """Returns the status of the current order."""
+        status, cancel_url = self._status()
+        return status
+
