@@ -1,11 +1,18 @@
 from enum import Enum
-from pyrh import Robinhood
+
+from exceptions import OrderCancellationError
+from instrument import Instrument
+import __init__
+
+class OrderStatus(object):
+    """The status of an order."""
+    
+    def __init__(self, order_response=None):
+        pass
 
 
-class Order:
+class Order(object):
     """An order which a user can place."""
-
-    rh = Robinhood()
 
     class Type(Enum):
         """The type of an order."""
@@ -27,7 +34,7 @@ class Order:
         GFD = 1
         GTC = 2
 
-    def __init__(self, instrument: Instrument, type: Order.Type, time_in_force: Order.TimeInForce,
+    def __init__(self, instrument: Instrument, order_type: Type, time_in_force: TimeInForce = TimeInForce.GFD,
                  quantity: int = None, price: float = None, stop_price: float = None):
         """Creates a new order.
 
@@ -42,18 +49,20 @@ class Order:
             a new Order object.
         """
         self.instrument = instrument
-        self.type = type
+        self.order_type = order_type
         self.time_in_force = time_in_force
         self.quantity = quantity
         self.price = price
         self.stop_price = stop_price
         self.id = None
+        self.status = OrderStatus()
+        self.rh = __init__.session_token.rh
 
     def __str__(self) -> str:
         """Custom pretty print function for an Order"""
         pass
 
-    def validate(self) -> None:
+    def _validate(self) -> None:
         """Validates the properties set on an order before it is placed.
 
         Raises:
@@ -72,41 +81,34 @@ class Order:
         Raises:
             MalformedOrderError: If the combinations of properties set on the order are not compatible.
         """
+        self._validate()
+        response = None
 
-        switch (self.type) {
-            case BUY:  
-                    self.rh.place_buy_order(self.instrument.url, self.quantity, self.price) 
-                    break;
-            case SELL:  
-                    self.rh.place_sell_order(self.instrument.url, self.quantity, self.price) 
-                    break;
-            case LIMIT_BUY_ORDER:  
-                    self.rh.place_limit_buy_order(self.instrument.url, self.symbol, self.time_in_force, self.price, self.quantity) 
-                    break;
-            case LIMIT_SELL_ORDER:  
-                    self.rh.place_limit_sell_order(self.instrument.url, self.symbol, self.time_in_force, self.price, self.quantity) 
-                    break;
-            case MARKET_BUY_ORDER:  
-                    self.rh.place_market_buy_order(self.instrument.url, self.symbol, self.time_in_force, self.quantity) 
-                    break;
-            case MARKET_SELL_ORDER:  
-                    self.rh.place_market_sell_order(self.instrument.url, self.symbol, self.time_in_force, self.quantity) 
-                    break;
-            case STOP_LIMIT_BUY_ORDER:  
-                    self.rh.place_stop_limit_buy_order(self.instrument.url, self.symbol, self.time_in_force, self.price, self.stop_price, self.quantity) 
-                    break;
-            case STOP_LIMIT_SELL_ORDER:  
-                    self.rh.place_stop_limit_sell_order(self.instrument.url, self.symbol, self.time_in_force, self.price, self.stop_price, self.quantity) 
-                    break;
-            case STOP_LOSS_BUY_ORDER:  
-                    self.rh.place_stop_loss_buy_order(self.instrument.url, self.symbol, self.time_in_force, self.stop_price, self.quantity) 
-                    break;
-            case STOP_LOSS_SELL_ORDER: 
-                    self.rh.place_stop_loss_sell_order(self.instrument.url, self.symbol, self.time_in_force, self.stop_price, self.quantity) 
-                    break;
-            default: 
-                    raise(MalformedOrderError)
-        }
+        if self.order_type == Order.Type.BUY:
+            response = self.rh.place_buy_order(self.instrument.url, self.quantity, self.price)
+        elif self.order_type == Order.Type.SELL:
+            response = self.rh.place_sell_order(self.instrument.url, self.quantity, self.price)
+        elif self.order_type == Order.Type.LIMIT_BUY_ORDER:
+            response = self.rh.place_limit_buy_order(self.instrument.url, self.instrument.symbol, self.time_in_force, self.price, self.quantity)
+        elif self.order_type == Order.Type.LIMIT_SELL_ORDER:
+            response = self.rh.place_limit_sell_order(self.instrument.url, self.instrument.symbol, self.time_in_force, self.price, self.quantity)
+        elif self.order_type == Order.Type.MARKET_BUY_ORDER:
+            response = self.rh.place_market_buy_order(self.instrument.url, self.instrument.symbol, self.time_in_force, self.quantity)
+        elif self.order_type == Order.Type.MARKET_SELL_ORDER:
+            response = self.rh.place_market_sell_order(self.instrument.url, self.instrument.symbol, self.time_in_force, self.quantity)
+        elif self.order_type == Order.Type.STOP_LIMIT_BUY_ORDER:
+            response = self.rh.place_stop_limit_buy_order(self.instrument.url, self.instrument.symbol, self.time_in_force, self.price, self.stop_price, self.quantity)
+        elif self.order_type == Order.Type.STOP_LIMIT_SELL_ORDER:
+            response = self.rh.place_stop_limit_sell_order(self.instrument.url, self.instrument.symbol, self.time_in_force, self.price, self.stop_price, self.quantity)
+        elif self.order_type == Order.Type.STOP_LOSS_BUY_ORDER:
+            response = self.rh.place_stop_loss_buy_order(self.instrument.url, self.instrument.symbol, self.time_in_force, self.stop_price, self.quantity)
+        elif self.order_type == Order.Type.STOP_LOSS_SELL_ORDER:
+            response = self.rh.place_stop_loss_sell_order(self.instrument.url, self.instrument.symbol, self.time_in_force, self.stop_price, self.quantity)
+        
+        return response
+        # self.status = OrderStatus(response)
+        # return self.status
+
 
     def cancel(self) -> None:
         """Cancels the current order after it has been placed but not yet executed.
@@ -114,10 +116,15 @@ class Order:
         Raises:
             OrderCancellationError: If order has already been executed or terminated.
         """
-        self.rh.canel_order(order_id)
+        # if self.status.is_executed() or self.status.is_terminated():
+            # raise OrderCancellationError(self)
+        # if self.status.is_placed() and self.status.is_pending():
+            # self.rh.canel_order(order_id)
+            # self.status = CANCELED
         pass
 
-    # TODO
+
     def status(self) -> OrderStatus:
         """Returns the status of the current order."""
-        pass
+        return self.status
+

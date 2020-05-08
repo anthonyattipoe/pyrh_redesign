@@ -4,7 +4,7 @@ class OrderCancellationError(Exception):
     * Already cancelled
     """
 
-    def __init__(self, order) -> OrderCancellationError:
+    def __init__(self, order):
         """Creates a new OrderCancellationError.
         
         Args:
@@ -23,7 +23,7 @@ class OrderCancellationError(Exception):
 class MalformedOrderError(Exception):
     """An exception thrown when a malformed order is validated."""
 
-    def __init__(self, order) -> MalformedOrderError:
+    def __init__(self, order):
         """Creates a new MalformedOrderError.
 
         Args:
@@ -43,7 +43,7 @@ class MalformedInstrumentError(Exception):
     """An exception thrown when a user attempts to create an Instrument with an 
     invalid combination of symbol and instrument type."""
 
-    def __init__(self, instrument) -> MalformedInstrumentError:
+    def __init__(self, instrument):
         """Creates a new MalformedInstrumentError.
 
         Args:
@@ -64,7 +64,7 @@ class UnauthorizedUserError(Exception):
     This error may also be raised if a user's session expires.
     """
 
-    def __init__(self) -> UnauthorizedUserError:
+    def __init__(self):
         """Creates a new UnauthorizedUserError."""
         pass
 
@@ -76,7 +76,7 @@ class UnauthorizedUserError(Exception):
 class InvalidLoginCredentialsError(Exception):
     """An exception raised when a user tries to login to Robinhood with the wrong credentials."""
 
-    def __init__(self) -> InvalidLoginCredentialsError:
+    def __init__(self):
         """Creates a new InvalidLoginCredentialsError."""
         pass
 

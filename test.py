@@ -1,5 +1,6 @@
 from session import begin_robinhood_session, end_robinhood_session
 from instrument import Instrument
+from order import Order
 from user import User
 from portfolio import Portfolio
 
@@ -48,10 +49,29 @@ def test_instrument():
     print("Previous closing price for Amazon stock, not adjusted: " + str(amazon_stock.previous_close()))
     print("Previous closing price for Amazon stock, adjusted: " + str(amazon_stock.previous_close(adjusted=True)))
 
+def test_order():
+    # Q1: Can all instruments have any time in force? Is GTC only available for gold members? Or restricted to certain kinds of instruments?
+    zomedica = Instrument(Instrument.Type.STOCK, 'ZOM') # Currently ~ $0.3
+    print('*****************')
+    print('PLACING BUY ORDER')
+    print('*****************')
+    zomedica_buy = Order(zomedica, Order.Type.BUY, quantity=3)
+    response = zomedica_buy.place()
+    print(response)
+    print("")
+
+    print('*****************')
+    print('PLACING SELL ORDER')
+    print('*****************')
+    # Defaults to good for day.
+    zoomedica_sell = Order(zomedica, Order.Type.SELL, quantity=1)
+    print(zoomedica_sell.place())
+
 
 if __name__ == "__main__":
     begin_robinhood_session(email, password)
     test_quote()
     test_user()
     test_instrument()
+    test_order()
     end_robinhood_session()
