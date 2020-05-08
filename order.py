@@ -1,7 +1,8 @@
 from enum import Enum
 
-from exceptions import OrderCancellationError, MalformedOrderError
+from exceptions import OrderCancellationError, MalformedOrderError, UnownedInstrumentError
 from instrument import Instrument
+from portfolio import Portfolio
 import __init__
 
 class OrderStatus(object):
@@ -83,6 +84,11 @@ class Order(object):
 
         if self.order_type in [Order.Type.STOP_LIMIT_BUY_ORDER, Order.Type.STOP_LIMIT_SELL_ORDER] and self.price == None:
             raise MalformedOrderError('You must include a price with the current order.')
+
+        if (self.order_type in [Order.Type.SELL, Order.Type.LIMIT_SELL_ORDER, Order.Type.MARKET_SELL_ORDER, 
+            Order.Type.STOP_LIMIT_SELL_ORDER, Order.Type.STOP_LOSS_SELL_ORDER]):
+            if not Portfolio().contains_instrument(self.instrument):
+                raise UnownedInstrumentError(self.instrument.ticker_symbol)
 
 
     def place(self) -> OrderStatus:
