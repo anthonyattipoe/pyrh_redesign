@@ -467,11 +467,12 @@ Can probably be merged with other market_value calls
 
 ## order_history
 
+#### out of a list of results
+
+{'next': None, 'previous': None, 'results': [{'id': '7bc37f3d-c2b1-4945-916a-5cd55b4e7264', 'ref_id': None, 'url': 'https://api.robinhood.com/orders/7bc37f3d-c2b1-4945-916a-5cd55b4e7264/', 'account': 'https://api.robinhood.com/accounts/843657974/', 'position': 'https://api.robinhood.com/positions/843657974/6b016aac-a281-40a1-bc1c-390d286444a9/', 'cancel': None, 'instrument': 'https://api.robinhood.com/instruments/6b016aac-a281-40a1-bc1c-390d286444a9/', 'cumulative_quantity': '3.00000000', 'average_price': '0.25000000', 'fees': '0.00', 'state': 'filled', 'type': 'market', 'side': 'buy', 'time_in_force': 'gfd', 'trigger': 'immediate', 'price': '0.24900000', 'stop_price': None, 'quantity': '3.00000000', 'reject_reason': None, 'created_at': '2020-05-08T17:20:19.182892Z', 'updated_at': '2020-05-08T17:20:19.852553Z', 'last_transaction_at': '2020-05-08T17:20:19.357000Z', 'executions': [{'price': '0.24900000', 'quantity': '3.00000000', 'settlement_date': '2020-05-12', 'timestamp': '2020-05-08T17:20:19.357000Z', 'id': 'e524c20d-56b4-46c0-b7e4-069c62841c17'}], 'extended_hours': False, 'override_dtbp_checks': False, 'override_day_trade_checks': False, 'response_category': None, 'stop_triggered_at': None, 'last_trail_price': None, 'last_trail_price_updated_at': None, 'total_notional': {'amount': '0.75', 'currency_code': 'USD', 'currency_id': '1072fc76-1862-41ab-82c2-485837590762'}, 'executed_notional': {'amount': '0.75', 'currency_code': 'USD', 'currency_id': '1072fc76-1862-41ab-82c2-485837590762'}, 'investment_schedule_id': None},
+
 ## place_buy_order
 
-*****************
-PLACING BUY ORDER
-*****************
 
 #### Buying ZOM
 
