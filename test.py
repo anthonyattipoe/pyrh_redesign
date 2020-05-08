@@ -13,26 +13,31 @@ def pretty_print(text):
     print('*****************')
     print(text)
     print('*****************')
+    print('')
 
 def test_quote():
     ins = Instrument(Instrument.Type.STOCK, "GOOG")
     print(ins.quote())
 
-
-def test_user():
+def test_portfolio():
     pretty_print("TESTING PORTFOLIO")
     p = Portfolio()
     print(p)
 
-    pretty_print('TESTING USER')
-    user = User()
+def test_positions():
+    pretty_print('TESTING POSITIONS')
+    pos = Portfolio().positions()
+    print(pos)
 
+def test_order_history():
     pretty_print('TESTING ORDER HISTORY')
+    user = User()
     print(user.order_history())
 
+def test_open_orders():
     pretty_print('TESTING OPEN ORDERS')
+    user = User()
     print(user.get_open_orders())
-
 
 def test_instrument():
     pretty_print("TESTING INSTRUMENT")
@@ -55,7 +60,7 @@ def test_instrument():
     print("Previous closing price for Amazon stock, adjusted: " + str(amazon_stock.previous_close(adjusted=True)))
 
 def test_buy_order():
-    pretty_print('TESTING SELL ORDER')
+    pretty_print('TESTING BUY ORDER')
     zom = Instrument(Instrument.Type.STOCK, 'ZOM')
     zom_order = Order(zom, Order.Type.BUY, quantity=3)
     print(zom_order.place())
@@ -99,7 +104,7 @@ def test_stop_limit_buy_order():
 def test_stop_limit_sell_order():
     pretty_print('TESTING STOP LIMIT SELL ORDER')
     zom = Instrument(Instrument.Type.STOCK, 'ZOM')
-    zom_order = Order(zom, Order.Type.STOP_LIMIT_SELL_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, price=2.50, stop_price=2.75)
+    zom_order = Order(zom, Order.Type.STOP_LIMIT_SELL_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, price=2.50, stop_price=2.00)
     print(zom_order.place())
 
 def test_stop_loss_buy_order():
@@ -111,22 +116,25 @@ def test_stop_loss_buy_order():
 def test_stop_loss_sell_order():
     pretty_print('TESTING STOP LOSS SELL ORDER')
     zom = Instrument(Instrument.Type.STOCK, 'ZOM')
-    zom_order = Order(zom, Order.Type.STOP_LOSS_SELL_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, stop_price=2.80)
+    zom_order = Order(zom, Order.Type.STOP_LOSS_SELL_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, stop_price=2.00)
     print(zom_order.place())
 
 if __name__ == "__main__":
     begin_robinhood_session(email, password)
     # test_quote()
-    # test_user()
+    # test_portfolio()
+    # test_positions()
+    # test_order_history()
+    # test_open_orders()
     # test_instrument()
     # test_buy_order()
     # test_sell_order()
     # test_limit_buy_order()
     # test_limit_sell_order()
-    test_market_buy_order()
-    test_market_sell_order()
-    test_stop_limit_buy_order()
-    test_stop_limit_sell_order()
-    test_stop_loss_buy_order()
+    # test_market_buy_order()
+    # test_market_sell_order()
+    # test_stop_limit_buy_order()
+    # test_stop_limit_sell_order()
+    # test_stop_loss_buy_order()
     test_stop_loss_sell_order()
     end_robinhood_session()
