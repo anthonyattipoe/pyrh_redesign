@@ -26,6 +26,10 @@ def test_quote():
     ins = Instrument(Instrument.Type.STOCK, "GOOG")
     print(ins.quote())
 
+def test_ask_info():
+    ins = Instrument(Instrument.Type.STOCK, "GOOG")
+    print(ins.ask_info())
+
 def test_portfolio():
     pretty_print("TESTING PORTFOLIO")
     p = Portfolio()
@@ -128,7 +132,8 @@ def test_stop_loss_sell_order():
 
 if __name__ == "__main__":
     begin_robinhood_session(email, password)
-    # test_quote()
+    test_quote()
+    test_ask_info()
     # test_portfolio()
     # test_positions()
     # test_order_history()
@@ -143,5 +148,5 @@ if __name__ == "__main__":
     # test_stop_limit_buy_order()
     # test_stop_limit_sell_order()
     # test_stop_loss_buy_order()
-    test_stop_loss_sell_order()
+    # test_stop_loss_sell_order()
     end_robinhood_session()
