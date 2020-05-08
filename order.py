@@ -3,6 +3,7 @@ from enum import Enum
 from exceptions import OrderCancellationError, MalformedOrderError, UnownedInstrumentError, InsufficientFundsError
 from instrument import Instrument
 from portfolio import Portfolio
+from user import User
 import __init__
 
 
@@ -35,6 +36,7 @@ class Order(object):
         UNFILLED    = 3
         FILLED      = 4
         CANCELLED   = 5
+        UNKNOWN     = 6
 
     def __init__(self, instrument: Instrument, order_type: Type, quantity: int,
                 time_in_force: TimeInForce = TimeInForce.GFD, price: float = None, stop_price: float = None):
@@ -59,7 +61,6 @@ class Order(object):
         self.id = None
         self.rh = __init__.session_token.rh
         self._is_placed = False
-        self._position = None
 
     def __str__(self) -> str:
         """Custom pretty print function for an Order"""
@@ -135,7 +136,7 @@ class Order(object):
             response = self.rh.place_stop_loss_sell_order(self.instrument.url, self.instrument.ticker_symbol, time_in_force, self.stop_price, self.quantity)
         
         self._is_placed = True
-        self._position = response['position']
+        self.id = response['id']
         return response
 
 
@@ -156,13 +157,18 @@ class Order(object):
         elif status == Order.Status.UNFILLED or status == Order.Status.UNCONFIRMED:
             self.rh.get(cancel_url)
 
-    def _status(self):
-        if not self._is_placed:
-            return Order.Status.UNPLACED
-        position = self.rh.get(self._position)
-
 
     def status(self):
         """Returns the status of the current order."""
-        status, cancel_url = self._status()
-        return status
+        status_map = {
+            'unconfirmed': Order.Status.UNCONFIRMED,
+            'unfilled': Order.Status.UNFILLED,
+            'filled': Order.Status.FILLED,
+            'cancelled': Order.Status.CANCELLED
+        }
+        if not self._is_placed:
+            return Order.Status.UNPLACED
+        past_orders = User().order_history()['results'] 
+        order = [x for x in past_orders if x['id'] == self.id][0]
+        status = order['state']
+        return status_map.get(status, Order.Status.UNKNOWN)
