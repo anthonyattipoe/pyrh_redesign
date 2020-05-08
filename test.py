@@ -49,29 +49,45 @@ def test_instrument():
     print("Previous closing price for Amazon stock, not adjusted: " + str(amazon_stock.previous_close()))
     print("Previous closing price for Amazon stock, adjusted: " + str(amazon_stock.previous_close(adjusted=True)))
 
-def test_order():
-    # Q1: Can all instruments have any time in force? Is GTC only available for gold members? Or restricted to certain kinds of instruments?
-    zomedica = Instrument(Instrument.Type.STOCK, 'ZOM') # Currently ~ $0.3
+def test_buy_order():
     print('*****************')
-    print('PLACING BUY ORDER')
+    print('TESTING SELL ORDER')
     print('*****************')
-    zomedica_buy = Order(zomedica, Order.Type.BUY, quantity=3)
-    response = zomedica_buy.place()
-    print(response)
-    print("")
+    zom = Instrument(Instrument.Type.STOCK, 'ZOM')
+    zom_order = Order(zom, Order.Type.BUY, quantity=3)
+    print(zom_order.place())
 
+def test_sell_order():
     print('*****************')
-    print('PLACING SELL ORDER')
+    print('TESTING SELL ORDER')
     print('*****************')
-    # Defaults to good for day.
-    zoomedica_sell = Order(zomedica, Order.Type.SELL, quantity=1)
-    print(zoomedica_sell.place())
+    zom = Instrument(Instrument.Type.STOCK, 'ZOM')
+    zom_order = Order(zom, Order.Type.SELL, quantity=1)
+    print(zom_order.place())
 
+def test_limit_buy_order():
+    print('*****************')
+    print('TESTING LIMIT BUY ORDER')
+    print('*****************')
+    zom = Instrument(Instrument.Type.STOCK, 'ZOM')
+    zom_order = Order(zom, Order.Type.LIMIT_BUY_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, price=2.50)
+    print(zom_order.place())
+
+def test_limit_sell_order():
+    print('*****************')
+    print('TESTING LIMIT SELL ORDER')
+    print('*****************')
+    zom = Instrument(Instrument.Type.STOCK, 'ZOM')
+    zom_order = Order(zom, Order.Type.LIMIT_SELL_ORDER, quantity=1, time_in_force=Order.TimeInForce.GTC, price=2.75)
+    print(zom_order.place())
 
 if __name__ == "__main__":
     begin_robinhood_session(email, password)
-    test_quote()
-    test_user()
-    test_instrument()
-    test_order()
+    # test_quote()
+    # test_user()
+    # test_instrument()
+    # test_buy_order()
+    # test_sell_order()
+    test_limit_buy_order()
+    test_limit_sell_order()
     end_robinhood_session()
