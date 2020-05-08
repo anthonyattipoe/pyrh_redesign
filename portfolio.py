@@ -5,6 +5,7 @@
 
 from enum import Enum
 from instrument import Instrument
+from decimal import *
 import __init__
 
 
@@ -29,19 +30,19 @@ class Portfolio:
             string = string + "{}: {}\n".format(item, str(attr[item])) 
         return string
 
-    def value(self, value_type: ValueType) -> float:
+
+    def value(self, value_type : ValueType) -> Decimal:
         """Returns portfolio equity or market value.
         
         Args:
             value_type: the value type {EQUITY or MARKET_VALUE}
-
         Returns:
             Float representing the value.
         """
-        if value_type == Portfolio.ValueType.EQUITY:
-            return self.rh.equity()
+        if value_type == Portfolio.ValueType.EQUITY: 
+            return round(Decimal(self.rh.equity()), 4)
         else:
-            return self.rh.market_value()
+            return round(Decimal(self.rh.market_value()), 4)
         
     def contains_instrument(self, instrument: Instrument, quantity: float = 0.0):
         """Determines of current portfolio contains the given instrument."""
@@ -50,42 +51,44 @@ class Portfolio:
                 return True
         return False
 
-    def excess_margin(self) -> float:
-        """Returns the excess margin portfolio"""
-        return self.rh.excess_margin()
 
-    def extended_hours_value(self, value_type: ValueType) -> float:
+    def excess_margin(self) -> Decimal:
+        """Returns the excess margin portfolio"""
+        return round(Decimal(self.rh.excess_margin()), 4)
+
+
+    def extended_hours_value(self, value_type : ValueType) -> Decimal:
         """ Returns portfolio extended_hours equity or market value.
         
             Args:
                 value_type: the value type {EQUITY or MARKET_VALUE}
         """
-        if value_type == Portfolio.ValueType.EQUITY:
-            return self.rh.extended_hours_equity()
+        if value_type == Portfolio.ValueType.EQUITY: 
+            return round(Decimal(self.rh.extended_hours_equity()), 4)
         else:
-            return self.rh.extended_hours_market_value()
+            return round(Decimal(self.rh.extended_hours_market_value()), 4)
 
-    def equity_previous_close(self, adjusted: bool = False) -> float:
+
+    def equity_previous_close(self, adjusted : bool = False) -> Decimal:
         """ Returns portfolio equity_previous_close
-
             Args:
                 adjusted: flag to determine standard or adjusted previous_close
         """
         if adjusted:
-            return self.rh.adjusted_equity_previous_close()
+            return round(Decimal(self.rh.adjusted_equity_previous_close()), 4)
         else:
-            return self.rh.equity_previous_close()
+            return round(Decimal(self.rh.equity_previous_close()), 4)
 
-    def last_core_value(self, value_type) -> float:
+    def last_core_value(self, value_type) -> Decimal:
         """ Returns portfolio last core value
         
             Args:
                 value_type: the value type {EQUITY or MARKET_VALUE}
         """
-        if value_type == Portfolio.ValueType.EQUITY:
-            return self.rh.last_core_equity()
+        if value_type == Portfolio.ValueType.EQUITY: 
+            return round(Decimal(self.rh.last_core_equity()), 4)
         else:
-            return self.rh.last_core_market_value()
+            return round(Decimal(self.rh.last_core_market_value()), 4)
 
     def dividends(self) -> list:
         """Returns the dividends for a portfolio

@@ -12,7 +12,6 @@ class User:
 
     def __init__(self):
         """Creates a new object which is used to access the current Users portfolio and orders.
-
                 Returns:
                     An user object.
         """
@@ -20,15 +19,15 @@ class User:
         self.rh = __init__.session_token.rh
         self.portfolio = Portfolio()
 
-    def order_history(self, orderId=None):
+    def order_history(self, orderId=None) -> list:
         """ Optional Args: add an order ID to retrieve information about a single order.
             Returns:
                 (:obj:`dict`): JSON dict from getting orders
         """
 
-        return self.rh.order_history(orderId)
+        return self.rh.order_history(orderId)["results"]
 
-    def get_open_orders(self):
+    def get_open_orders(self) -> list:
         """ Returns all currently open (cancellable) orders.
             If not orders are currently open, `None` is returned.
         """
@@ -40,10 +39,8 @@ class User:
         
         Args:
             None 
-
         Returns:
             dict represnation of investment profile 
-
             example  'user': 'api.robinhood.com/user/', 
                      'total_net_worth': RANGE_RANGE_STR, 
                      'annual_income': RANGE_RANGE_STR, 
