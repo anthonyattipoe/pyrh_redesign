@@ -84,26 +84,28 @@ class Order(object):
         self._validate()
         response = None
 
+        time_in_force = "GTC" if self.time_in_force == Order.TimeInForce.GTC else "GFD"
+
         if self.order_type == Order.Type.BUY:
             response = self.rh.place_buy_order(self.instrument.order_object(), self.quantity, self.price)
         elif self.order_type == Order.Type.SELL:
             response = self.rh.place_sell_order(self.instrument.order_object(), self.quantity, self.price)
         elif self.order_type == Order.Type.LIMIT_BUY_ORDER:
-            response = self.rh.place_limit_buy_order(self.instrument.order_object(), self.instrument.symbol, self.time_in_force, self.price, self.quantity)
+            response = self.rh.place_limit_buy_order(self.instrument.url, self.instrument.symbol, time_in_force, self.price, self.quantity)
         elif self.order_type == Order.Type.LIMIT_SELL_ORDER:
-            response = self.rh.place_limit_sell_order(self.instrument.order_object(), self.instrument.symbol, self.time_in_force, self.price, self.quantity)
+            response = self.rh.place_limit_sell_order(self.instrument.url, self.instrument.symbol, time_in_force, self.price, self.quantity)
         elif self.order_type == Order.Type.MARKET_BUY_ORDER:
-            response = self.rh.place_market_buy_order(self.instrument.order_object(), self.instrument.symbol, self.time_in_force, self.quantity)
+            response = self.rh.place_market_buy_order(self.instrument.order_object(), self.instrument.symbol, time_in_force, self.quantity)
         elif self.order_type == Order.Type.MARKET_SELL_ORDER:
-            response = self.rh.place_market_sell_order(self.instrument.order_object(), self.instrument.symbol, self.time_in_force, self.quantity)
+            response = self.rh.place_market_sell_order(self.instrument.order_object(), self.instrument.symbol, time_in_force, self.quantity)
         elif self.order_type == Order.Type.STOP_LIMIT_BUY_ORDER:
-            response = self.rh.place_stop_limit_buy_order(self.instrument.order_object(), self.instrument.symbol, self.time_in_force, self.price, self.stop_price, self.quantity)
+            response = self.rh.place_stop_limit_buy_order(self.instrument.order_object(), self.instrument.symbol, time_in_force, self.price, self.stop_price, self.quantity)
         elif self.order_type == Order.Type.STOP_LIMIT_SELL_ORDER:
-            response = self.rh.place_stop_limit_sell_order(self.instrument.order_object(), self.instrument.symbol, self.time_in_force, self.price, self.stop_price, self.quantity)
+            response = self.rh.place_stop_limit_sell_order(self.instrument.order_object(), self.instrument.symbol, time_in_force, self.price, self.stop_price, self.quantity)
         elif self.order_type == Order.Type.STOP_LOSS_BUY_ORDER:
-            response = self.rh.place_stop_loss_buy_order(self.instrument.order_object(), self.instrument.symbol, self.time_in_force, self.stop_price, self.quantity)
+            response = self.rh.place_stop_loss_buy_order(self.instrument.order_object(), self.instrument.symbol, time_in_force, self.stop_price, self.quantity)
         elif self.order_type == Order.Type.STOP_LOSS_SELL_ORDER:
-            response = self.rh.place_stop_loss_sell_order(self.instrument.order_object(), self.instrument.symbol, self.time_in_force, self.stop_price, self.quantity)
+            response = self.rh.place_stop_loss_sell_order(self.instrument.order_object(), self.instrument.symbol, time_in_force, self.stop_price, self.quantity)
         
         return response
         # self.status = OrderStatus(response)
@@ -127,4 +129,3 @@ class Order(object):
     def status(self) -> OrderStatus:
         """Returns the status of the current order."""
         return self.status
-
