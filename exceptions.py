@@ -83,3 +83,25 @@ class InvalidLoginCredentialsError(Exception):
     def __str__(self) -> str:
         """Returns a string description of the InvalidLoginCredentialsError."""
         return 'An error occurred logging you in with the provided credentials.'
+
+class InsufficientFundsError(Exception):
+    """An exception raised when a user tries to purchase an Instrument for which they don't have enough funds."""
+
+    def __init__(self, symbol):
+        """Creates a new InsufficientFundsError."""
+        self.symbol = symbol
+
+    def __str__(self):
+        """Returns a string description of the InsufficientFundsError."""
+        return 'You do not have suffiecient funds to purchase {}'.format(self.symbol)
+
+class UnownedInstrumentError(Exception):
+    """An exception raised when a user attempts to sell an Instrument they do not own."""
+
+    def __init__(self, symbol):
+        """Creates a new UnownedInstrumentError."""
+        self.symbol = symbol
+    
+    def __str__(self):
+        """Returns a string description of the UnownedInstrumentError."""
+        return 'You currently do not own any shares of {}'.format(self.symbol)
