@@ -1,27 +1,28 @@
+"""
+    The following class, Portoflio, is used to represent an existing Robinhod user's portfolio.  The portfolio comprises
+    of the instrument the user owns along with securities and positions.
+"""
+
 from enum import Enum
-from session import begin_robinhood_session, end_robinhood_session
 from instrument import Instrument
 from decimal import *
 import __init__
 
 
 class Portfolio:
-    """A user's current portfolio of instruments they own.
-       Includes info on securities and positions
-    """
+    """ An existing Robinhood User's Portfolio."""
     
     class ValueType(Enum):
         """ The way to calculate the value of a user's holdings """
-        EQUITY = 1
+        EQUITY       = 1
         MARKET_VALUE = 2
 
     def __init__(self):
+        """ Creates a new Portfolio object."""
         self.rh = __init__.session_token.rh 
 
-
-
     def __str__(self) -> str:
-        """Custom pretty print function for a Portfolio"""
+        """Prints contents of Portfolio"""
         portfolio = self.rh.portfolio()
         attr = vars(portfolio)
         string = "Portfolio \n"
@@ -35,16 +36,16 @@ class Portfolio:
         
         Args:
             value_type: the value type {EQUITY or MARKET_VALUE}
-
         Returns:
-            Decimal rounded to four digits representing the value.
+            Float representing the value.
         """
-        if value_type == ValueType.EQUITY: 
+        if value_type == Portfolio.ValueType.EQUITY: 
             return round(Decimal(self.rh.equity()), 4)
         else:
             return round(Decimal(self.rh.market_value()), 4)
         
     def contains_instrument(self, instrument: Instrument, quantity: float = 0.0):
+        """Determines of current portfolio contains the given instrument."""
         for position in self.positions():
             if position['symbol'] == instrument.ticker_symbol and position['shares_held_for_sells'] >= quantity:
                 return True
@@ -52,39 +53,26 @@ class Portfolio:
 
 
     def excess_margin(self) -> Decimal:
-        """Returns the excess margin portfolio
-        
-        Args:
-            None 
-
-        Returns:
-            Decimal rounded to four digits representing the value.
-        """
+        """Returns the excess margin portfolio"""
         return round(Decimal(self.rh.excess_margin()), 4)
 
 
     def extended_hours_value(self, value_type : ValueType) -> Decimal:
-        """Returns portfolio extended_hours equity or market value.
+        """ Returns portfolio extended_hours equity or market value.
         
-        Args:
-            value_type: the value type {EQUITY or MARKET_VALUE}
-
-        Returns:
-            Decimal rounded to four digits representing the value.
+            Args:
+                value_type: the value type {EQUITY or MARKET_VALUE}
         """
-        if value_type == ValueType.EQUITY: 
+        if value_type == Portfolio.ValueType.EQUITY: 
             return round(Decimal(self.rh.extended_hours_equity()), 4)
         else:
             return round(Decimal(self.rh.extended_hours_market_value()), 4)
 
-    def equity_previous_close(self, adjusted : bool = False) -> Decimal:
-        """Returns portfolio equity_previous_close
-        
-        Args:
-            adjusted: flag to determine standard or adjusted previous_close 
 
-        Returns:
-            Decimal rounded to four digits representing the value.
+    def equity_previous_close(self, adjusted : bool = False) -> Decimal:
+        """ Returns portfolio equity_previous_close
+            Args:
+                adjusted: flag to determine standard or adjusted previous_close
         """
         if adjusted:
             return round(Decimal(self.rh.adjusted_equity_previous_close()), 4)
@@ -92,41 +80,35 @@ class Portfolio:
             return round(Decimal(self.rh.equity_previous_close()), 4)
 
     def last_core_value(self, value_type) -> Decimal:
-        """Returns portfolio last core value
+        """ Returns portfolio last core value
         
-        Args:
-            value_type: the value type {EQUITY or MARKET_VALUE}
-
-        Returns:
-            Decimal rounded to four digits representing the value.
+            Args:
+                value_type: the value type {EQUITY or MARKET_VALUE}
         """
-        if value_type == ValueType.EQUITY: 
+        if value_type == Portfolio.ValueType.EQUITY: 
             return round(Decimal(self.rh.last_core_equity()), 4)
         else:
             return round(Decimal(self.rh.last_core_market_value()), 4)
 
     def dividends(self) -> list:
         """Returns the dividends for a portfolio
-        
-        Args:
-            None 
 
         Returns:
             List of dividends, where each dividend represented by single dict
 
-            example dividend: { 'id': ID_NUMBER_AS_STR, 
-                                'url': URL_AS_STR, 
-                                'account': ACCOUNT_URL_AS_STR, 
-                                'instrument': INSTRUMENT_URL_AS_STR, 
-                                'amount': '0.36', 
-                                'rate': '0.1200000000', 
-                                'position': '3.00000000', 
-                                'withholding': '0.00', 
-                                'record_date': '2020-03-05', 
-                                'payable_date': '2020-03-16', 
-                                'paid_at': '2020-03-17T02:14:50Z', 
-                                'state': 'paid', 
-                                'nra_withholding': None, 
+            example dividend: { 'id': ID_NUMBER_AS_STR,
+                                'url': URL_AS_STR,
+                                'account': ACCOUNT_URL_AS_STR,
+                                'instrument': INSTRUMENT_URL_AS_STR,
+                                'amount': '0.36',
+                                'rate': '0.1200000000',
+                                'position': '3.00000000',
+                                'withholding': '0.00',
+                                'record_date': '2020-03-05',
+                                'payable_date': '2020-03-16',
+                                'paid_at': '2020-03-17T02:14:50Z',
+                                'state': 'paid',
+                                'nra_withholding': None,
                                 'drip_enabled': False
                                }
         """
