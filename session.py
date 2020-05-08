@@ -1,3 +1,7 @@
+"""
+    The following class, RobinHood_Object, allowing users to being and end Robinhood sessions.
+"""
+
 from __future__ import annotations
 from pyrh.pyrh.robinhood import Robinhood
 import __init__
@@ -28,17 +32,16 @@ class RobinHood_Object(object):
 
     def end_session(self):
         """ logout of Robinhood session"""
-        #self.rh.logout()
         pass
 
 
 def begin_robinhood_session(email, password):
-    
+    """ starting a Robinhood session using the given email and password"""
     __init__.session_token = RobinHood_Object(email, password)
 
 
 def end_robinhood_session():
-    
+    """ ending a Robinhood session"""
     __init__.session_token.end_session()
     __init__.session_token = None
 
