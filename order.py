@@ -1,5 +1,8 @@
-from enum import Enum
+"""
+    The following class, Order, is used to represent an order a user can place.
+"""
 
+from enum import Enum
 from exceptions import OrderCancellationError, MalformedOrderError, UnownedInstrumentError, InsufficientFundsError
 from instrument import Instrument
 from portfolio import Portfolio
@@ -63,7 +66,6 @@ class Order(object):
         self._is_placed = False
 
     def __str__(self) -> str:
-        """Custom pretty print function for an Order"""
         pass
 
     def _validate(self) -> None:
@@ -158,6 +160,7 @@ class Order(object):
             self.rh.get(cancel_url)
 
     def _status(self):
+        """ Helper function to determine order status."""
         status_map = {
             'unconfirmed': Order.Status.UNCONFIRMED,
             'unfilled': Order.Status.UNFILLED,
