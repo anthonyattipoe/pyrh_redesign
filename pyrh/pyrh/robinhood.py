@@ -734,6 +734,11 @@ class Robinhood(InstrumentManager, SessionManager):
             (:obj:`requests.request`): result from `orders` put command
 
         """
+        print(str(instrument_URL))
+        print(str(symbol))
+        print(str(time_in_force))
+        print(str(price))
+        print(str(quantity))
         return self.submit_buy_order(
             order_type="limit",
             trigger="immediate",
@@ -1068,7 +1073,7 @@ class Robinhood(InstrumentManager, SessionManager):
                         "Stop order has no stop_price in call to submit_sell_order"
                     )
                 )
-            if price <= 0:
+            if stop_price <= 0:
                 raise (
                     ValueError(
                         "Stop_price must be positive number in call to "
@@ -1249,7 +1254,7 @@ class Robinhood(InstrumentManager, SessionManager):
                         "Stop order has no stop_price in call to submit_buy_order"
                     )
                 )
-            if price <= 0:
+            if stop_price <= 0:
                 raise (
                     ValueError(
                         "Stop_price must be positive number in call to submit_buy_order"
@@ -1385,7 +1390,7 @@ class Robinhood(InstrumentManager, SessionManager):
             try:
                 self.auth_method
             except:  # noqa: E722
-                print(ex)
+                print(ex) 
 
     def place_buy_order(self, instrument, quantity, ask_price=0.0):
         """Wrapper for placing buy orders
