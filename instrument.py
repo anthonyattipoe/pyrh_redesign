@@ -87,7 +87,7 @@ class Instrument:
 
     def last_trade_price(self) -> Decimal:
         trade_price_string = self.rh.last_trade_price(self.ticker_symbol)
-        return round(Decimal(trade_price_string[0][0], 4))
+        return round(Decimal(trade_price_string[0][0]), 4)
 
     def last_updated_at(self) -> str:
         updated_at_string = self.rh.last_updated_at(self.ticker_symbol)
