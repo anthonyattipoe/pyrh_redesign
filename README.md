@@ -5,7 +5,7 @@
 ## Introduction
 There are many public APIs with flawed functionality. This could range from broken methods
 to simply poor documentation. Our task for this assignment was to find a broken public API and redesign it. The public
- API chosen for this assignment was 'pyrh' (https://pyrh.readthedocs.io/en/latest/), with the following description
+ API chosen for this assignment was ['pyrh'](https://pyrh.readthedocs.io/en/latest/), with the following description
  "Python Framework to make trades with Unofficial Robinhood API. Supports Python 3.6+."  
 
 ## Pyrh Redesign
@@ -15,12 +15,12 @@ Although Pyrh does allow Robinhood users to trade using the API, there were many
 * Poor Documentation
 * Incorrect Return Types
 
-Our redesign of the API resolves the issues listed above while providing users with a more intuitive design for trading. The full documentation for our redesign can be found here: https://pyrh-redesign.readthedocs.io/en/latest/
+Our redesign of the API resolves the issues listed above while providing users with a more intuitive design for trading. The full documentation for our redesign can be found [here](https://pyrh-redesign.readthedocs.io/en/latest/)
 
 ## Directory Overview
 * [client/](client/)  - contains client code samples performing various tasks a user may be interested in.
 * [results/](results/) - contains results outputted from executing the client code samples in the client directory.
-* [docs/](docs/)    - contains relevant files used to manage the project documentation found at https://pyrh-redesign.readthedocs.io/en/latest/
+* [docs/](docs/)    - contains relevant files used to manage the project documentation found [here](https://pyrh-redesign.readthedocs.io/en/latest/)
 * [pyrh/](pyrh/)    - contains modified source code from the original pyrh project
 
 ## Relevant Files
