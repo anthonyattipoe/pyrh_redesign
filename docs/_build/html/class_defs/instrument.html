@@ -34,6 +34,165 @@
             
   <div class="section" id="pyrh-redesign-instrument">
 <h1>pyrh_redesign.instrument<a class="headerlink" href="#pyrh-redesign-instrument" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="instrument.Instrument">
+<em class="property">class </em><code class="sig-prename descclassname">instrument.</code><code class="sig-name descname">Instrument</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">instrument_type</span></em>, <em class="sig-param"><span class="n">symbol</span></em><span class="sig-paren">)</span><a class="headerlink" href="#instrument.Instrument" title="Permalink to this definition">¶</a></dt>
+<dd><p>A tradeable instrument on the Robinhood platform.</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.__init__" title="instrument.Instrument.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(instrument_type, symbol)</p></td>
+<td><p>Creates a new object which can be used to track updates about an instrument or be included in an order.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.__str__" title="instrument.Instrument.__str__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__str__</span></code></a>()</p></td>
+<td><p>Prints the Instruments ticket symbol</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.symbol" title="instrument.Instrument.symbol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symbol</span></code></a>()</p></td>
+<td><p>Returns the Instrument’s ticket symbol</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.quote" title="instrument.Instrument.quote"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quote</span></code></a>()</p></td>
+<td><p>Returns the current market quote of the Instrument.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.order_object" title="instrument.Instrument.order_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">order_object</span></code></a>()</p></td>
+<td><p>Returns the users URL and the Instrument’s  ticket symbol</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.ask_info" title="instrument.Instrument.ask_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ask_info</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.bid_info" title="instrument.Instrument.bid_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bid_info</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.fundamental" title="instrument.Instrument.fundamental"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fundamental</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.historical_quotes" title="instrument.Instrument.historical_quotes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">historical_quotes</span></code></a>(interval, span)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.news" title="instrument.Instrument.news"><code class="xref py py-obj docutils literal notranslate"><span class="pre">news</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.option_chain_id" title="instrument.Instrument.option_chain_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">option_chain_id</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.market_data" title="instrument.Instrument.market_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">market_data</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.popularity" title="instrument.Instrument.popularity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">popularity</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.last_trade_price" title="instrument.Instrument.last_trade_price"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_trade_price</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.last_updated_at" title="instrument.Instrument.last_updated_at"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_updated_at</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.previous_close" title="instrument.Instrument.previous_close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">previous_close</span></code></a>([adjusted])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<dl class="py method">
+<dt id="instrument.Instrument.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">instrument_type</span></em>, <em class="sig-param"><span class="n">symbol</span></em><span class="sig-paren">)</span><a class="headerlink" href="#instrument.Instrument.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new object which can be used to track
+updates about an instrument or be included in an order.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>instrument_type: an enum delineating the type of instrument.
+symbol: the symbol corresponding with the desired instrument.</p>
+</dd>
+<dt>Returns:</dt><dd><p>An Instrument object.</p>
+</dd>
+<dt>Raises:</dt><dd><p>MalformedInstrumentError: If an invalid combination of symbol and instrument type is provided.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#instrument.Instrument.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the Instruments ticket symbol</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.symbol">
+<code class="sig-name descname">symbol</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#instrument.Instrument.symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Instrument’s ticket symbol</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.quote">
+<code class="sig-name descname">quote</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#instrument.Instrument.quote" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current market quote of the Instrument.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.order_object">
+<code class="sig-name descname">order_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#instrument.Instrument.order_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the users URL and the Instrument’s  ticket symbol</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.ask_info">
+<code class="sig-name descname">ask_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>decimal.Decimal<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#instrument.Instrument.ask_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.bid_info">
+<code class="sig-name descname">bid_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>decimal.Decimal<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#instrument.Instrument.bid_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.fundamental">
+<code class="sig-name descname">fundamental</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#instrument.Instrument.fundamental" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.historical_quotes">
+<code class="sig-name descname">historical_quotes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">interval</span></em>, <em class="sig-param"><span class="n">span</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#instrument.Instrument.historical_quotes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.news">
+<code class="sig-name descname">news</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#instrument.Instrument.news" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.option_chain_id">
+<code class="sig-name descname">option_chain_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#instrument.Instrument.option_chain_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.market_data">
+<code class="sig-name descname">market_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#instrument.Instrument.market_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.popularity">
+<code class="sig-name descname">popularity</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#instrument.Instrument.popularity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.last_trade_price">
+<code class="sig-name descname">last_trade_price</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; decimal.Decimal<a class="headerlink" href="#instrument.Instrument.last_trade_price" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.last_updated_at">
+<code class="sig-name descname">last_updated_at</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#instrument.Instrument.last_updated_at" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="instrument.Instrument.previous_close">
+<code class="sig-name descname">previous_close</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">adjusted</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>decimal.Decimal<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#instrument.Instrument.previous_close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 
 

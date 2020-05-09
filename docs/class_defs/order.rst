@@ -1,32 +1,35 @@
 pyrh_redesign.order
 ===================
 
+.. currentmodule:: order
 
-.. autoclass:: order
-
-
-   .. automethod:: __init__
+.. autoclass:: Order
 
 
    .. rubric:: Methods
 
    .. autosummary::
 
-      ~order.__init__
-      ~order.from_json
-      ~order.get
-      ~order.login
-      ~order.logout
-      ~order.post
-      ~order.to_json
+      ~Order.__init__
 
+      ~Order.__str__
 
+      ~Order.place
 
+      ~Order.cancel
 
+      ~Order.status
 
    .. rubric:: Attributes
 
-   .. autosummary::
+   .. automethod:: __init__
 
-      ~order.authenticated
-      ~order.login_set
+   .. automethod:: __str__
+
+   .. automethod:: place
+
+   .. automethod:: cancel
+
+   .. automethod:: status
+
+

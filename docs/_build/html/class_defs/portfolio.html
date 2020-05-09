@@ -14,7 +14,7 @@
     <script src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="pyrh_redesign.instrument" href="instrument.html" />
+    <link rel="next" title="&lt;no title&gt;" href="instrument.html" />
     <link rel="prev" title="pyrh_redesign.user" href="user.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -34,6 +34,181 @@
             
   <div class="section" id="pyrh-redesign-portfolio">
 <h1>pyrh_redesign.portfolio<a class="headerlink" href="#pyrh-redesign-portfolio" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="portfolio.Portfolio">
+<em class="property">class </em><code class="sig-prename descclassname">portfolio.</code><code class="sig-name descname">Portfolio</code><a class="headerlink" href="#portfolio.Portfolio" title="Permalink to this definition">¶</a></dt>
+<dd><p>An existing Robinhood User’s Portfolio.</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#portfolio.Portfolio.__init__" title="portfolio.Portfolio.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>()</p></td>
+<td><p>Creates a new Portfolio object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#portfolio.Portfolio.__str__" title="portfolio.Portfolio.__str__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__str__</span></code></a>()</p></td>
+<td><p>Prints contents of Portfolio</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#portfolio.Portfolio.value" title="portfolio.Portfolio.value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value</span></code></a>(value_type)</p></td>
+<td><p>Returns portfolio equity or market value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#portfolio.Portfolio.contains_instrument" title="portfolio.Portfolio.contains_instrument"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contains_instrument</span></code></a>(instrument[, quantity])</p></td>
+<td><p>Determines of current portfolio contains the given instrument.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#portfolio.Portfolio.excess_margin" title="portfolio.Portfolio.excess_margin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excess_margin</span></code></a>()</p></td>
+<td><p>Returns the excess margin portfolio</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#portfolio.Portfolio.extended_hours_value" title="portfolio.Portfolio.extended_hours_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extended_hours_value</span></code></a>(value_type)</p></td>
+<td><p>Returns portfolio extended_hours equity or market value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#portfolio.Portfolio.equity_previous_close" title="portfolio.Portfolio.equity_previous_close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">equity_previous_close</span></code></a>([adjusted])</p></td>
+<td><p>Returns portfolio equity_previous_close Args:     adjusted: flag to determine standard or adjusted previous_close</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#portfolio.Portfolio.last_core_value" title="portfolio.Portfolio.last_core_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_core_value</span></code></a>(value_type)</p></td>
+<td><p>Returns portfolio last core value</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#portfolio.Portfolio.dividends" title="portfolio.Portfolio.dividends"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dividends</span></code></a>()</p></td>
+<td><p>Returns the dividends for a portfolio</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#portfolio.Portfolio.positions" title="portfolio.Portfolio.positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">positions</span></code></a>([previously_held])</p></td>
+<td><p>Returns the positions for a user’s portfolio</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="portfolio.Portfolio.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#portfolio.Portfolio.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new Portfolio object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="portfolio.Portfolio.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#portfolio.Portfolio.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints contents of Portfolio</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="portfolio.Portfolio.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value_type</span><span class="p">:</span> <span class="n">portfolio.Portfolio.ValueType</span></em><span class="sig-paren">)</span> &#x2192; decimal.Decimal<a class="headerlink" href="#portfolio.Portfolio.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns portfolio equity or market value.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>value_type: the value type {EQUITY or MARKET_VALUE}</p>
+</dd>
+<dt>Returns:</dt><dd><p>Float representing the value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="portfolio.Portfolio.contains_instrument">
+<code class="sig-name descname">contains_instrument</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">instrument</span><span class="p">:</span> <span class="n">instrument.Instrument</span></em>, <em class="sig-param"><span class="n">quantity</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#portfolio.Portfolio.contains_instrument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines of current portfolio contains the given instrument.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="portfolio.Portfolio.excess_margin">
+<code class="sig-name descname">excess_margin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; decimal.Decimal<a class="headerlink" href="#portfolio.Portfolio.excess_margin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the excess margin portfolio</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="portfolio.Portfolio.extended_hours_value">
+<code class="sig-name descname">extended_hours_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value_type</span><span class="p">:</span> <span class="n">portfolio.Portfolio.ValueType</span></em><span class="sig-paren">)</span> &#x2192; decimal.Decimal<a class="headerlink" href="#portfolio.Portfolio.extended_hours_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns portfolio extended_hours equity or market value.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>value_type: the value type {EQUITY or MARKET_VALUE}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="portfolio.Portfolio.equity_previous_close">
+<code class="sig-name descname">equity_previous_close</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">adjusted</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; decimal.Decimal<a class="headerlink" href="#portfolio.Portfolio.equity_previous_close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns portfolio equity_previous_close
+Args:</p>
+<blockquote>
+<div><p>adjusted: flag to determine standard or adjusted previous_close</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="portfolio.Portfolio.last_core_value">
+<code class="sig-name descname">last_core_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value_type</span></em><span class="sig-paren">)</span> &#x2192; decimal.Decimal<a class="headerlink" href="#portfolio.Portfolio.last_core_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns portfolio last core value</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>value_type: the value type {EQUITY or MARKET_VALUE}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="portfolio.Portfolio.dividends">
+<code class="sig-name descname">dividends</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#portfolio.Portfolio.dividends" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the dividends for a portfolio</p>
+<dl>
+<dt>Returns:</dt><dd><p>List of dividends, where each dividend represented by single dict</p>
+<dl>
+<dt>example dividend: { ‘id’: ID_NUMBER_AS_STR,</dt><dd><blockquote>
+<div><p>‘url’: URL_AS_STR,
+‘account’: ACCOUNT_URL_AS_STR,
+‘instrument’: INSTRUMENT_URL_AS_STR,
+‘amount’: ‘0.36’,
+‘rate’: ‘0.1200000000’,
+‘position’: ‘3.00000000’,
+‘withholding’: ‘0.00’,
+‘record_date’: ‘2020-03-05’,
+‘payable_date’: ‘2020-03-16’,
+‘paid_at’: ‘2020-03-17T02:14:50Z’,
+‘state’: ‘paid’,
+‘nra_withholding’: None,
+‘drip_enabled’: False</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="portfolio.Portfolio.positions">
+<code class="sig-name descname">positions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">previously_held</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#portfolio.Portfolio.positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the positions for a user’s portfolio</p>
+<dl>
+<dt>Args:</dt><dd><p>previously_held: bool. include positions where the user has 0 quantity</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict representation of a position</p>
+<dl>
+<dt>example position: {  ‘url’: ‘<a class="reference external" href="https://api.robinhood.com/positions/ACCOUNT_NUMBER/ID_NUMBER/">https://api.robinhood.com/positions/ACCOUNT_NUMBER/ID_NUMBER/</a>’, </dt><dd><blockquote>
+<div><p>‘instrument’: ‘<a class="reference external" href="https://api.robinhood.com/instruments/ID_NUMBER/">https://api.robinhood.com/instruments/ID_NUMBER/</a>’, 
+‘account’: ‘<a class="reference external" href="https://api.robinhood.com/accounts/ACCOUNT_NUMBER/">https://api.robinhood.com/accounts/ACCOUNT_NUMBER/</a>’, 
+‘account_number’: ‘ACCOUNT_NUMBER’, 
+‘average_buy_price’: PRICE_STR_FLT, 
+‘pending_average_buy_price’: PRICE_STR_FLT, 
+‘quantity’: QUANTITY_STR_FLT, 
+‘intraday_average_buy_price’: ‘0.0000’, 
+‘intraday_quantity’: ‘0.00000000’, 
+‘shares_held_for_buys’: ‘0.00000000’, 
+‘shares_held_for_sells’: ‘2.00000000’, 
+‘shares_held_for_stock_grants’: ‘0.00000000’, 
+‘shares_held_for_options_collateral’: ‘0.00000000’, 
+‘shares_held_for_options_events’: ‘0.00000000’, 
+‘shares_pending_from_options_events’: ‘0.00000000’, 
+‘updated_at’: ‘2020-05-02T20:11:41.491656Z’, 
+‘created_at’: ‘2019-07-31T23:57:07.494746Z’,
+‘symbol’: “GOOG”</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -58,7 +233,6 @@
 <li class="toctree-l2"><a class="reference internal" href="session.html">pyrh_redesign.session</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user.html">pyrh_redesign.user</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">pyrh_redesign.portfolio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument.html">pyrh_redesign.instrument</a></li>
 <li class="toctree-l2"><a class="reference internal" href="order.html">pyrh_redesign.order</a></li>
 </ul>
 </li>
@@ -70,7 +244,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="../api.html">API Reference</a><ul>
       <li>Previous: <a href="user.html" title="previous chapter">pyrh_redesign.user</a></li>
-      <li>Next: <a href="instrument.html" title="next chapter">pyrh_redesign.instrument</a></li>
+      <li>Next: <a href="instrument.html" title="next chapter">&lt;no title&gt;</a></li>
   </ul></li>
   </ul></li>
 </ul>

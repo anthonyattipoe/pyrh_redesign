@@ -17,11 +17,7 @@ pyrh_redesign.user
       ~User.get_open_orders
 
       ~User.investment_profile
-
-   .. rubric:: Attributes
-
-   .. autosummary::
-
+      
       ~User.portfolio
 
    .. automethod:: __init__
@@ -31,9 +27,5 @@ pyrh_redesign.user
    .. automethod:: get_open_orders
 
    .. automethod:: investment_profile
-
-
-
-
 
 

@@ -14,7 +14,7 @@
     <script src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="pyrh_redesign.instrument" href="instrument.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="instrument.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,6 +33,89 @@
             
   <div class="section" id="pyrh-redesign-order">
 <h1>pyrh_redesign.order<a class="headerlink" href="#pyrh-redesign-order" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="order.Order">
+<em class="property">class </em><code class="sig-prename descclassname">order.</code><code class="sig-name descname">Order</code><span class="sig-paren">(</span><em class="sig-param">instrument: instrument.Instrument</em>, <em class="sig-param">order_type: order.Order.Type</em>, <em class="sig-param">quantity: int</em>, <em class="sig-param">time_in_force: order.Order.TimeInForce = &lt;TimeInForce.GFD: 1&gt;</em>, <em class="sig-param">price: float = None</em>, <em class="sig-param">stop_price: float = None</em><span class="sig-paren">)</span><a class="headerlink" href="#order.Order" title="Permalink to this definition">¶</a></dt>
+<dd><p>An order which a user can place.</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#order.Order.__init__" title="order.Order.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(instrument, order_type, quantity[, …])</p></td>
+<td><p>Creates a new order.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#order.Order.__str__" title="order.Order.__str__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__str__</span></code></a>()</p></td>
+<td><p>Return str(self).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#order.Order.place" title="order.Order.place"><code class="xref py py-obj docutils literal notranslate"><span class="pre">place</span></code></a>()</p></td>
+<td><p>Place the current order.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#order.Order.cancel" title="order.Order.cancel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cancel</span></code></a>()</p></td>
+<td><p>Cancels the current order after it has been placed but not yet executed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#order.Order.status" title="order.Order.status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">status</span></code></a>()</p></td>
+<td><p>Returns the status of the current order.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<dl class="py method">
+<dt id="order.Order.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">instrument: instrument.Instrument</em>, <em class="sig-param">order_type: order.Order.Type</em>, <em class="sig-param">quantity: int</em>, <em class="sig-param">time_in_force: order.Order.TimeInForce = &lt;TimeInForce.GFD: 1&gt;</em>, <em class="sig-param">price: float = None</em>, <em class="sig-param">stop_price: float = None</em><span class="sig-paren">)</span><a class="headerlink" href="#order.Order.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new order.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>instrument: the instrument tied to the prospective order a user creates.
+type: an enum used to represent the type of order the user will like to place.
+time_in_force: how long an order lasts before it is executed or expires.
+quantity: a discrete number of instruments included in the current order.
+price: a price amount corresponding to the instrument included in the current order.</p>
+</dd>
+<dt>Returns:</dt><dd><p>a new Order object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="order.Order.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#order.Order.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="order.Order.place">
+<code class="sig-name descname">place</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#order.Order.place" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place the current order. Calls _validate() before the order is placed.
+This method is idempotent so calling place() after the order has already
+placed will have no effect.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>An OrderStatus object outlining the status of the current order.</p>
+</dd>
+<dt>Raises:</dt><dd><p>MalformedOrderError: If the combinations of properties set on the order are not compatible.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="order.Order.cancel">
+<code class="sig-name descname">cancel</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#order.Order.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancels the current order after it has been placed but not yet executed.</p>
+<dl class="simple">
+<dt>Raises:</dt><dd><p>OrderCancellationError: If order has already been executed or terminated.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="order.Order.status">
+<code class="sig-name descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#order.Order.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the status of the current order.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -57,7 +140,6 @@
 <li class="toctree-l2"><a class="reference internal" href="session.html">pyrh_redesign.session</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user.html">pyrh_redesign.user</a></li>
 <li class="toctree-l2"><a class="reference internal" href="portfolio.html">pyrh_redesign.portfolio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument.html">pyrh_redesign.instrument</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">pyrh_redesign.order</a></li>
 </ul>
 </li>
@@ -68,7 +150,7 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="../api.html">API Reference</a><ul>
-      <li>Previous: <a href="instrument.html" title="previous chapter">pyrh_redesign.instrument</a></li>
+      <li>Previous: <a href="instrument.html" title="previous chapter">&lt;no title&gt;</a></li>
   </ul></li>
   </ul></li>
 </ul>
