@@ -22,10 +22,8 @@ def get_ask_bid_periodically(ticker_symbol, iterations, interval):
     x = np.arange(iterations)
     plt.clf()
     plt.plot(x, ask_prices)
-    plt.savefig("../results/ask_prices_every_" + str(interval) + "s_" + ticker_symbol + ".jpg")
-    plt.clf()
     plt.plot(x, bid_prices)
-    plt.savefig("../results/bid_prices_every_" + str(interval) + "s_" + ticker_symbol + ".jpg")
+    plt.savefig("../results/ask_bid_prices_every_" + str(interval) + "s_" + ticker_symbol + ".jpg")
 
 
 if __name__ == "__main__":
