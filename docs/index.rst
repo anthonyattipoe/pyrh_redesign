@@ -27,6 +27,7 @@ API Reference
    :maxdepth: 3
    
    api
+   examples
 
 * :ref:`search`
 

@@ -39,22 +39,46 @@ class Portfolio:
         Returns:
             Float representing the value.
         """
+        attr = vars(self.rh.portfolio())
         if value_type == Portfolio.ValueType.EQUITY: 
-            return round(Decimal(self.rh.equity()), 4)
+            return round(Decimal(attr["equity"]), 4)
         else:
-            return round(Decimal(self.rh.market_value()), 4)
+            return round(Decimal(attr["market_value"]), 4)
         
     def contains_instrument(self, instrument: Instrument, quantity: float = 0.0):
-        """Determines of current portfolio contains the given instrument."""
+        """Determines of current portfolio contains the given instrument.
+
+        Args:
+            instrument: Instrument to look for in portfolio
+            quantity: see if that quantity of instrument is in portfolio
+
+        Returns:
+            Bool: whether ornot there are quantity amount of instrument in portfolio
+        """
         for position in self.positions():
-            if position['symbol'] == instrument.ticker_symbol and position['shares_held_for_sells'] >= quantity:
+            if position['symbol'] == instrument.ticker_symbol and float(position['shares_held_for_sells']) >= quantity:
                 return True
         return False
+
+    def share_info(self, instrument: Instrument) -> tuple:
+        """A way to retrieve the quantity and value of the instrument
+
+        Args:
+          instrument: instrument to look for in portfolio
+
+        Returns:
+          tuple: an int value containing the quantity of the instrument owned, the decimal value of the instrument at day trading
+        """
+        for position in self.positions():
+            if position['symbol'] == instrument.ticker_symbol:
+                return (int(float(position['intraday_quantity'])), round(Decimal(position['intraday_average_buy_price']), 4))
+        return (0, round(Decimal("0.0000"), 4))
 
 
     def excess_margin(self) -> Decimal:
         """Returns the excess margin portfolio"""
-        return round(Decimal(self.rh.excess_margin()), 4)
+        attr = vars(self.rh.portfolio())
+        return round(Decimal(attr['excess_margin']), 4)
 
 
     def extended_hours_value(self, value_type : ValueType) -> Decimal:
@@ -63,10 +87,11 @@ class Portfolio:
             Args:
                 value_type: the value type {EQUITY or MARKET_VALUE}
         """
+        attr = vars(self.rh.portfolio())
         if value_type == Portfolio.ValueType.EQUITY: 
-            return round(Decimal(self.rh.extended_hours_equity()), 4)
+            return round(Decimal(attr["extended_hours_equity"]), 4)
         else:
-            return round(Decimal(self.rh.extended_hours_market_value()), 4)
+            return round(Decimal(attr["extended_hours_market_value"]), 4)
 
 
     def equity_previous_close(self, adjusted : bool = False) -> Decimal:
@@ -75,10 +100,11 @@ class Portfolio:
             Args:
                 adjusted: flag to determine standard or adjusted previous_close
         """
+        attr = vars(portfolio)
         if adjusted:
-            return round(Decimal(self.rh.adjusted_equity_previous_close()), 4)
+            return round(Decimal(attr["adjusted_equity_previous_close"]), 4)
         else:
-            return round(Decimal(self.rh.equity_previous_close()), 4)
+            return round(Decimal(attr["equity_previous_close"]), 4)
 
     def last_core_value(self, value_type : ValueType) -> Decimal:
         """ Returns portfolio last core value
@@ -86,10 +112,11 @@ class Portfolio:
             Args:
                 value_type: the value type {EQUITY or MARKET_VALUE}
         """
+        attr = vars(self.rh.portfolio())
         if value_type == Portfolio.ValueType.EQUITY: 
-            return round(Decimal(self.rh.last_core_equity()), 4)
+            return round(Decimal(attr["last_core_equity"]), 4)
         else:
-            return round(Decimal(self.rh.last_core_market_value()), 4)
+            return round(Decimal(attr["last_core_market_value"]), 4)
 
     def dividends(self) -> list:
         """

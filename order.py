@@ -61,10 +61,7 @@ class Order(object):
             a new Order object.
 
         """
-
-        #: Doc comment for instance attribute qux.
         self.instrument = instrument
-        """instrument"""
         self.order_type = order_type
         self.time_in_force = time_in_force
         self.quantity = quantity
@@ -75,7 +72,15 @@ class Order(object):
         self._is_placed = False
 
     def __str__(self) -> str:
-        pass
+        string_return = ""
+        string_return += "Instrument = " + str(self.instrument) + "\n"
+        string_return += "Order type = " + str(self.order_type) + "\n"
+        string_return += "Time in Force = " + str(self.time_in_force) + "\n"
+        string_return += "Quantity = " + str(self.quantity) + "\n"
+        string_return += "Price = " + str(self.price) + "\n"
+        string_return += "Stop price = " + str(self.stop_price) + "\n"
+        string_return += "id = " + str(self.id) + "\n"
+        return string_return
 
     def _validate(self) -> None:
         """Validates the properties set on an order before it is placed.
