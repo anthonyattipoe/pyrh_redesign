@@ -18,21 +18,21 @@ Although Pyrh does allow Robinhood users to trade using the API, there were many
 Our redesign of the API resolves the issues listed above while providing users with a more intuitive design for trading. The full documentation for our redesign can be found here: https://pyrh-redesign.readthedocs.io/en/latest/
 
 ## Directory Overview
-* [client](client/)  - contains client code samples performing various tasks a user may be interested in.
-* results/ - contains results outputted from executing the client code samples in the client directory.
-* docs/    - contains relevant files used to manage the project documentation found at https://pyrh-redesign.readthedocs.io/en/latest/
-* pyrh/    - contains modified source code from the original pyrh project
+* [client/](client/)  - contains client code samples performing various tasks a user may be interested in.
+* [results/](results/) - contains results outputted from executing the client code samples in the client directory.
+* [docs/](docs/)    - contains relevant files used to manage the project documentation found at https://pyrh-redesign.readthedocs.io/en/latest/
+* [pyrh/](pyrh/)    - contains modified source code from the original pyrh project
 
 ## Relevant Files
-* instrument.py   - the newly designed Instrument class
-* order.py        - the newly designed Order class
-* portfolio.py    - the newly designed Portfolio class
-* session.py      - the newly designed Robinhood session class
-* user.py         - the newly designed User class
-* exceptions.py   - a collection of new exceptions designed for use with our updated API
-* test.py         - a collection of unit tests which test functionality of the newly implemented classes
-* requirements.md - a collection of use cases and top level requirements meant to be addressed by the redesign of this API
-* responses.md    - responses returned from various endpoints using the original pyrh API
+* [instrument.py](instrument.py)   - the newly designed Instrument class
+* [order.py](order.py)        - the newly designed Order class
+* [portfolio.py](portfolio.py)    - the newly designed Portfolio class
+* [session.py](session.py)      - the newly designed Robinhood session class
+* [user.py](user.py)         - the newly designed User class
+* [exceptions.py](exceptions.py)   - a collection of new exceptions designed for use with our updated API
+* [test.py](test.py)         - a collection of unit tests which test functionality of the newly implemented classes
+* [requirements.md](requirements.md) - a collection of use cases and top level requirements meant to be addressed by the redesign of this API
+* [responses.md](responses.md)    - responses returned from various endpoints using the original pyrh API
 
 
 ## Team Members:
