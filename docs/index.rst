@@ -23,13 +23,11 @@ Python Framework to make trades with Unofficial Robinhood API. Supports Python 3
 API Reference
 #############
 
-* :ref:`genindex`
-
 .. toctree::
    :maxdepth: 3
    
    api
-   
+
 * :ref:`search`
 
 
