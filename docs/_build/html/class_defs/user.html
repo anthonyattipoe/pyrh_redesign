@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>pyrh_redesign.user &#8212; pyrh_redesign  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyrh_redesign.portfolio" href="portfolio.html" />
+    <link rel="prev" title="pyrh_redesign.session" href="session.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="pyrh-redesign-user">
+<h1>pyrh_redesign.user<a class="headerlink" href="#pyrh-redesign-user" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="user.User">
+<em class="property">class </em><code class="sig-prename descclassname">user.</code><code class="sig-name descname">User</code><a class="headerlink" href="#user.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>An existing Robinhood User.</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#user.User.__init__" title="user.User.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>()</p></td>
+<td><p>Creates a new object which is used to access the current Users portfolio and orders.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#user.User.order_history" title="user.User.order_history"><code class="xref py py-obj docutils literal notranslate"><span class="pre">order_history</span></code></a>([orderId])</p></td>
+<td><p>Optional Args: add an order ID to retrieve information about a single order.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#user.User.get_open_orders" title="user.User.get_open_orders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_open_orders</span></code></a>()</p></td>
+<td><p>Returns all currently open (cancellable) orders.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#user.User.investment_profile" title="user.User.investment_profile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">investment_profile</span></code></a>()</p></td>
+<td><p>Returns the investment profile for a users portfolio</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">User.portfolio</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="user.User.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#user.User.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new object which is used to access the current Users portfolio and orders.
+Returns:</p>
+<blockquote>
+<div><p>An user object.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="user.User.order_history">
+<code class="sig-name descname">order_history</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">orderId</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#user.User.order_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional Args: add an order ID to retrieve information about a single order.
+Returns:</p>
+<blockquote>
+<div><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): JSON dict from getting orders</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="user.User.get_open_orders">
+<code class="sig-name descname">get_open_orders</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#user.User.get_open_orders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all currently open (cancellable) orders.
+If not orders are currently open, <cite>None</cite> is returned.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="user.User.investment_profile">
+<code class="sig-name descname">investment_profile</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#user.User.investment_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the investment profile for a users portfolio</p>
+<dl>
+<dt>Args:</dt><dd><p>None</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict represnation of investment profile 
+example  ‘user’: ‘api.robinhood.com/user/’,</p>
+<blockquote>
+<div><p>‘total_net_worth’: RANGE_RANGE_STR, 
+‘annual_income’: RANGE_RANGE_STR, 
+‘source_of_funds’: STR, 
+‘investment_objective’: ‘income_invest_obj’, 
+‘investment_experience’: STR, 
+‘liquid_net_worth’: RANGE_RANGE_STR, 
+‘risk_tolerance’: STR, 
+‘tax_bracket’: ‘’, 
+‘time_horizon’: STR, 
+‘liquidity_needs’: STR, 
+‘investment_experience_collected’: BOOL, 
+‘suitability_verified’: BOOL, 
+‘option_trading_experience’: ‘’, 
+‘professional_trader’: None, 
+‘understand_option_spreads’: BOOL, 
+‘interested_in_options’: None, 
+‘updated_at’: ‘2019-08-01T16:18:26.996458Z’</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">pyrh_redesign</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="session.html">pyrh_redesign.session</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pyrh_redesign.user</a></li>
+<li class="toctree-l2"><a class="reference internal" href="portfolio.html">pyrh_redesign.portfolio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument.html">pyrh_redesign.instrument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="order.html">pyrh_redesign.order</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../api.html">API Reference</a><ul>
+      <li>Previous: <a href="session.html" title="previous chapter">pyrh_redesign.session</a></li>
+      <li>Next: <a href="portfolio.html" title="next chapter">pyrh_redesign.portfolio</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, John Paul Harriman, Anthony Attipoe, Chinedu Ojukwu, Evangeline Liu, Sara H-b.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/class_defs/user.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

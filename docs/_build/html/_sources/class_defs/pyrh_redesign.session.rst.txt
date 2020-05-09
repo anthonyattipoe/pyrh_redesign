@@ -1,0 +1,33 @@
+pyrh.session
+===================
+
+.. currentmodule:: pyrh_redesign
+
+.. autoclass:: session
+
+
+   .. automethod:: __init__
+
+
+   .. rubric:: Methods
+
+   .. autosummary::
+
+      ~session.__init__
+      ~session.from_json
+      ~session.get
+      ~session.login
+      ~session.logout
+      ~session.post
+      ~session.to_json
+
+
+
+
+
+   .. rubric:: Attributes
+
+   .. autosummary::
+
+      ~session.authenticated
+      ~session.login_set
