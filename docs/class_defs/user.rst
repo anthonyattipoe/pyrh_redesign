@@ -3,7 +3,7 @@ pyrh_redesign.user
 
 .. automodule:: user
 
-.. autoclass:: User
+.. class:: User
 
 
    .. rubric:: Methods

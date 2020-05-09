@@ -3,7 +3,7 @@ pyrh_redesign.order
 
 .. automodule:: order
 
-.. autoclass:: Order
+.. class:: Order
 
    .. rubric:: Methods
 

@@ -3,7 +3,7 @@ pyrh_redesign.portfolio
 
 .. automodule:: portfolio
 
-.. autoclass:: Portfolio
+.. class:: Portfolio
 
 
    .. rubric:: Methods

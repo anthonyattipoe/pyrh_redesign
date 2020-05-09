@@ -3,8 +3,7 @@ pyrh_redesign.instrument
 
 .. automodule:: instrument
 
-.. autoclass:: Instrument
-
+.. class:: Instrument
 
    .. rubric:: Methods
 
