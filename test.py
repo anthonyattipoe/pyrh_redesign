@@ -130,15 +130,16 @@ def test_stop_loss_sell_order():
     zom_order = Order(zom, Order.Type.STOP_LOSS_SELL_ORDER, quantity=2, time_in_force=Order.TimeInForce.GTC, stop_price=0.200)
     print(zom_order.place())
 
+
 if __name__ == "__main__":
     begin_robinhood_session(email, password)
-    test_quote()
-    test_ask_info()
+    # test_quote()
+    # test_ask_info()
     # test_portfolio()
     # test_positions()
     # test_order_history()
     # test_open_orders()
-    # test_instrument()
+    test_instrument()
     # test_buy_order()
     # test_sell_order()
     # test_limit_buy_order()

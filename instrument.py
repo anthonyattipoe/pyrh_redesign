@@ -128,12 +128,10 @@ class Instrument:
         """ News relating to the given instrument
         
         Returns:
-            dict: 
-                important keys:
-                    count: number of new items in results
-                    results: list of dict that have information regarding the intstrument
+            results: list of dict that have information regarding the intstrument
         """
-        return self.rh.get_news(self.ticker_symbol)
+        news_result = self.rh.get_news(self.ticker_symbol)
+        return news_result['results']
 
     def option_chain_id(self):
         return self.rh.get_option_chainid(self.ticker_symbol)
