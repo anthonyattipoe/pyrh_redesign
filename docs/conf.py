@@ -12,7 +12,6 @@
 #
 import os
 import sys
-import pluginmanager
 import shlex
 sys.path.insert(0, os.path.abspath('class_defs/'))
 sys.path.insert(0, os.path.abspath('.'))
