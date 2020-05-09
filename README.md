@@ -33,6 +33,7 @@ Our redesign of the API resolves the issues listed above while providing users w
 * [test.py](test.py)         - a collection of unit tests which test functionality of the newly implemented classes
 * [requirements.md](requirements.md) - a collection of use cases and top level requirements meant to be addressed by the redesign of this API
 * [responses.md](responses.md)    - responses returned from various endpoints using the original pyrh API
+* [Final Report](final_report.pdf) - a copy of the final report for this project
 
 
 ## Team Members:
