@@ -11,7 +11,9 @@ import __init__
 
 
 class Order(object):
-    """An order which a user can place."""
+    """
+    An order which a user can place.
+    """
 
     class Type(Enum):
         """The type of an order."""
@@ -54,8 +56,12 @@ class Order(object):
 
         Returns:
             a new Order object.
+
         """
+
+        #: Doc comment for instance attribute qux.
         self.instrument = instrument
+        """instrument"""
         self.order_type = order_type
         self.time_in_force = time_in_force
         self.quantity = quantity

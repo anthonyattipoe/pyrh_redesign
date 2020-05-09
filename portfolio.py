@@ -71,6 +71,7 @@ class Portfolio:
 
     def equity_previous_close(self, adjusted : bool = False) -> Decimal:
         """ Returns portfolio equity_previous_close
+
             Args:
                 adjusted: flag to determine standard or adjusted previous_close
         """
@@ -91,33 +92,39 @@ class Portfolio:
             return round(Decimal(self.rh.last_core_market_value()), 4)
 
     def dividends(self) -> list:
-        """Returns the dividends for a portfolio
+        """
+        The dividends for a portfolio.
 
         Returns:
             List of dividends, where each dividend represented by single dict
 
-            example dividend: { 'id': ID_NUMBER_AS_STR,
-                                'url': URL_AS_STR,
-                                'account': ACCOUNT_URL_AS_STR,
-                                'instrument': INSTRUMENT_URL_AS_STR,
-                                'amount': '0.36',
-                                'rate': '0.1200000000',
-                                'position': '3.00000000',
-                                'withholding': '0.00',
-                                'record_date': '2020-03-05',
-                                'payable_date': '2020-03-16',
-                                'paid_at': '2020-03-17T02:14:50Z',
-                                'state': 'paid',
-                                'nra_withholding': None,
-                                'drip_enabled': False
-                               }
+            example dividend: 
+                { 
+
+                  id: ID_NUMBER_AS_STR,
+                  url: URL_AS_STR,
+                  account: ACCOUNT_URL_AS_STR,
+                  instrument: INSTRUMENT_URL_AS_STR,
+                  amount: 0.36,
+                  rate: 0.1200000000,
+                  position: 3.00000000,
+                  withholding: 0.00,
+                  record_date: 2020-03-05,
+                  payable_date: 2020-03-16,
+                  paid_at: 2020-03-17T02:14:50Z,
+                  state: paid,
+                  nra_withholding: None,
+                  drip_enabled: False
+                
+                }
         """
 
         return self.rh.dividends()["results"]
 
 
     def positions(self, previously_held=False) -> list:
-        """Returns the positions for a user's portfolio
+        """
+        The positions for a user's portfolio.
         
         Args:
             previously_held: bool. include positions where the user has 0 quantity
@@ -125,26 +132,33 @@ class Portfolio:
         Returns:
             dict representation of a position
 
-            example position: {  'url': 'https://api.robinhood.com/positions/ACCOUNT_NUMBER/ID_NUMBER/', 
-                                 'instrument': 'https://api.robinhood.com/instruments/ID_NUMBER/', 
-                                 'account': 'https://api.robinhood.com/accounts/ACCOUNT_NUMBER/', 
-                                 'account_number': 'ACCOUNT_NUMBER', 
-                                 'average_buy_price': PRICE_STR_FLT, 
-                                 'pending_average_buy_price': PRICE_STR_FLT, 
-                                 'quantity': QUANTITY_STR_FLT, 
-                                 'intraday_average_buy_price': '0.0000', 
-                                 'intraday_quantity': '0.00000000', 
-                                 'shares_held_for_buys': '0.00000000', 
-                                 'shares_held_for_sells': '2.00000000', 
-                                 'shares_held_for_stock_grants': '0.00000000', 
-                                 'shares_held_for_options_collateral': '0.00000000', 
-                                 'shares_held_for_options_events': '0.00000000', 
-                                 'shares_pending_from_options_events': '0.00000000', 
-                                 'updated_at': '2020-05-02T20:11:41.491656Z', 
-                                 'created_at': '2019-07-31T23:57:07.494746Z',
-                                 'symbol': "GOOG"
-                             }
+            example position: 
+
+                { 
+
+                  url: https://api.robinhood.com/positions/ACCOUNT_NUMBER/ID_NUMBER/, 
+                  instrument: https://api.robinhood.com/instruments/ID_NUMBER/, 
+                  account: https://api.robinhood.com/accounts/ACCOUNT_NUMBER/, 
+                  account_number: ACCOUNT_NUMBER, 
+                  average_buy_price: PRICE_STR_FLT, 
+                  pending_average_buy_price: PRICE_STR_FLT, 
+                  quantity: QUANTITY_STR_FLT, 
+                  intraday_average_buy_price: 0.0000, 
+                  intraday_quantity: 0.00000000, 
+                  shares_held_for_buys: 0.00000000, 
+                  shares_held_for_sells: 2.00000000, 
+                  shares_held_for_stock_grants: 0.00000000, 
+                  shares_held_for_options_collateral: 0.00000000, 
+                  shares_held_for_options_events: 0.00000000, 
+                  shares_pending_from_options_events: 0.00000000, 
+                  updated_at: 2020-05-02T20:11:41.491656Z, 
+                  created_at: 2019-07-31T23:57:07.494746Z,
+                  symbol: GOOG
+
+                }
+
         """
+
         positions = self.rh.positions()["results"]
         mod_positions = []
         for position in positions:

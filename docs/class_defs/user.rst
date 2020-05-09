@@ -17,8 +17,7 @@ pyrh_redesign.user
       ~User.get_open_orders
 
       ~User.investment_profile
-      
-      ~User.portfolio
+
 
    .. automethod:: __init__
 
