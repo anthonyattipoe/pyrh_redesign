@@ -1,0 +1,275 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>order &#8212; pyrh_redesign  documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pyrh_redesign  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for order</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The following class, Order, is used to represent an order a user can place.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span> <span class="nn">exceptions</span> <span class="kn">import</span> <span class="n">OrderCancellationError</span><span class="p">,</span> <span class="n">MalformedOrderError</span><span class="p">,</span> <span class="n">UnownedInstrumentError</span><span class="p">,</span> <span class="n">InsufficientFundsError</span>
+<span class="kn">from</span> <span class="nn">instrument</span> <span class="kn">import</span> <span class="n">Instrument</span>
+<span class="kn">from</span> <span class="nn">portfolio</span> <span class="kn">import</span> <span class="n">Portfolio</span>
+<span class="kn">from</span> <span class="nn">user</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">import</span> <span class="nn">__init__</span>
+
+
+<div class="viewcode-block" id="Order"><a class="viewcode-back" href="../class_defs/order.html#order.Order">[docs]</a><span class="k">class</span> <span class="nc">Order</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An order which a user can place.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Order.Type"><a class="viewcode-back" href="../class_defs/order.html#order.Order.Type">[docs]</a>    <span class="k">class</span> <span class="nc">Type</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The type of an order.&quot;&quot;&quot;</span>
+        <span class="n">BUY</span>                   <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">SELL</span>                  <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">LIMIT_BUY_ORDER</span>       <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">LIMIT_SELL_ORDER</span>      <span class="o">=</span> <span class="mi">4</span>
+        <span class="n">MARKET_BUY_ORDER</span>      <span class="o">=</span> <span class="mi">5</span>
+        <span class="n">MARKET_SELL_ORDER</span>     <span class="o">=</span> <span class="mi">6</span>
+        <span class="n">STOP_LIMIT_BUY_ORDER</span>  <span class="o">=</span> <span class="mi">7</span>
+        <span class="n">STOP_LIMIT_SELL_ORDER</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="n">STOP_LOSS_BUY_ORDER</span>   <span class="o">=</span> <span class="mi">9</span>
+        <span class="n">STOP_LOSS_SELL_ORDER</span>  <span class="o">=</span> <span class="mi">10</span></div>
+
+<div class="viewcode-block" id="Order.TimeInForce"><a class="viewcode-back" href="../class_defs/order.html#order.Order.TimeInForce">[docs]</a>    <span class="k">class</span> <span class="nc">TimeInForce</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The time in force of an order.</span>
+<span class="sd">        This specifies how long an order lasts until it is executed or expires.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">GFD</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">GTC</span> <span class="o">=</span> <span class="mi">2</span></div>
+    
+<div class="viewcode-block" id="Order.Status"><a class="viewcode-back" href="../class_defs/order.html#order.Order.Status">[docs]</a>    <span class="k">class</span> <span class="nc">Status</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The status of the order</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">UNPLACED</span>    <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">UNCONFIRMED</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">UNFILLED</span>    <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">FILLED</span>      <span class="o">=</span> <span class="mi">4</span>
+        <span class="n">CANCELLED</span>   <span class="o">=</span> <span class="mi">5</span>
+        <span class="n">UNKNOWN</span>     <span class="o">=</span> <span class="mi">6</span></div>
+
+<div class="viewcode-block" id="Order.__init__"><a class="viewcode-back" href="../class_defs/order.html#order.Order.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instrument</span><span class="p">:</span> <span class="n">Instrument</span><span class="p">,</span> <span class="n">order_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">,</span> <span class="n">quantity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                <span class="n">time_in_force</span><span class="p">:</span> <span class="n">TimeInForce</span> <span class="o">=</span> <span class="n">TimeInForce</span><span class="o">.</span><span class="n">GFD</span><span class="p">,</span> <span class="n">price</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">stop_price</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new order.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            instrument: the instrument tied to the prospective order a user creates.</span>
+<span class="sd">            type: an enum used to represent the type of order the user will like to place.</span>
+<span class="sd">            time_in_force: how long an order lasts before it is executed or expires.</span>
+<span class="sd">            quantity: a discrete number of instruments included in the current order.</span>
+<span class="sd">            price: a price amount corresponding to the instrument included in the current order.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            a new Order object.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1">#: Doc comment for instance attribute qux.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span> <span class="o">=</span> <span class="n">instrument</span>
+        <span class="sd">&quot;&quot;&quot;instrument&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="o">=</span> <span class="n">order_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_in_force</span> <span class="o">=</span> <span class="n">time_in_force</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span> <span class="o">=</span> <span class="n">quantity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_price</span> <span class="o">=</span> <span class="n">stop_price</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rh</span> <span class="o">=</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">session_token</span><span class="o">.</span><span class="n">rh</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_placed</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Order.__str__"><a class="viewcode-back" href="../class_defs/order.html#order.Order.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Validates the properties set on an order before it is placed.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            MalformedOrderError: If the combinations of properties set on the order are not compatible.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MalformedOrderError</span><span class="p">(</span><span class="s1">&#39;The quantity must be greater than or equal to 1.&#39;</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MalformedOrderError</span><span class="p">(</span><span class="s1">&#39;The price must be greater than or equal to 0.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_price</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_price</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MalformedOrderError</span><span class="p">(</span><span class="s1">&#39;The stop price must be greater than or equal to 0.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LIMIT_BUY_ORDER</span><span class="p">,</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LIMIT_SELL_ORDER</span><span class="p">,</span> 
+            <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LOSS_BUY_ORDER</span><span class="p">,</span><span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LOSS_SELL_ORDER</span><span class="p">]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_price</span> <span class="o">==</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">MalformedOrderError</span><span class="p">(</span><span class="s1">&#39;You must include a stop_price with the current order.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LIMIT_BUY_ORDER</span><span class="p">,</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LIMIT_SELL_ORDER</span><span class="p">]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MalformedOrderError</span><span class="p">(</span><span class="s1">&#39;You must include a price with the current order.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">SELL</span><span class="p">,</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">LIMIT_SELL_ORDER</span><span class="p">,</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">MARKET_SELL_ORDER</span><span class="p">,</span> 
+            <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LIMIT_SELL_ORDER</span><span class="p">,</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LOSS_SELL_ORDER</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">Portfolio</span><span class="p">()</span><span class="o">.</span><span class="n">contains_instrument</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">UnownedInstrumentError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">BUY</span><span class="p">,</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">LIMIT_BUY_ORDER</span><span class="p">,</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">MARKET_BUY_ORDER</span><span class="p">,</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LIMIT_BUY_ORDER</span><span class="p">,</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LOSS_BUY_ORDER</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">Portfolio</span><span class="p">()</span><span class="o">.</span><span class="n">withdrawable_amount</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">last_trade_price</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">InsufficientFundsError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Order.place"><a class="viewcode-back" href="../class_defs/order.html#order.Order.place">[docs]</a>    <span class="k">def</span> <span class="nf">place</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Place the current order. Calls _validate() before the order is placed.</span>
+<span class="sd">        This method is idempotent so calling place() after the order has already</span>
+<span class="sd">        placed will have no effect.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            An OrderStatus object outlining the status of the current order.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            MalformedOrderError: If the combinations of properties set on the order are not compatible.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">()</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">time_in_force</span> <span class="o">=</span> <span class="s2">&quot;GTC&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_in_force</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">TimeInForce</span><span class="o">.</span><span class="n">GTC</span> <span class="k">else</span> <span class="s2">&quot;GFD&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">BUY</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">place_buy_order</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">order_object</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">SELL</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">place_sell_order</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">order_object</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">LIMIT_BUY_ORDER</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">place_limit_buy_order</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">,</span> <span class="n">time_in_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">LIMIT_SELL_ORDER</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">place_limit_sell_order</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">,</span> <span class="n">time_in_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">MARKET_BUY_ORDER</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">place_market_buy_order</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">,</span> <span class="n">time_in_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">MARKET_SELL_ORDER</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">place_market_sell_order</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">,</span> <span class="n">time_in_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LIMIT_BUY_ORDER</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">place_stop_limit_buy_order</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">,</span> <span class="n">time_in_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_price</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LIMIT_SELL_ORDER</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">place_stop_limit_sell_order</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">,</span> <span class="n">time_in_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_price</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LOSS_BUY_ORDER</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">place_stop_loss_buy_order</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">,</span> <span class="n">time_in_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_price</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_type</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STOP_LOSS_SELL_ORDER</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">place_stop_loss_sell_order</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">,</span> <span class="n">time_in_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_price</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_placed</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="Order.cancel"><a class="viewcode-back" href="../class_defs/order.html#order.Order.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Cancels the current order after it has been placed but not yet executed.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            OrderCancellationError: If order has already been executed or terminated.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">status</span><span class="p">,</span> <span class="n">cancel_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNPLACED</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">OrderCancellationError</span><span class="p">(</span><span class="s1">&#39;This order cannot be cancelled because it has not been placed yet.&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">FILLED</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">OrderCancellationError</span><span class="p">(</span><span class="s1">&#39;This order has already been filled.&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">CANCELLED</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">OrderCancellationError</span><span class="p">(</span><span class="s1">&#39;This order has already been cancelled.&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNFILLED</span> <span class="ow">or</span> <span class="n">status</span> <span class="o">==</span> <span class="n">Order</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNCONFIRMED</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cancel_url</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Helper function to determine order status.&quot;&quot;&quot;</span>
+        <span class="n">status_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;unconfirmed&#39;</span><span class="p">:</span> <span class="n">Order</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNCONFIRMED</span><span class="p">,</span>
+            <span class="s1">&#39;unfilled&#39;</span><span class="p">:</span> <span class="n">Order</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNFILLED</span><span class="p">,</span>
+            <span class="s1">&#39;filled&#39;</span><span class="p">:</span> <span class="n">Order</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">FILLED</span><span class="p">,</span>
+            <span class="s1">&#39;cancelled&#39;</span><span class="p">:</span> <span class="n">Order</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">CANCELLED</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_placed</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Order</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNPLACED</span>
+        <span class="n">past_orders</span> <span class="o">=</span> <span class="n">User</span><span class="p">()</span><span class="o">.</span><span class="n">order_history</span><span class="p">()[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span> 
+        <span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">past_orders</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span>
+        <span class="n">cancel_url</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="s1">&#39;cancel&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">status_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">Order</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">),</span> <span class="n">cancel_url</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Order.status"><a class="viewcode-back" href="../class_defs/order.html#order.Order.status">[docs]</a>    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the status of the current order.&quot;&quot;&quot;</span>
+        <span class="n">status</span><span class="p">,</span> <span class="n">cancel_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">status</span></div></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pyrh_redesign  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, John Paul Harriman, Anthony Attipoe, Chinedu Ojukwu, Evangeline Liu, Sara H-b.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+  </body>
+</html>

@@ -30,6 +30,9 @@ API Reference
 
 * :ref:`search`
 
+Github Repo
+###########
+`Repo Here <https://github.com/anthonyattipoe/pyrh_redesign>`_
 
 Quickstart
 **********

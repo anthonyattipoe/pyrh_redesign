@@ -1,7 +1,7 @@
 pyrh_redesign.portfolio
 =======================
 
-.. currentmodule:: portfolio
+.. automodule:: portfolio
 
 .. autoclass:: Portfolio
 

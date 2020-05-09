@@ -1,0 +1,274 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>instrument &#8212; pyrh_redesign  documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pyrh_redesign  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for instrument</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The following class, Instrument, is used to represent a tradable instrument on the Robinhood platform.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
+<span class="kn">import</span> <span class="nn">__init__</span>
+
+
+<div class="viewcode-block" id="Instrument"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument">[docs]</a><span class="k">class</span> <span class="nc">Instrument</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A tradeable instrument on the Robinhood platform.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Instrument.Type"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.Type">[docs]</a>    <span class="k">class</span> <span class="nc">Type</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The type of instrument in question.&quot;&quot;&quot;</span>
+        <span class="n">STOCK</span>  <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">BOND</span>   <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">ETF</span>    <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">CRYPTO</span> <span class="o">=</span> <span class="mi">4</span></div>
+
+<div class="viewcode-block" id="Instrument.__init__"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instrument_type</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new object which can be used to track</span>
+<span class="sd">        updates about an instrument or be included in an order.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            instrument_type: an enum delineating the type of instrument.</span>
+<span class="sd">            symbol: the symbol corresponding with the desired instrument.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            An Instrument object.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            MalformedInstrumentError: If an invalid combination of symbol and instrument type is provided.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instrument_type</span> <span class="o">=</span> <span class="n">instrument_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span> <span class="o">=</span> <span class="n">symbol</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rh</span> <span class="o">=</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">session_token</span><span class="o">.</span><span class="n">rh</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quote</span><span class="p">()[</span><span class="s2">&quot;instrument&quot;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Instrument.__str__"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Prints the Instruments ticket symbol&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span></div>
+
+<div class="viewcode-block" id="Instrument.symbol"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.symbol">[docs]</a>    <span class="k">def</span> <span class="nf">symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the Instrument&#39;s ticket symbol&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span></div>
+
+<div class="viewcode-block" id="Instrument.quote"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.quote">[docs]</a>    <span class="k">def</span> <span class="nf">quote</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Returns the current market quote of the Instrument.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">quote_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Instrument.order_object"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.order_object">[docs]</a>    <span class="k">def</span> <span class="nf">order_object</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Returns the users URL and the Instrument&#39;s ticket symbol&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
+            <span class="s1">&#39;symbol&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span>
+        <span class="p">}</span> </div>
+
+<div class="viewcode-block" id="Instrument.ask_info"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.ask_info">[docs]</a>    <span class="k">def</span> <span class="nf">ask_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Decimal</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot; The ask price and ask size of a given instrument</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple: (ask_price, ask_size)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">price_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">ask_price</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span>
+        <span class="n">price</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">price_string</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">size_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">ask_size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">size_string</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">price</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span> <span class="n">size</span></div>
+
+<div class="viewcode-block" id="Instrument.bid_info"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.bid_info">[docs]</a>    <span class="k">def</span> <span class="nf">bid_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Decimal</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot; The bid price and bid size of a given instrument</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple: (bid_price, bid_size)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">price_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">bid_price</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span>
+        <span class="n">price</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">price_string</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">size_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">bid_size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">size_string</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">price</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span> <span class="n">size</span></div>
+
+<div class="viewcode-block" id="Instrument.fundamental"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.fundamental">[docs]</a>    <span class="k">def</span> <span class="nf">fundamental</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Fundamental analysis of an instrument</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: (ask_price, ask_size)</span>
+<span class="sd">            example:</span>
+<span class="sd">                {</span>
+<span class="sd">                 &#39;open&#39;: &#39;158.310000&#39;, </span>
+<span class="sd">                 &#39;high&#39;: &#39;160.170000&#39;, </span>
+<span class="sd">                 &#39;low&#39;: &#39;155.260000&#39;, </span>
+<span class="sd">                 &#39;volume&#39;: &#39;4275536.000000&#39;, </span>
+<span class="sd">                 &#39;average_volume_2_weeks&#39;: &#39;6414987.900000&#39;, </span>
+<span class="sd">                 &#39;average_volume&#39;: &#39;6414987.900000&#39;, </span>
+<span class="sd">                 &#39;high_52_weeks&#39;: &#39;195.720000&#39;, </span>
+<span class="sd">                 &#39;dividend_yield&#39;: None, </span>
+<span class="sd">                 &#39;float&#39;: &#39;859278760.000000&#39;, </span>
+<span class="sd">                 &#39;low_52_weeks&#39;: &#39;115.290000&#39;, </span>
+<span class="sd">                 &#39;market_cap&#39;: &#39;139951150000.000000&#39;, </span>
+<span class="sd">                 &#39;pb_ratio&#39;: &#39;4.120950&#39;, </span>
+<span class="sd">                 &#39;pe_ratio&#39;: &#39;1055.130000&#39;, </span>
+<span class="sd">                 &#39;shares_outstanding&#39;: &#39;895000000.000000&#39;, </span>
+<span class="sd">                 &#39;description&#39;: &#39;salesforce.com, inc. engages in the ... blah blah blah&#39;, </span>
+<span class="sd">                 &#39;instrument&#39;: &#39;https://api.robinhood.com/instruments/cf1d849d-06f7-4374-9e84-13129713d0c7/&#39;, </span>
+<span class="sd">                 &#39;ceo&#39;: &#39;Marc Russell Benioff&#39;, </span>
+<span class="sd">                 &#39;headquarters_city&#39;: &#39;San Francisco&#39;, </span>
+<span class="sd">                 &#39;headquarters_state&#39;: &#39;California&#39;, </span>
+<span class="sd">                 &#39;sector&#39;: &#39;Technology Services&#39;, </span>
+<span class="sd">                 &#39;industry&#39;: &#39;Packaged Software&#39;, </span>
+<span class="sd">                 &#39;num_employees&#39;: 49000, &#39;year_founded&#39;: 1999</span>
+<span class="sd">                 }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">get_fundamentals</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Instrument.historical_quotes"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.historical_quotes">[docs]</a>    <span class="k">def</span> <span class="nf">historical_quotes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">span</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; The historical data of a given instrument</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple: (ask_price, ask_size)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">historical_data_raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">get_historical_quotes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">span</span><span class="p">)</span>
+        <span class="n">historical_data</span> <span class="o">=</span> <span class="n">historical_data_raw</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;historicals&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">historical_data</span></div>
+
+<div class="viewcode-block" id="Instrument.news"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.news">[docs]</a>    <span class="k">def</span> <span class="nf">news</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; News relating to the given instrument</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            results: list of dict that have information regarding the intstrument</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">news_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">get_news</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">news_result</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Instrument.option_chain_id"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.option_chain_id">[docs]</a>    <span class="k">def</span> <span class="nf">option_chain_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">get_option_chainid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Instrument.market_data"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.market_data">[docs]</a>    <span class="k">def</span> <span class="nf">market_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; The market_data of a given instrument</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict:</span>
+<span class="sd">                important keys:</span>
+<span class="sd">                    rests: list of dict that have information regarding instrument</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">get_option_marketdata</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Instrument.popularity"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.popularity">[docs]</a>    <span class="k">def</span> <span class="nf">popularity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; How many users currently have this instrument</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int: the number of users</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">get_popularity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Instrument.last_trade_price"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.last_trade_price">[docs]</a>    <span class="k">def</span> <span class="nf">last_trade_price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; The last trading price for the given instrument</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Decimal value: trading price</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">trade_price_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">last_trade_price</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">trade_price_string</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">4</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Instrument.last_updated_at"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.last_updated_at">[docs]</a>    <span class="k">def</span> <span class="nf">last_updated_at</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; The last updated date for the given instrument</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: date in form &#39;YYYY-MM-DD&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">updated_at_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">last_updated_at</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">updated_at_string</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Instrument.previous_close"><a class="viewcode-back" href="../class_defs/instrument.html#instrument.Instrument.previous_close">[docs]</a>    <span class="k">def</span> <span class="nf">previous_close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adjusted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Decimal</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot; The price and date of the given instrument for the previous close</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: (price: Decimal, date: str)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">date_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">previous_close_date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">date_string</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">adjusted</span><span class="p">:</span>
+            <span class="n">price_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">previous_close</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span>
+            <span class="n">price</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">price_string</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span><span class="mi">4</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">price</span><span class="p">,</span> <span class="n">date</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">price_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">adjusted_previous_close</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ticker_symbol</span><span class="p">)</span>
+            <span class="n">price</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">price_string</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span><span class="mi">4</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">price</span><span class="p">,</span> <span class="n">date</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pyrh_redesign  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, John Paul Harriman, Anthony Attipoe, Chinedu Ojukwu, Evangeline Liu, Sara H-b.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+  </body>
+</html>

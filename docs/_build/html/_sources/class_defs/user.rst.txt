@@ -1,7 +1,7 @@
 pyrh_redesign.user
 ==================
 
-.. currentmodule:: user
+.. automodule:: user
 
 .. autoclass:: User
 

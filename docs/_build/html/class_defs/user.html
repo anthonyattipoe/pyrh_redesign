@@ -1,42 +1,89 @@
 
-<!DOCTYPE html>
+
+<!doctype html>
 
 <html>
   <head>
     <meta charset="utf-8" />
     <title>pyrh_redesign.user &#8212; pyrh_redesign  documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script src="../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="pyrh_redesign.portfolio" href="portfolio.html" />
     <link rel="prev" title="pyrh_redesign.session" href="session.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head><body>
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="portfolio.html" title="pyrh_redesign.portfolio"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="session.html" title="pyrh_redesign.session"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pyrh_redesign  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API Reference</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="session.html"
+                        title="previous chapter">pyrh_redesign.session</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="portfolio.html"
+                        title="next chapter">pyrh_redesign.portfolio</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/class_defs/user.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          
-
           <div class="body" role="main">
             
-  <div class="section" id="pyrh-redesign-user">
-<h1>pyrh_redesign.user<a class="headerlink" href="#pyrh-redesign-user" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-user">
+<span id="pyrh-redesign-user"></span><h1>pyrh_redesign.user<a class="headerlink" href="#module-user" title="Permalink to this headline">¶</a></h1>
+<p>The following class, User, is used to represent an existing Robinhod User.  The User has a portfolio attribute,
+which is represented by the Portfolio class.  In addition to accessing the user’s porfolio, information regarding
+their order history and current open orders can be access.</p>
 <dl class="py class">
 <dt id="user.User">
-<em class="property">class </em><code class="sig-prename descclassname">user.</code><code class="sig-name descname">User</code><a class="headerlink" href="#user.User" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">user.</code><code class="sig-name descname">User</code><a class="reference internal" href="../_modules/user.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user.User" title="Permalink to this definition">¶</a></dt>
 <dd><p>An existing Robinhood User.</p>
 <p class="rubric">Methods</p>
 <table class="longtable docutils align-default">
@@ -61,7 +108,7 @@
 </table>
 <dl class="py method">
 <dt id="user.User.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#user.User.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/user.html#User.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user.User.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new object which is used to access the current Users portfolio and orders.
 Returns:</p>
 <blockquote>
@@ -71,7 +118,7 @@ Returns:</p>
 
 <dl class="py method">
 <dt id="user.User.order_history">
-<code class="sig-name descname">order_history</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">orderId</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#user.User.order_history" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">order_history</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">orderId</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="../_modules/user.html#User.order_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user.User.order_history" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optional Args: add an order ID to retrieve information about a single order.
 Returns:</p>
 <blockquote>
@@ -81,14 +128,14 @@ Returns:</p>
 
 <dl class="py method">
 <dt id="user.User.get_open_orders">
-<code class="sig-name descname">get_open_orders</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#user.User.get_open_orders" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_open_orders</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="../_modules/user.html#User.get_open_orders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user.User.get_open_orders" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns all currently open (cancellable) orders.
-If not orders are currently open, <cite>None</cite> is returned.</p>
+If no orders are currently open, <cite>None</cite> is returned.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="user.User.investment_profile">
-<code class="sig-name descname">investment_profile</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#user.User.investment_profile" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">investment_profile</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="../_modules/user.html#User.investment_profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user.User.investment_profile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the investment profile for a users portfolio</p>
 <dl>
 <dt>Args:</dt><dd><p>None</p>
@@ -124,79 +171,32 @@ example  ‘user’: ‘api.robinhood.com/user/’,</p>
 
 
           </div>
-          
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">pyrh_redesign</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="session.html">pyrh_redesign.session</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">pyrh_redesign.user</a></li>
-<li class="toctree-l2"><a class="reference internal" href="portfolio.html">pyrh_redesign.portfolio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument.html">pyrh_redesign.instrument</a></li>
-<li class="toctree-l2"><a class="reference internal" href="order.html">pyrh_redesign.order</a></li>
-</ul>
-</li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../api.html">API Reference</a><ul>
-      <li>Previous: <a href="session.html" title="previous chapter">pyrh_redesign.session</a></li>
-      <li>Next: <a href="portfolio.html" title="next chapter">pyrh_redesign.portfolio</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2020, John Paul Harriman, Anthony Attipoe, Chinedu Ojukwu, Evangeline Liu, Sara H-b.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="../_sources/class_defs/user.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="portfolio.html" title="pyrh_redesign.portfolio"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="session.html" title="pyrh_redesign.session"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pyrh_redesign  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API Reference</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, John Paul Harriman, Anthony Attipoe, Chinedu Ojukwu, Evangeline Liu, Sara H-b.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
   </body>
 </html>

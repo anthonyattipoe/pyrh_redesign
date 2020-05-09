@@ -1,7 +1,7 @@
 pyrh_redesign.instrument
 ========================
 
-.. currentmodule:: instrument
+.. automodule:: instrument
 
 .. autoclass:: Instrument
 
@@ -42,7 +42,18 @@ pyrh_redesign.instrument
 
       ~Instrument.previous_close
 
-   .. rubric:: Attributes
+   .. autoclass:: instrument::Instrument.Type
+
+   .. rubric:: Types of Instruments
+
+   =============================== ===========
+   Types                           Defintion
+   =============================== ===========
+   STOCK                           Share of the organization
+   BOND                            A certificate issued promising to repay borrow money at a fixed interest rate at a specific time
+   ETF                             Exchange-traded fund - holds assets such as stocks, commodities, or bonds
+   CRYPTO                          Cryptocurrency - digital asset designed to work as a medium of exchange
+   =============================== ===========
 
    .. automethod:: __init__
 

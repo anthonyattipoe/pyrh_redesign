@@ -1,0 +1,148 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>user &#8212; pyrh_redesign  documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pyrh_redesign  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for user</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The following class, User, is used to represent an existing Robinhod User.  The User has a portfolio attribute,</span>
+<span class="sd">    which is represented by the Portfolio class.  In addition to accessing the user&#39;s porfolio, information regarding</span>
+<span class="sd">    their order history and current open orders can be access.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">portfolio</span> <span class="kn">import</span> <span class="n">Portfolio</span>
+<span class="kn">import</span> <span class="nn">__init__</span>
+
+
+<div class="viewcode-block" id="User"><a class="viewcode-back" href="../class_defs/user.html#user.User">[docs]</a><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;An existing Robinhood User.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="User.__init__"><a class="viewcode-back" href="../class_defs/user.html#user.User.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new object which is used to access the current Users portfolio and orders.</span>
+<span class="sd">                Returns:</span>
+<span class="sd">                    An user object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rh</span> <span class="o">=</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">session_token</span><span class="o">.</span><span class="n">rh</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">portfolio</span> <span class="o">=</span> <span class="n">Portfolio</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="User.order_history"><a class="viewcode-back" href="../class_defs/user.html#user.User.order_history">[docs]</a>    <span class="k">def</span> <span class="nf">order_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orderId</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Optional Args: add an order ID to retrieve information about a single order.</span>
+<span class="sd">            Returns:</span>
+<span class="sd">                (:obj:`dict`): JSON dict from getting orders</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">order_history</span><span class="p">(</span><span class="n">orderId</span><span class="p">)[</span><span class="s2">&quot;results&quot;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="User.get_open_orders"><a class="viewcode-back" href="../class_defs/user.html#user.User.get_open_orders">[docs]</a>    <span class="k">def</span> <span class="nf">get_open_orders</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Returns all currently open (cancellable) orders.</span>
+<span class="sd">            If no orders are currently open, `None` is returned.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">get_open_orders</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="User.investment_profile"><a class="viewcode-back" href="../class_defs/user.html#user.User.investment_profile">[docs]</a>    <span class="k">def</span> <span class="nf">investment_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the investment profile for a users portfolio</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            None </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict represnation of investment profile </span>
+<span class="sd">            example  &#39;user&#39;: &#39;api.robinhood.com/user/&#39;, </span>
+<span class="sd">                     &#39;total_net_worth&#39;: RANGE_RANGE_STR, </span>
+<span class="sd">                     &#39;annual_income&#39;: RANGE_RANGE_STR, </span>
+<span class="sd">                     &#39;source_of_funds&#39;: STR, </span>
+<span class="sd">                     &#39;investment_objective&#39;: &#39;income_invest_obj&#39;, </span>
+<span class="sd">                     &#39;investment_experience&#39;: STR, </span>
+<span class="sd">                     &#39;liquid_net_worth&#39;: RANGE_RANGE_STR, </span>
+<span class="sd">                     &#39;risk_tolerance&#39;: STR, </span>
+<span class="sd">                     &#39;tax_bracket&#39;: &#39;&#39;, </span>
+<span class="sd">                     &#39;time_horizon&#39;: STR, </span>
+<span class="sd">                     &#39;liquidity_needs&#39;: STR, </span>
+<span class="sd">                     &#39;investment_experience_collected&#39;: BOOL, </span>
+<span class="sd">                     &#39;suitability_verified&#39;: BOOL, </span>
+<span class="sd">                     &#39;option_trading_experience&#39;: &#39;&#39;, </span>
+<span class="sd">                     &#39;professional_trader&#39;: None, </span>
+<span class="sd">                     &#39;understand_option_spreads&#39;: BOOL, </span>
+<span class="sd">                     &#39;interested_in_options&#39;: None, </span>
+<span class="sd">                     &#39;updated_at&#39;: &#39;2019-08-01T16:18:26.996458Z&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rh</span><span class="o">.</span><span class="n">investment_profile</span><span class="p">()</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pyrh_redesign  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, John Paul Harriman, Anthony Attipoe, Chinedu Ojukwu, Evangeline Liu, Sara H-b.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+  </body>
+</html>

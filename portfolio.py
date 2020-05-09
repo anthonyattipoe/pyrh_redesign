@@ -80,7 +80,7 @@ class Portfolio:
         else:
             return round(Decimal(self.rh.equity_previous_close()), 4)
 
-    def last_core_value(self, value_type) -> Decimal:
+    def last_core_value(self, value_type : ValueType) -> Decimal:
         """ Returns portfolio last core value
         
             Args:
@@ -122,7 +122,7 @@ class Portfolio:
         return self.rh.dividends()["results"]
 
 
-    def positions(self, previously_held=False) -> list:
+    def positions(self, previously_held: bool =False) -> list:
         """
         The positions for a user's portfolio.
         
