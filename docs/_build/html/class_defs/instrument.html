@@ -58,44 +58,75 @@
 <td><p>Returns the current market quote of the Instrument.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.order_object" title="instrument.Instrument.order_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">order_object</span></code></a>()</p></td>
-<td><p>Returns the users URL and the Instrument’s  ticket symbol</p></td>
+<td><p>Returns the users URL and the Instrument’s ticket symbol</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.ask_info" title="instrument.Instrument.ask_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ask_info</span></code></a>()</p></td>
-<td><p></p></td>
+<td><p>The ask price and ask size of a given instrument</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.bid_info" title="instrument.Instrument.bid_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bid_info</span></code></a>()</p></td>
-<td><p></p></td>
+<td><p>The bid price and bid size of a given instrument</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.fundamental" title="instrument.Instrument.fundamental"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fundamental</span></code></a>()</p></td>
-<td><p></p></td>
+<td><p>Fundamental analysis of an instrument</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.historical_quotes" title="instrument.Instrument.historical_quotes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">historical_quotes</span></code></a>(interval, span)</p></td>
-<td><p></p></td>
+<td><p>The historical data of a given instrument</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.news" title="instrument.Instrument.news"><code class="xref py py-obj docutils literal notranslate"><span class="pre">news</span></code></a>()</p></td>
-<td><p></p></td>
+<td><p>News relating to the given instrument</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.option_chain_id" title="instrument.Instrument.option_chain_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">option_chain_id</span></code></a>()</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.market_data" title="instrument.Instrument.market_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">market_data</span></code></a>()</p></td>
-<td><p></p></td>
+<td><p>The market_data of a given instrument</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.popularity" title="instrument.Instrument.popularity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">popularity</span></code></a>()</p></td>
-<td><p></p></td>
+<td><p>How many users currently have this instrument</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.last_trade_price" title="instrument.Instrument.last_trade_price"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_trade_price</span></code></a>()</p></td>
-<td><p></p></td>
+<td><p>The last trading price for the given instrument</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#instrument.Instrument.last_updated_at" title="instrument.Instrument.last_updated_at"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_updated_at</span></code></a>()</p></td>
-<td><p></p></td>
+<td><p>The last updated date for the given instrument</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#instrument.Instrument.previous_close" title="instrument.Instrument.previous_close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">previous_close</span></code></a>([adjusted])</p></td>
-<td><p></p></td>
+<td><p>The price and date of the given instrument for the previous close</p></td>
 </tr>
 </tbody>
 </table>
-<p class="rubric">Attributes</p>
+<dl class="py class">
+<dt id="instrument.Instrument.Type">
+<em class="property">class </em><code class="sig-name descname">Type</code><a class="headerlink" href="#instrument.Instrument.Type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of instrument in question.</p>
+</dd></dl>
+
+<p class="rubric">Types of Instruments</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Types</p></th>
+<th class="head"><p>Defintion</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>STOCK</p></td>
+<td><p>Share of the organization</p></td>
+</tr>
+<tr class="row-odd"><td><p>BOND</p></td>
+<td><p>A certificate issued promising to repay borrow money at a fixed interest rate at a specific time</p></td>
+</tr>
+<tr class="row-even"><td><p>ETF</p></td>
+<td><p>Exchange-traded fund - holds assets such as stocks, commodities, or bonds</p></td>
+</tr>
+<tr class="row-odd"><td><p>CRYPTO</p></td>
+<td><p>Cryptocurrency - digital asset designed to work as a medium of exchange</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="py method">
 <dt id="instrument.Instrument.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">instrument_type</span></em>, <em class="sig-param"><span class="n">symbol</span></em><span class="sig-paren">)</span><a class="headerlink" href="#instrument.Instrument.__init__" title="Permalink to this definition">¶</a></dt>
@@ -126,40 +157,101 @@ symbol: the symbol corresponding with the desired instrument.</p>
 
 <dl class="py method">
 <dt id="instrument.Instrument.quote">
-<code class="sig-name descname">quote</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#instrument.Instrument.quote" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">quote</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#instrument.Instrument.quote" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the current market quote of the Instrument.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="instrument.Instrument.order_object">
-<code class="sig-name descname">order_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#instrument.Instrument.order_object" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the users URL and the Instrument’s  ticket symbol</p>
+<code class="sig-name descname">order_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#instrument.Instrument.order_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the users URL and the Instrument’s ticket symbol</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="instrument.Instrument.ask_info">
 <code class="sig-name descname">ask_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>decimal.Decimal<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#instrument.Instrument.ask_info" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The ask price and ask size of a given instrument</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Tuple: (ask_price, ask_size)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="instrument.Instrument.bid_info">
 <code class="sig-name descname">bid_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>decimal.Decimal<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#instrument.Instrument.bid_info" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The bid price and bid size of a given instrument</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Tuple: (bid_price, bid_size)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="instrument.Instrument.fundamental">
 <code class="sig-name descname">fundamental</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#instrument.Instrument.fundamental" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Fundamental analysis of an instrument</p>
+<dl>
+<dt>Returns:</dt><dd><p>dict: (ask_price, ask_size)
+example:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>{</dt><dd><p>‘open’: ‘158.310000’, 
+‘high’: ‘160.170000’, 
+‘low’: ‘155.260000’, 
+‘volume’: ‘4275536.000000’, 
+‘average_volume_2_weeks’: ‘6414987.900000’, 
+‘average_volume’: ‘6414987.900000’, 
+‘high_52_weeks’: ‘195.720000’, 
+‘dividend_yield’: None, 
+‘float’: ‘859278760.000000’, 
+‘low_52_weeks’: ‘115.290000’, 
+‘market_cap’: ‘139951150000.000000’, 
+‘pb_ratio’: ‘4.120950’, 
+‘pe_ratio’: ‘1055.130000’, 
+‘shares_outstanding’: ‘895000000.000000’, 
+‘description’: ‘salesforce.com, inc. engages in the … blah blah blah’, 
+‘instrument’: ‘<a class="reference external" href="https://api.robinhood.com/instruments/cf1d849d-06f7-4374-9e84-13129713d0c7/">https://api.robinhood.com/instruments/cf1d849d-06f7-4374-9e84-13129713d0c7/</a>’, 
+‘ceo’: ‘Marc Russell Benioff’, 
+‘headquarters_city’: ‘San Francisco’, 
+‘headquarters_state’: ‘California’, 
+‘sector’: ‘Technology Services’, 
+‘industry’: ‘Packaged Software’, 
+‘num_employees’: 49000, ‘year_founded’: 1999
+}</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="instrument.Instrument.historical_quotes">
 <code class="sig-name descname">historical_quotes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">interval</span></em>, <em class="sig-param"><span class="n">span</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#instrument.Instrument.historical_quotes" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The historical data of a given instrument</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Tuple: (ask_price, ask_size)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="instrument.Instrument.news">
 <code class="sig-name descname">news</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#instrument.Instrument.news" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>News relating to the given instrument</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>dict: </dt><dd><dl class="simple">
+<dt>important keys:</dt><dd><p>count: number of new items in results
+results: list of dict that have information regarding the intstrument</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="instrument.Instrument.option_chain_id">
@@ -169,27 +261,58 @@ symbol: the symbol corresponding with the desired instrument.</p>
 <dl class="py method">
 <dt id="instrument.Instrument.market_data">
 <code class="sig-name descname">market_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#instrument.Instrument.market_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The market_data of a given instrument</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>dict:</dt><dd><dl class="simple">
+<dt>important keys:</dt><dd><p>rests: list of dict that have information regarding instrument</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="instrument.Instrument.popularity">
 <code class="sig-name descname">popularity</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#instrument.Instrument.popularity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>How many users currently have this instrument</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: the number of users</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="instrument.Instrument.last_trade_price">
 <code class="sig-name descname">last_trade_price</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; decimal.Decimal<a class="headerlink" href="#instrument.Instrument.last_trade_price" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The last trading price for the given instrument</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Decimal value: trading price</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="instrument.Instrument.last_updated_at">
 <code class="sig-name descname">last_updated_at</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#instrument.Instrument.last_updated_at" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The last updated date for the given instrument</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>str: date in form ‘YYYY-MM-DD’</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="instrument.Instrument.previous_close">
 <code class="sig-name descname">previous_close</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">adjusted</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>decimal.Decimal<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#instrument.Instrument.previous_close" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The price and date of the given instrument for the previous close</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>tuple: (price: Decimal, date: str)</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

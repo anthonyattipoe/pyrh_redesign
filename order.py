@@ -36,6 +36,9 @@ class Order(object):
         GTC = 2
     
     class Status(Enum):
+        """
+        The status of the order
+        """
         UNPLACED    = 1
         UNCONFIRMED = 2
         UNFILLED    = 3

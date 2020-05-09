@@ -35,13 +35,21 @@ class RobinHood_Object(object):
         pass
 
 
-def begin_robinhood_session(email, password):
-    """ starting a Robinhood session using the given email and password"""
+def begin_robinhood_session(email: str, password: str) -> None:
+    """ Starting a Robinhood session using the given email and password
+        
+        Args:
+            email (string): email of Robinhood account
+            password (string): password of Robinhood account
+
+        Returns:
+            None: only opens the session for the user to use
+    """
     __init__.session_token = RobinHood_Object(email, password)
 
 
 def end_robinhood_session():
-    """ ending a Robinhood session"""
+    """ Ending a Robinhood session"""
     __init__.session_token.end_session()
     __init__.session_token = None
 

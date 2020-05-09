@@ -29,7 +29,7 @@ class User:
 
     def get_open_orders(self) -> list:
         """ Returns all currently open (cancellable) orders.
-            If not orders are currently open, `None` is returned.
+            If no orders are currently open, `None` is returned.
         """
 
         return self.rh.get_open_orders()
