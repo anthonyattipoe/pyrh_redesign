@@ -5,9 +5,9 @@
 -------------------------------------------------------------
 
 pyrh_redesign
-#############
+*************
 (a pyrh API Wrapper)
-####################
+********************
 
 
 Python Framework to make trades with Unofficial Robinhood API. Supports Python 3.6+
