@@ -80,7 +80,8 @@ class Instrument:
         return historical_data
 
     def news(self) -> dict:
-        return self.rh.get_news(self.ticker_symbol)
+        news_result = self.rh.get_news(self.ticker_symbol)
+        return news_result['results']
 
     def option_chain_id(self):
         return self.rh.get_option_chainid(self.ticker_symbol)
