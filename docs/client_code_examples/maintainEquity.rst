@@ -3,6 +3,9 @@
 Maintaining Equity Example Walkthrough
 ======================================
 
+`Source Code Here <https://github.com/anthonyattipoe/pyrh_redesign/blob/master/client/maintain_equity.py>`_
+
+
 Let's say that I would like to keep my market value of a certain stock at a certain percentage of my portfolio.
 
 I'm going to choose Facebook for example (the ticker is "FB")

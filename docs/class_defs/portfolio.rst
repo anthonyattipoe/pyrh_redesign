@@ -30,6 +30,8 @@ pyrh_redesign.portfolio
 
       ~Portfolio.positions
 
+      ~Portfolio.share_info
+
 
 
    .. automethod:: __init__
@@ -51,6 +53,8 @@ pyrh_redesign.portfolio
    .. automethod:: dividends
 
    .. automethod:: positions
+
+   .. automethod:: share_info
 
 
 
