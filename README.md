@@ -18,7 +18,7 @@ Although Pyrh does allow Robinhood users to trade using the API, there were many
 Our redesign of the API resolves the issues listed above while providing users with a more intuitive design for trading. The full documentation for our redesign can be found here: https://pyrh-redesign.readthedocs.io/en/latest/
 
 ## Directory Overview
-* [client] (client/)  - contains client code samples performing various tasks a user may be interested in.
+* [client](client/)  - contains client code samples performing various tasks a user may be interested in.
 * results/ - contains results outputted from executing the client code samples in the client directory.
 * docs/    - contains relevant files used to manage the project documentation found at https://pyrh-redesign.readthedocs.io/en/latest/
 * pyrh/    - contains modified source code from the original pyrh project
