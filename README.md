@@ -15,7 +15,7 @@ Although Pyrh does allow Robinhood users to trade using the API, there were many
 * Poor Documentation
 * Incorrect Return Types
 
-Our redesign of the API resolves the issues listed above while providing users with a more intuitive design for trading. 
+Our redesign of the API resolves the issues listed above while providing users with a more intuitive design for trading. The full documentation for our redesign can be found here: https://pyrh-redesign.readthedocs.io/en/latest/
 
 ## Team Members:
 * Sara Harvey Browne
