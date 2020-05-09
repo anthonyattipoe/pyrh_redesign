@@ -66,14 +66,4 @@ pyrh_redesign.order
    ============ ================
 
 
-   .. automethod:: __init__
-
-   .. automethod:: __str__
-
-   .. automethod:: place
-
-   .. automethod:: cancel
-
-   .. automethod:: status
-
 

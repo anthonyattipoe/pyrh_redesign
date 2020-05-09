@@ -54,36 +54,5 @@ pyrh_redesign.instrument
    CRYPTO                          Cryptocurrency - digital asset designed to work as a medium of exchange
    =============================== ===========
 
-   .. automethod:: __init__
-
-   .. automethod:: __str__
-
-   .. automethod:: symbol
-
-   .. automethod:: quote
-
-   .. automethod:: order_object
-
-   .. automethod:: ask_info
-
-   .. automethod:: bid_info
-
-   .. automethod:: fundamental
-
-   .. automethod:: historical_quotes
-
-   .. automethod:: news
-
-   .. automethod:: option_chain_id
-
-   .. automethod:: market_data
-
-   .. automethod:: popularity
-
-   .. automethod:: last_trade_price
-
-   .. automethod:: last_updated_at
-
-   .. automethod:: previous_close
 
 

@@ -19,12 +19,4 @@ pyrh_redesign.user
       ~User.investment_profile
 
 
-   .. automethod:: __init__
-
-   .. automethod:: order_history
-
-   .. automethod:: get_open_orders
-
-   .. automethod:: investment_profile
-
 
