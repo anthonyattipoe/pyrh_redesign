@@ -1,7 +1,7 @@
 pyrh_redesign.instrument
 ========================
 
-.. currentmodule:: instrument
+.. automodule:: instrument
 
 .. autoclass:: Instrument
 

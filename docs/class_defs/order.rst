@@ -1,7 +1,7 @@
 pyrh_redesign.order
 ===================
 
-.. currentmodule:: order
+.. automodule:: order
 
 .. autoclass:: Order
 

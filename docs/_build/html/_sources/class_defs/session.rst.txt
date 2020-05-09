@@ -1,7 +1,7 @@
 pyrh_redesign.session
 =====================
 
-.. currentmodule:: session
+.. automodule:: session
 
 
 .. rubric:: Methods
